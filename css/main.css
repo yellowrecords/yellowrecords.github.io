@@ -59,6 +59,7 @@ hr {
     text-align: center;
     height: 5px;
 }
+
 /*Desktop*/
 @media only screen and (min-width: 769px) {
 body {
@@ -66,6 +67,8 @@ body {
     text-align: center;
 }
 .quicklinks{
+display: none !important;
+    visibility:hidden;
     z-index: 0;
     overflow: hidden;
     margin-bottom:0px;
@@ -74,8 +77,8 @@ body {
   width:450px;
 }
   .items2 a {
+   
   font-weight: 700;
-    display: inline-block;
     color:var(--nav-text-color);
     text-align: center;
     padding: 0;
@@ -93,19 +96,56 @@ body {
     width:50px;
 }
 
-
+.quicklinksnav{
+  
+display: flex !important;
+  justify-content: center !important;
+  align-items: center !important; 
+    z-index: 0;
+    overflow: hidden;
+    margin-bottom:0px;
+    top:0px;
+  margin: 0 0 5 0px;
+  width:300px;
+   margin: auto;
+  position: absolute;
+  top: 0; left: 500; bottom: 0; right: 0;
+}
+    .items5 a {
+   border:none !important;
+  font-weight: 700;
+    color:var(--nav-text-color);
+    text-align: center;
+    padding: 0 !important;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 500ms;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 40px;
+    width:40px;
+}
+  .items5 img {
+  height: 40px;
+    width:40px;
+}
 
   .mlinks{
     z-index: 0;
     overflow: hidden;
-    
+    vertical-align:top;
     top:0px;
   margin: 0 auto;
     margin-bottom:15px;
   width:800px;
     
 }
+  .mlinks img{
+    vertical-align:top;
+  }
   .items3 a {
+    vertical-align:top;
   font-weight: 700;
     display: inline-block;
     color:black;
@@ -116,7 +156,7 @@ body {
     transition: 500ms;
     margin-left: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom:45px;
     height: 150px;
     width:150px;
 }
@@ -143,8 +183,8 @@ body {
   font-size: 80px;
 }
 .mc{
- width:450px; 
-height:300px;
+ width:700px; 
+  height:525px;
 }
   
 .header img{
@@ -161,14 +201,15 @@ height:300px;
   font-family: 'Caveat', cursive;
   height:200px;
   line-height: 200px;
-  background-image: url("/caffeb.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  
   width: 100%;
 }
 .cafeheader h1{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important; 
   font-family: 'Caveat', cursive;
     margin: 0px 0px 0px 15px;
     color:var(--nav-text-color);
@@ -871,7 +912,14 @@ height:auto;
   height: 30px;
     width:30px;
 }
-  
+  .quicklinksnav{
+    display: none !important;
+    visibility:hidden;
+  }
+  .items5{
+    display: none !important;
+    visibility:hidden;
+  }
   
     .navbar {
         box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.5);
@@ -1050,9 +1098,10 @@ height:auto;
     transition: 500ms;
     margin-left: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     height: 150px;
     width:150px;
+     vertical-align:top;
 }
   .items3 img {
   height: 150px;
