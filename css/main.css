@@ -1,10 +1,12 @@
 /*Initialize font*/
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
 /*Main/light color palette*/
 
 /*Main/light color palette*/
 :root{
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Syne Mono', monospace;
   -webkit-font-smoothing: subpixel-antialiased;
  /* font-synthesis: none;*/
   transform: perspective(1px);
@@ -13,6 +15,7 @@
     font-weight: 400;
   text-shadow: 0 0 0;
   font-kerning: none;
+    --accent-color:#fee486;
     --accent-color-light:#fee486;
     --back-color:#ffbb00;
     --text-color:black;
@@ -22,7 +25,7 @@
     --card-shadow:0px 0px 14px 3px rgba(255, 165, 0,1);
     --mob-shadow:0px 0px 5px 1px rgba(189,189,189,1);
     --nav-text-color:white;
-    --link-hover:dodgerblue;
+    --link-hover:#ffffff;
     --control-text:white;
     --link-text:#ffffff;
     --visited-text:rgb(185, 124, 255);
@@ -40,6 +43,10 @@ font-weight: normal;
 
 }
 body{
+  font-style: normal;
+  font-weight: 400;
+  -webkit-font-smoothing: subpixel-antialiased;
+-webkit-text-stroke:1px transparent;
     background-color: var(--back-color);
     margin: 0 auto;
     color:var(--text-color);
@@ -126,17 +133,20 @@ body {
   background-position: center;
 }
 .header h1{
+  font-family: 'Caveat', cursive;
     margin: 0px 0px 0px 15px;
     color:var(--nav-text-color);
     text-align: left;
   font-weight: bold;
-  margin-left: 50px;
+  margin-left: 30px;
     text-shadow: var(--header-shadow);
+  font-size: 80px;
 }
 .mc{
  width:450px; 
 height:300px;
 }
+  
 .header img{
     height:50px;
     width:auto;
@@ -148,6 +158,7 @@ height:300px;
 
 
 .cafeheader{
+  font-family: 'Caveat', cursive;
   height:200px;
   line-height: 200px;
   background-image: url("/caffeb.png");
@@ -158,6 +169,7 @@ height:300px;
   width: 100%;
 }
 .cafeheader h1{
+  font-family: 'Caveat', cursive;
     margin: 0px 0px 0px 15px;
     color:var(--nav-text-color);
     text-align: left;
@@ -174,7 +186,33 @@ height:300px;
   filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
 }
   
+.cafeheader2{
+  height:200px;
+  line-height: 200px;
+  background-image: url("/slowblur.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  
+  width: 100%;
+}
+.cafeheader2 h1{
+  font-family: 'Caveat', cursive;
+    margin: 0px 0px 0px 15px;
+    color:var(--nav-text-color);
+    text-align: left;
+  font-weight: bold;
+  margin-left: 50px;
+    text-shadow: var(--header-shadow);
+}
 
+.cafeheader2 img{
+    height:50px;
+ 
+    float: left;
+    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+}
 .wordmark img {
   height: 100px;
   margin-top: 25px;
@@ -199,7 +237,7 @@ height:300px;
 }
 
 .musecard h4{
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Caveat', cursive;
   font-size: 55px;
   margin: 8px 0px 10px 0;
   font-weight: bold;
@@ -216,6 +254,7 @@ height:300px;
     margin:0;
 }
 .musecard p{
+  font-size: 24px;
     margin: 10px 15px 0px 15px;
     text-align: left;
     -moz-text-align-last: center; /* Firefox 12+ */
@@ -338,17 +377,16 @@ background-color: rgb(175, 175, 175);
     overflow: hidden;
 }
 
-
 .ytb{
     background-color: #ff002b;
-    width:125px;
+    width:100px;
       border-style: solid;
   border-width: 3px;
       border-color: rgba(255, 255, 255, 0.55);
     padding: 7px, 10px;
   }
   .ytb h1{
-    font-size: 24px;
+    font-size: 20px;
   }
   .ytb a{
     text-decoration: none;
@@ -374,7 +412,7 @@ margin-bottom: 140px;
     z-index: 22;
     border-radius: 1vh;
     transition: 0.3s;
-    width: 90%;
+    width: 70%;
     margin: 0 0 1em;
     margin-left: auto;
   text-align: left;
@@ -383,7 +421,7 @@ margin-bottom: 140px;
 }
 
 .card h4{
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Caveat', cursive;
   font-size: 55px;
   margin: 8px 0px 10px 0;
   font-weight: bold;
@@ -400,6 +438,7 @@ margin-bottom: 140px;
     margin:0;
 }
 .card p{
+  font-size:24px;
     margin: 10px 15px 0px 15px;
     text-align: left;
     -moz-text-align-last: center; /* Firefox 12+ */
@@ -555,13 +594,14 @@ ul li::before {
 }
 
 a {
-    transition: 0.3s;
-    color:var(--link-text);
-}
-
-a:hover {
-    color: var(--link-hover);
-}
+      color:inherit;
+        transition: 0.3s;
+    }
+    
+    a:hover {
+      opacity:65%;
+      text-decoration:none;
+    }
 
 hr.beautiful-line{
  	border-top: 1px solid #999; 
@@ -628,11 +668,12 @@ height: 2px;
    
     }
     .header h1{
+      font-family: 'Caveat', cursive;
       font-weight: bold;
         margin: 0px 0px 0px 0px;
         color:var(--nav-text-color);
         text-align: center;
-        font-size: 40px;
+        font-size: 50px;
         text-shadow: var(--header-shadow);
     }
     .header img{
@@ -672,7 +713,7 @@ height: 2px;
 }
 
 .musecard h4{
-  font-family: 'Fira Sans', sans-serif;
+  font-family: 'Caveat', cursive;
   font-size: 55px;
   margin: 8px 0px 10px 0;
   font-weight: bold;
@@ -707,10 +748,11 @@ height: 2px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  
+  font-family: 'Caveat', cursive;
   width: 100%;
 }
 .cafeheader h1{
+  font-size: 50px;
     margin: 0px 0px 0px 15px;
     color:var(--nav-text-color);
     text-align: left;
@@ -720,6 +762,33 @@ height: 2px;
 }
 
 .cafeheader img{
+    height:50px;
+ 
+    float: left;
+    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
+}
+  .cafeheader2{
+  height:125px;
+  line-height: 200px;
+  background-image: url("/slowblur.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: 'Caveat', cursive;
+  width: 100%;
+}
+.cafeheader2 h1{
+  font-size: 50px;
+    margin: 0px 0px 0px 15px;
+    color:var(--nav-text-color);
+    text-align: left;
+  font-weight: bold;
+  margin-left: 50px;
+    text-shadow: var(--header-shadow);
+}
+
+.cafeheader2 img{
     height:50px;
  
     float: left;
@@ -780,7 +849,7 @@ height:auto;
     z-index: 0;
     overflow: hidden;
       margin: 0 auto;
-    width: 240px;
+    width: 300px;
     top:0px;
 }
   .items2 a {
@@ -803,8 +872,10 @@ height:auto;
     width:30px;
 }
   
+  
     .navbar {
         box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.5);
+      font-family: 'Caveat', cursive;
         z-index: 100;
         overflow: auto;
         background-color:var(--nav-fill);
@@ -819,19 +890,21 @@ height:auto;
 
     }
     .items a {
+      font-family: 'Caveat', cursive;
+      font-weight: 700;
     display: inline-block;
     color:var(--nav-text-color);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-      font-weight: bold;
     font-size: 14px;
     transition: 0.5s;
     margin-left: 0px;
     margin-top: 0px;
     margin-bottom: 0px;
-      
-
+      transform: perspective(1px);
+-webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
       
     }
 
@@ -904,6 +977,7 @@ height:auto;
     color:white;
   }
     .card {
+      
         z-index: 22;
         border-radius: 1vh;
         transition: 0.3s;
@@ -914,7 +988,8 @@ height:auto;
     }
     
     .card h4{
-        font-size: 30px;
+      font-family: 'Caveat', cursive;
+        font-size: 35px;
         margin: 4px 0px 2px 0;
         font-weight: bold;
       text-align: center;
@@ -1097,13 +1172,14 @@ height:auto;
         width: 57%;
     }
     
-    a {
+   a {
+      color:inherit;
         transition: 0.3s;
-        color:var(--accent-color);
     }
     
     a:hover {
-        color: var(--link-hover);
+      opacity:65%;
+      text-decoration:none;
     }
     
     hr.beautiful-line{
