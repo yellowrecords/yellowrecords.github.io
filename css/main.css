@@ -15,16 +15,16 @@
     font-weight: 400;
   text-shadow: 0 0 0;
   font-kerning: none;
-    --accent-color:#fee486;
-    --accent-color-light:#fee486;
-    --back-color:#ffbb00;
-    --text-color:black;
-    --nav-fill:rgba(255, 165, 0, 0.65);
+    --accent-color:#0091ff;
+    --accent-color-light:#fe86c6;
+    --back-color:#1a0057;
+    --text-color:white;
+    --nav-fill:rgba(46, 61, 174, .5); 
     --header-grad:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(17,0,175,1) 0%, rgba(55,72,224,1) 23%, rgba(0,131,215,1) 100%);
-    --card-fill:#ffe252;
+    --card-fill:#2b008f;
     --card-shadow:0px 0px 14px 3px rgba(255, 165, 0,1);
     --mob-shadow:0px 0px 5px 1px rgba(189,189,189,1);
-    --nav-text-color:white;
+    --nav-text-color:#bdc4ff;
     --link-hover:#ffffff;
     --control-text:white;
     --link-text:#ffffff;
@@ -104,12 +104,11 @@ display: flex !important;
     z-index: 0;
     overflow: hidden;
     margin-bottom:0px;
-    top:0px;
   margin: 0 0 5 0px;
-  width:300px;
+  width:340px;
    margin: auto;
   position: absolute;
-  top: 0; left: 500; bottom: 0; right: 0;
+  top: 0; left: 550; bottom: 0; right: 0;
 }
     .items5 a {
    border:none !important;
@@ -126,6 +125,9 @@ display: flex !important;
     height: 40px;
     width:40px;
 }
+  .items5 a:hover{
+    
+  }
   .items5 img {
   height: 40px;
     width:40px;
@@ -148,7 +150,7 @@ display: flex !important;
     vertical-align:top;
   font-weight: 700;
     display: inline-block;
-    color:black;
+    color:white;
     text-align: center;
     padding: 0;
     text-decoration: none;
@@ -385,7 +387,7 @@ background-color: rgb(175, 175, 175);
     float: left;
   border-style: solid;
   border-width: 3px;
-  border-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 255, 255, 0.45);
     display: block;
     color:var(--nav-text-color);
     text-align: center;
@@ -408,7 +410,7 @@ background-color: rgb(175, 175, 175);
     color: var(--nav-text-color);
   border-style: solid;
   border-width: 3px;
-  border-color: #f7d488;
+  border-color: #f086fe;
 
     padding: 14px 16px;
 }
@@ -870,7 +872,7 @@ height: 2px;
     
     .mc{
  width:100%; 
-height:auto;
+aspect-ratio: 4/3;
       background-image:url("/cafe.jpg");
       background-size: 100%,100%;
       background-position: center;
@@ -888,12 +890,14 @@ height:auto;
 
 .quicklinks{
     z-index: 0;
-    overflow: hidden;
+    overflow: auto;
       margin: 0 auto;
-    width: 300px;
+    width: 354px;
     top:0px;
+  overflow-wrap: break-word;
 }
   .items2 a {
+    overflow-wrap: break-word;
   font-weight: 700;
     display: inline-block;
     color:var(--nav-text-color);
@@ -1090,7 +1094,7 @@ height:auto;
   .items3 a {
   font-weight: 700;
     display: inline-block;
-    color:black;
+    color:white;
     text-align: center;
     padding: 0;
     text-decoration: none;
