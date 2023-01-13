@@ -331,6 +331,36 @@ display: flex !important;
 .notifier a:hover {
     color:var(--accent-color-light)
 }
+    .back2{
+        display: flex;
+    align-items:center;
+    z-index: 10;
+    font-size:22px;
+    border-radius:15px;
+    padding:20px;
+    width:70%;
+    transition:0.5s;
+    height:150px;
+    transition: 0.3s ease-out;
+    }
+  .back2 span{
+    margin-top: 15px;
+    font-weight: bold;
+color:var(--nav-text-color);
+    text-shadow: var(--header-shadow);
+    margin-left:20px;
+    font-size: 75px;
+    margin: 0px 0px 0px 15px;
+    
+    text-align: left;
+  font-weight: bold;
+  }
+   .discordimg{
+    height:140px !important;
+    padding-right: 5px;
+     margin-top: 15px;
+    }
+
 .alert {
     width:100%;
 	line-height: 5px;
@@ -814,11 +844,12 @@ height: 2px;
 .cafeheader h1{
   font-size: 50px;
     margin: 0px 0px 0px 15px;
-    color:var(--nav-text-color);
+    
     text-align: left;
-  font-weight: bold;
+  
   margin-left: 50px;
-
+  font-weight: bold;
+color:var(--nav-text-color);
     text-shadow: var(--header-shadow);
 }
 
@@ -865,16 +896,17 @@ height: 2px;
     padding:20px;
     width:70%;
     transition:0.5s;
-    height:65px;
+    height:75px;
     transition: 0.3s ease-out;
     }
   .back2 span{
+    font-weight: bold;
+color:var(--nav-text-color);
+    text-shadow: var(--header-shadow);
     margin-top: 15px;
-    -webkit-text-stroke: 2px #ba6bfc;
     margin-left:20px;
     font-size: 50px;
     margin: 0px 0px 0px 15px;
-    color:#4902fe;
     text-align: left;
   font-weight: bold;
   }
