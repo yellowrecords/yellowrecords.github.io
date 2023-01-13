@@ -132,7 +132,11 @@ display: flex !important;
   height: 40px;
     width:40px;
 }
-
+.alb{
+  background-color: pink;
+  width:70%;
+  height:200px;
+}
   .mlinks{
     z-index: 0;
     overflow: hidden;
@@ -187,7 +191,13 @@ display: flex !important;
 .mc{
  width:700px; 
   height:525px;
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 1;
 }
+  .mc iframe{
+    
+  }
   
 .header img{
     height:50px;
@@ -509,26 +519,33 @@ h3{
     margin:10px 0 19px 0;
 }
 .ccard {
+  
+  padding:10, 10px;
     z-index: 22;
-    border-radius: container1vh;
+    border-radius: 20px;
     background: var(--card-fill);
-box-shadow: var(--card-shadow);
+-webkit-box-shadow: var(--mob-shadow);
+        -webkit-box-shadow: var(--mob-shadow);
     transition: 0.3s;
-    width: 90%;
+    width: 70%;
     margin: 0 0 1em;
     margin-left: auto;
     margin-right: auto;
 text-align: left;
 display: block;
+
+    
 }
 .ccard h4{
+  font-family: 'Caveat', cursive;
     margin-top:15px; margin-bottom:0px;
+  font-size:50px;
 }
 .ccard h5{
-    margin-top:5px; margin-bottom:0px; font-size:20px;
+    margin-top:5px; margin-bottom:0px; font-size:23px;
 }
 .ccard h6{
-    font-size:16px; margin-top:5px; margin-bottom:15px;
+    font-size:20px; margin-top:5px; margin-bottom:15px;
     font-style: italic;
     font-weight: 400;
 }
@@ -666,11 +683,11 @@ height: 2px;
   }
 .cimage{
     float:left;
-    border-radius: 50px;
+    border-radius: 10px;
     margin-top: 15px;
     margin-right: 15px;
     margin-bottom:15px;
-    height:90px;
+    height:200px;
 }
   .split {
     text-align: center;
@@ -801,6 +818,7 @@ height: 2px;
     text-align: left;
   font-weight: bold;
   margin-left: 50px;
+
     text-shadow: var(--header-shadow);
 }
 
@@ -838,6 +856,34 @@ height: 2px;
     -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
   filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
 }
+  .back2{
+        display: flex;
+    align-items:center;
+    z-index: 10;
+    font-size:22px;
+    border-radius:15px;
+    padding:20px;
+    width:70%;
+    transition:0.5s;
+    height:65px;
+    transition: 0.3s ease-out;
+    }
+  .back2 span{
+    margin-top: 15px;
+    -webkit-text-stroke: 2px #ba6bfc;
+    margin-left:20px;
+    font-size: 50px;
+    margin: 0px 0px 0px 15px;
+    color:#4902fe;
+    text-align: left;
+  font-weight: bold;
+  }
+   .discordimg{
+    height:100px !important;
+    padding-right: 5px;
+     margin-top: 15px;
+    }
+
   
 
 .wordmark img {
@@ -871,11 +917,15 @@ height: 2px;
     }
     
     .mc{
+      
  width:100%; 
 aspect-ratio: 4/3;
       background-image:url("/cafe.jpg");
       background-size: 100%,100%;
       background-position: center;
+      border-radius: 15px;
+  overflow: hidden;
+  z-index: 1;
 }
     .notify{
         margin-top: 5px;
@@ -1119,7 +1169,7 @@ aspect-ratio: 4/3;
         -webkit-box-shadow: var(--mob-shadow);
         -webkit-box-shadow: var(--mob-shadow);
         transition: 0.3s;
-
+padding:5px;
         margin: 0 0 7px;
         margin-left: 0;
         margin-right: 0;
@@ -1128,11 +1178,14 @@ aspect-ratio: 4/3;
 
     }
     .ccard h4{
+      font-family: 'Caveat', cursive;
         margin-top:2px; margin-bottom:0px;
-        font-size:18px;
+        font-size:34px;
+      margin-left: 5px;
     }
     .ccard h5{
-        margin-top:0px; margin-bottom:0px; font-size:16px;
+        margin-top:0px; margin-bottom:0px; font-size:18px;
+      margin-left: 5px;
     }
     .ccard h6{
         font-size:13px; margin-top:0px; margin-bottom:0px;
@@ -1169,7 +1222,42 @@ aspect-ratio: 4/3;
         /* Footer height */
         font-size: 15px;
     }
+    .alb{
+  background-color: #0503bb;
+      border-radius: 15px;
+  width:97%;
+  height:200px;
+      margin: auto;
+}
+  .albcover{
+    float: left;
+  width: 50%;
+  }
+  .albcover img{
+    border-radius: 15px;
+    height:150px;
     
+  }
+  alb:after{
+    
+  }
+  /* Create two equal columns that floats next to each other */
+  .row{
+    width:100%;
+  }
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
     .button1 {
         background-color: var(--accent-color);
         /* Green */
@@ -1246,11 +1334,11 @@ aspect-ratio: 4/3;
       }
     .cimage{
         float:left;
-        border-radius: 50px;
+        border-radius: 7px;
         margin-top: 2px;
 
         margin-right:5px;
-        height:50px;
+        height:140px;
     }
       .split {
         text-align: center;
