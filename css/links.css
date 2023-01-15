@@ -52,24 +52,26 @@ body{
     color:var(--text-color);
 
 
-    background-color: black;
+    background: linear-gradient(-45deg, #000f4d, #001f04, #00175c, #00162e);
+	background-size: 400% 400%;
+	animation: gradient 7s ease infinite;
+}
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
-.animated-gradient {
-  position: fixed;
-    top: 0px;
-    left: 0;
-    z-index: 999;
-    width: 100%;
-    height: 100vh;
-  animation: animateBg 14s linear infinite;
-  background-image: linear-gradient(90deg,#011900,#00203d,#1d0047,#011900,#00203d);
-  background-size: 400% 100%;
-}
-@keyframes animateBg {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 0%; }
-}
+
+
+
+
 
 
 hr {
@@ -112,6 +114,15 @@ body {
     height:33px;
     padding-right: 5px;
     }
+  .coolphot{
+    margin-top:50px;
+  }
+.coolphot img{
+  width:400px;
+}
+  .navbar h1{
+    font-size: 10px;
+  }
 .ihold{
   display: block !important;
   margin:auto !important;
@@ -150,6 +161,7 @@ display: none !important;
   .navbar h1{
   font-family: 'Caveat', cursive;
   font-size:80px;
+    margin:0;
 }
   .items2 a {
    
@@ -170,6 +182,8 @@ display: none !important;
   height: 50px;
     width:50px;
 }
+
+  
 
 .quicklinksnav{
   
@@ -463,6 +477,7 @@ background-color: rgb(175, 175, 175);
     position:-webkit-sticky;
     position:sticky;
     top:0px;
+  padding:0px;
 }
 .items a {
   font-weight: 700;
