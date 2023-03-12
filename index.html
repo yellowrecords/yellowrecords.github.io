@@ -18,6 +18,58 @@
 
 
   <script src="/js/global.js"></script>
+  <style>
+    body {
+      background: linear-gradient(270deg, #72826b, #081602, #254526);
+      background-size: 600% 600%;
+
+      -webkit-animation: AnimationName 59s ease infinite;
+      -moz-animation: AnimationName 59s ease infinite;
+      animation: AnimationName 59s ease infinite;
+    }
+
+    @-webkit-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    @-moz-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+  </style>
 
 
 </head>
@@ -26,15 +78,16 @@
   <div class="header">
     <div class="wordmark">
       <!--<img src="BNairMarque.png">-->
-      <h1>Bobby Nair</h1>
+      <h1>BOBBY NAIR*</h1>
     </div>
   </div>
 
   <div class="navbar">
-    <div class="items">
-      <a class="active" href="/">FEATURED</a>
+    <div class="navitems">
+      <a class="active" href="/">HOME</a>
       <a href="/discography/">DISCOGRAPHY</a>
-      <a href="/video/">VIDEOS</a>
+      <a href="/video/">PORTFOLIO</a>
+      <a href="/contact/">CONTACT</a>
       <div class="quicklinksnav">
         <div class="items5">
           <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank"><img src="/insta.png"></a>
@@ -71,9 +124,14 @@
         <a href="https://www.tiktok.com/@bobby_nair" target="_blank"><img src="/tik.png"></a>
       </div>
     </div>
-    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/5IGPzDdGKP8sgXxAmc1Lgi?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    
+
+
+    <div class="countdown">
+      <p id="demo"></p>
+    </div>
+
     <div class="card">
+
       <div class="container">
         <h4><a href="/discography/loveyou/">Love You</a> - Out Now!</h4>
 
@@ -90,6 +148,29 @@
       </div>
 
     </div>
+    <!-- Begin Mailchimp Signup Form -->
+    <style type="text/css">
+      #mc_embed_signup {
+        background: #1a0057;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+
+      }
+
+
+
+      /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+    </style>
+
+
+
+
+
+
+
+
+
     <div class="ccard">
       <div class="container">
         <img class="cimage" src="/loveyou.jpg">
@@ -112,51 +193,108 @@
 
     </div>
 
-    <div class="card">
-      <div class="container">
-        <h4>Café Music Video</h4>
 
-
-
-        <iframe class="mc" src="https://www.youtube.com/embed/ERn8i826_K8" title="YouTube video player" frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
-        <p>
-          <a href="https://www.youtube.com/watch?v=ERn8i826_K8">Video also available for download here.</a>
-        </p>
-      </div>
-    </div>
     <hr>
     <div class="card">
       <div class="container">
         <h4>Who is Bobby Nair?</h4>
-        <p>Based in the United States, Bobby Nair is an alternative singer-songwriter with a distinctive style,
-          focusing
-          on piano and vocal compositions.
-          <br>
-          <br>
-          <b>Albums/EPs:</b>
-          <br>
-          <i><a href="/discography/#redux">Saturn REDUX</a></i>
-          <br>
-          <i><a href="/discography/#slowpoke">Slowpoke</a></i>
-          <br>
-          <i><a href="/discography/#winter">I Miss The Winter</a></i>
-          <br>
-          <i><a href="/discography/#saturn">Saturn – EP</a></i>
-          <br>
-          <br>
-          <b>Singles:</b>
-          <br>
-          <i>Café (Redux) – Single</i>
-          <br>
-          <i>Kill the Butterflies (Saturn Demo)</i>
-          <br>
-          <i>On The Line (feat TY Carter)</i>
-          <br>
-          <i>Snow Song</i>
+        <p>Bobby Nair is an artist based out of the deepest sewer tunnels of the busiest cities. In his free time, he
+          enjoys playing piano, doing cartwheels, and opening portals to worlds that do not exist yet. He once said, in
+          an interview with a very prolific stray cat, "I strive for greatness, in any profession that may force itself
+          upon me." His whereabouts are currently unknown.
+          <br><br>
+          (also, he's super handsome and talented, don’t tell anybody though please. it is a secret.)
+
         </p>
       </div>
+
+      <div class="ite-container">
+        <a href="/discography/">
+          <div class="ite">
+            <img src="disco.png" width="400px" alt="" />
+            <p>Discography</p>
+          </div>
+        </a>
+        <a href="/video/">
+          <div style="margin-left:200px;" class="ite">
+            <img src="thumb.png" width="400px" alt="" />
+            <p>Videos</p>
+          </div>
+        </a>
+      </div>
+      <br>
+      <br>
+      <div id="mc_embed_signup">
+        <form
+          action="https://bobbynair.us21.list-manage.com/subscribe/post?u=b65c2bfae274b3bd9d0e11ec4&amp;id=bed75906bc&amp;f_id=0071f8e1f0"
+          method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+          target="_blank" novalidate>
+          <div id="mc_embed_signup_scroll">
+            <h2>Get updates on music and videos in your inbox!</h2>
+
+            <div class="mc-field-group">
+              <label for="mce-EMAIL">Email Address <span class="asterisk">*</span>
+              </label>
+              <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" required>
+              <span id="mce-EMAIL-HELPERTEXT" class="helper_text"></span>
+            </div>
+            <div class="mc-field-group">
+              <label for="mce-FNAME">First Name </label>
+              <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+              <span id="mce-FNAME-HELPERTEXT" class="helper_text"></span>
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display:none"></div>
+              <div class="response" id="mce-success-response" style="display:none"></div>
+            </div>
+            <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+            <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+                name="b_b65c2bfae274b3bd9d0e11ec4_bed75906bc" tabindex="-1" value=""></div>
+            <div class="optionalParent">
+              <div class="clear foot">
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+      <script
+        type='text/javascript'>(function ($) {window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; fnames[3] = 'ADDRESS'; ftypes[3] = 'address'; fnames[4] = 'PHONE'; ftypes[4] = 'phone'; fnames[5] = 'BIRTHDAY'; ftypes[5] = 'birthday';}(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+
+
+
+      <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date("May 20, 2023 00:00:00").getTime();
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+
+          // Get today's date and time
+          var now = new Date().getTime();
+
+          // Find the distance between now and the count down date
+          var distance = countDownDate - now;
+
+          // Time calculations for days, hours, minutes and seconds
+          var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          // Output the result in an element with id="demo"
+          document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+          // If the count down is over, write some text 
+          if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "EXPIRED";
+          }
+        }, 1000);
+      </script>
+      <!--End mc_embed_signup-->
     </div>
     <hr>
 
@@ -165,10 +303,46 @@
 
   </div>
 
+  <style>
+    /* external css: flickity.css */
+
+    * {
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: sans-serif;
+    }
+
+    .gallery {
+      background: #EEE;
+    }
+
+    .gallery-cell {
+      width: 66%;
+      height: 200px;
+      margin-right: 10px;
+      background: #8C8;
+      counter-increment: gallery-cell;
+    }
+
+    /* cell number */
+    .gallery-cell:before {
+      display: block;
+      text-align: center;
+      content: counter(gallery-cell);
+      line-height: 200px;
+      font-size: 80px;
+      color: white;
+    }
+  </style>
+
   <!--Script tags are here because if they aren't here, for some reason it causes things to animate weirdly on load. Leave them here.-->
   <footer>
     2023 Yellow Records <br><span><a href="https://www.instagram.com/bobbyfreakingnair/">ig:
         @bobbyfreakingnair</a> · <a href="mailto:nairbobby5@gmail.com"> nairbobby5@gmail.com</a></span>
+
   </footer>
 </body>
 

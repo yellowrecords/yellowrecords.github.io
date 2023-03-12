@@ -2,11 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@100,100i,300,300i,400,400i,700,700i,900,900i&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
 /*Main/light color palette*/
 
 /*Main/light color palette*/
 :root{
-  font-family: 'Syne Mono', monospace;
+   font-family: 'Playfair Display', serif !important;
   -webkit-font-smoothing: subpixel-antialiased;
  /* font-synthesis: none;*/
   transform: perspective(1px);
@@ -109,6 +117,10 @@ body {
     }
   .back2 span{
     margin-left:20px;
+    
+  }
+  a{
+    text-decoration: none !important;
   }
    .discordimg{
     height:33px;
@@ -174,6 +186,10 @@ body {
 }
   .navbar h1{
     font-size: 10px;
+    font-family: 'PT Serif', serif !important;
+    color:#ffffff !important;
+     -webkit-text-stroke-width: 1px !important;
+  -webkit-text-stroke-color: white !important;
   }
 .ihold{
   display: block !important;
@@ -211,7 +227,10 @@ display: none !important;
   width:450px;
 }
   .navbar h1{
-  font-family: 'Caveat', cursive;
+  font-family: 'PT Serif', serif !important;
+    color:white !important;
+     -webkit-text-stroke-width: 1px !important;
+  -webkit-text-stroke-color: white !important;
   font-size:80px;
     margin:0;
 }
@@ -1123,8 +1142,12 @@ aspect-ratio: 4/3;
     height:50px;
     padding-right: 5px;
     }
-
-  
+a{
+    text-decoration: none !important;
+  }
+  h4{
+    margin-bottom:10px;
+  }
   .items2 a {
     overflow-wrap: break-word;
   font-weight: 700;
@@ -1154,8 +1177,11 @@ aspect-ratio: 4/3;
     visibility:hidden;
   }
     .navbar h1{
-  font-family: 'Caveat', cursive;
-  font-size:80px;
+  font-family: 'PT Serif', serif !important;
+    color:white !important;
+     -webkit-text-stroke-width: 1px !important;
+  -webkit-text-stroke-color: white !important;
+  font-size:50px;
       margin:0;
 }
     .navbar {

@@ -20,6 +20,54 @@
       margin: 0px !important;
       padding: 0px !important;
       border: 0px !important;
+      background: linear-gradient(270deg, #000000, #010030, #0c0030, #0f0000);
+      background-size: 800% 800%;
+
+      -webkit-animation: AnimationName 11s ease infinite;
+      -moz-animation: AnimationName 11s ease infinite;
+      animation: AnimationName 11s ease infinite;
+    }
+
+    @-webkit-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    @-moz-keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    @keyframes AnimationName {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
     }
   </style>
 </head>
@@ -33,16 +81,30 @@
   </div>
 
   <div class="navbar">
-    <div class="items">
-      <a href="/">FEATURED</a>
-      <a class="active" href="/discography/">DISCOGRAPHY</a>
-      <a href="/video/">VIDEOS</a>
+    <div class="navitems">
+      <a class="active" href="/">HOME</a>
+      <a href="/discography/">DISCOGRAPHY</a>
+      <a href="/video/">PORTFOLIO</a>
+      <a href="/contact/">CONTACT</a>
+      <div class="quicklinksnav">
+        <div class="items5">
+          <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank"><img src="/insta.png"></a>
+          <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/spotify.png"></a>
+          <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/apple.png"></a>
+          <a href="https://www.youtube.com/@bobbynair4736" target="_blank"><img src="/yt.png"></a>
+          <a href="https://genius.com/artists/Bobby-nair" target="_blank"><img src="/gen.png"></a>
+          <a href="https://www.tiktok.com/@bobby_nair" target="_blank"><img src="/tik.png"></a>
+        </div>
+      </div>
 
 
       <!--<div class="topnav-right">
         <a href="/about/"><img src="/spotify.png"></a>
       </div>-->
     </div>
+    <!--<div class="notifier">
+      <p><i>New Music Video out 1/13/2023!</i></p>
+    </div>-->
 
   </div>
 
@@ -70,8 +132,18 @@
       </div>
 
     </div>
-    <h2 style="font-weight: bold; margin-bottom: 0px;">Albums</h2>
     <div class="mlinks">
+      <h2 style="font-weight: bold; margin-bottom: 0px;">Singles</h2>
+      <div class="items3">
+        <a href="#saturn"><img src="/ep.jpg">Café (Redux)</a>
+        <a href="#winter"><img src="/winter.jpg">Kill The Butterflies</a>
+        <a href="#slowpoke"><img src="/slow.jpg">On The Line</a>
+        <a href="#redux"><img src="/saturn.jpg">Snow Song</a>
+      </div>
+    </div>
+
+    <div class="mlinks">
+      <h2 style="font-weight: bold; margin-bottom: 0px;">Albums</h2>
       <div class="items3">
         <a href="#saturn"><img src="/ep.jpg">Saturn</a>
         <a href="#winter"><img src="/winter.jpg">I Miss
@@ -81,9 +153,7 @@
       </div>
     </div>
 
-    <div id="redux" class="musecard"
-      style="background: rgb(255,187,0);
-background: linear-gradient(180deg, rgba(26,0,87,1) 0%, rgba(158,0,1,1) 4%, rgba(162,9,2,1) 96%, rgba(236,171,28,1) 100%); color:white;">
+    <div id="redux" class="musecard">
       <div class="container">
         <br>
         <br>
@@ -125,9 +195,7 @@ background: linear-gradient(180deg, rgba(26,0,87,1) 0%, rgba(158,0,1,1) 4%, rgba
         <br><br>
       </div>
     </div>
-    <div id="slowpoke" class="musecard"
-      style="background: rgb(237,166,12);
-background: linear-gradient(180deg, rgba(237,166,12,1) 0%, rgba(236,171,28,1) 7%, rgba(236,171,28,1) 82%, rgba(228,236,234,1) 100%); color:white;">
+    <div id="slowpoke" class="musecard">
       <div class="container">
         <img width="250px" src="/slow.jpg">
         <h4>Slowpoke</h4>
@@ -171,9 +239,7 @@ background: linear-gradient(180deg, rgba(237,166,12,1) 0%, rgba(236,171,28,1) 7%
         <br>
       </div>
     </div>
-    <div id="winter" class="musecard"
-      style="background: rgb(228,236,234);
-background: linear-gradient(180deg, rgba(228,236,234,1) 0%, rgba(220,214,202,1) 94%, rgba(171,80,4,1) 100%); color:black;">
+    <div id="winter" class="musecard">
 
       <div class="container">
         <img width="250px" src="/winter.jpg">
@@ -220,8 +286,7 @@ background: linear-gradient(180deg, rgba(228,236,234,1) 0%, rgba(220,214,202,1) 
         </p>
       </div>
     </div>
-    <div id="saturn" class="musecard" style="background: rgb(171,80,4);
-background: linear-gradient(180deg, rgba(171,80,4,1) 0%, rgba(165,77,7,1) 95%, rgba(26,0,87,1) 100%); color:white;">
+    <div id="saturn" class="musecard">
       <div class="container">
         <img width="250px" src="/ep.jpg">
         <h4>Saturn</h4>
