@@ -31,7 +31,7 @@
     --text-color:white;
     --nav-fill:rgba(45, 54, 60, .8);
     --header-grad:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(17,0,175,1) 0%, rgba(55,72,224,1) 23%, rgba(0,131,215,1) 100%);
-    --card-fill:#2b008f;
+    --card-fill:transparent;
     --card-shadow:0px 0px 14px 3px rgba(255, 165, 0,1);
     --mob-shadow:0px 0px 5px 1px rgba(189,189,189,1);
     --nav-text-color:white;
@@ -1445,10 +1445,12 @@ padding:5px;
 /* MailChimp Form Embed Code - Classic - 12/17/2015 v10.7 */
   #mc_embed_form {
             width: 100%;
+background-color:transparent;
+
   }
 #mc_embed_signup form {display:block; position:relative; text-align:left; margin: 10px;}
 #mc_embed_signup h2 {font-weight:bold; padding:0; margin:10px 0; font-size:1.4em;}
-#mc_embed_signup input {background-color: #5239cc; border: 1px solid #5239cc; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color:white; height:20px; font-size:15px;}
+#mc_embed_signup input {background-color: black; border: 1px solid #5239cc; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px; color:white; height:20px; font-size:15px;}
 #mc_embed_signup input[type=checkbox]{-webkit-appearance:checkbox;}
 #mc_embed_signup input[type=radio]{-webkit-appearance:radio;}
 #mc_embed_signup input:focus {border-color:#333;}
