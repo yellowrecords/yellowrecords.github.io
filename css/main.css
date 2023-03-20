@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap');
 
 /*Main/light color palette*/
 
@@ -71,7 +73,7 @@ hr {
 }
 
 /*Desktop*/
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 869px) {
 body {
     font-size: 22px;
     text-align: center;
@@ -290,20 +292,27 @@ display: flex !important;
 }
 
 .countdown{
-  display: flex;
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
   width:70%;
-  font-size: 50px;
-  background-color: black;
+  font-size: 75px;
+  padding:0px;
+  margin-top:-20px;
+  margin-bottom:0px !important;
+  
+  background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,8,10,1) 82%, rgba(0,0,0,0.3981967787114846) 98%, rgba(0,212,255,0) 100%);
   border-radius: 10px;
   font-stretch: ultra-expanded;
+  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+    -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
 }
   
 .mc{
- width:700px; 
-  height:525px;
+ width:900px; 
+  height:700px;
   border-radius: 20px;
   overflow: hidden;
   z-index: 1;
@@ -562,17 +571,19 @@ background-color: rgb(175, 175, 175);
     margin-bottom: 10px;
 }
 .navitems a:hover {
-    background-color: rgba(255, 255, 255, 0.30);
+    background-color: rgba(255, 255, 255, 0.00);
     color: white;
+  border-color:#1fb71f;
+   animation:slidebg 5s linear infinite;
   
 
 }
 .navitems a.active {
-    background-color: rgba(255, 255, 255, 0.30);
-    color: var(--nav-text-color);
+    background-color: rgba(255, 255, 255, 0.00);
+    color:var(--accent-color);
   border-style: solid;
   border-width: 3px;
-  border-color: #f7a1a1;
+  border-color: var(--accent-color);
 
     padding: 14px 16px;
 }
@@ -691,7 +702,6 @@ display: block;
     
 }
 .ccard h4{
-  font-family: 'Caveat', cursive;
     margin-top:15px; margin-bottom:0px;
   font-size:50px;
 }
@@ -867,7 +877,7 @@ height: 2px;
 
 }
 /*Mobile*/
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 868px) {
     body {
         font-size: 22px;
         text-align: center;
@@ -1218,8 +1228,8 @@ aspect-ratio: 4/3;
     
     }
     .navitems a.active {
-        color: var(--accent-color-light)
-    
+        color:var(--accent-color);
+    background-color: transparent;
 
     }
 
@@ -1290,7 +1300,7 @@ aspect-ratio: 4/3;
     }
     
     .card h4{
-      -webkit-text-stroke: 2px black;
+      -webkit-text-stroke: 1px black;
       font-family: 'Playfair Display', serif;
         font-size: 35px;
         margin: 4px 0px 2px 0;
@@ -1511,6 +1521,27 @@ background-color:transparent;
     float: left;
   width: 50%;
   }
+
+.countdown{
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  width:90%;
+  font-size: 40px;
+  padding:0px;
+  margin-top:-20px;
+  margin-bottom:-20px !important;
+  
+  background: rgb(0,0,0);
+background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,8,10,1) 82%, rgba(0,0,0,0.3981967787114846) 98%, rgba(0,212,255,0) 100%);
+  border-radius: 10px;
+  font-stretch: ultra-expanded;
+  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+    -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
+}
+
+  
   .albcover img{
     border-radius: 15px;
     height:150px;

@@ -15,12 +15,18 @@
   <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link href="/css/main.css?v=1.1" rel="stylesheet">
+  <link href="/css/tailwind.min.css" rel="stylesheet">
 
 
   <script src="/js/global.js"></script>
   <style>
     body {
-      background-color: #254526;
+      background: linear-gradient(270deg, #72826b, #081602, #254526);
+      background-size: 600% 600%;
+
+      -webkit-animation: AnimationName 59s ease infinite;
+      -moz-animation: AnimationName 59s ease infinite;
+      animation: AnimationName 59s ease infinite;
     }
   </style>
 
@@ -30,16 +36,16 @@
   <div class="header">
     <div class="wordmark">
       <!--<img src="BNairMarque.png">-->
-      <h1>CONTACT</h1>
+      <h1>Contact</h1>
     </div>
   </div>
 
   <div class="navbar">
     <div class="navitems">
-      <a class="active" href="/">HOME</a>
+      <a href="/">HOME</a>
       <a href="/discography/">DISCOGRAPHY</a>
       <a href="/video/">PORTFOLIO</a>
-      <a href="/contact/">CONTACT</a>
+      <a class="active" href="/contact/">CONTACT</a>
       <div class="quicklinksnav">
         <div class="items5">
           <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank"><img src="/insta.png"></a>
@@ -65,17 +71,7 @@
 
 
   <div class="content">
-    <div class="quicklinks">
-      <div class="items2">
-        <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank"><img src="/insta.png"></a>
-        <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/spotify.png"></a>
-        <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/apple.png"></a>
-        <a href=" #"><img src="/saturnico.png"></a>
-        <a href="https://www.youtube.com/@bobbynair4736" target="_blank"><img src="/yt.png"></a>
-        <a href="https://genius.com/artists/Bobby-nair" target="_blank"><img src="/gen.png"></a>
-        <a href="https://www.tiktok.com/@bobby_nair" target="_blank"><img src="/tik.png"></a>
-      </div>
-    </div>
+
 
 
 
@@ -102,30 +98,73 @@
 
 
 
-    <div class="card">
-      <div class="container">
-        <h4 style="text-align: left;">Email</h4>
-        <p>Contact me directly for any business inquiries or any questions about my work.</p>
-        <a href="mailto:nairbobby5@gmail.com">nairbobby5@gmail.com</a>
-        <br>
-        <h4 style="text-align: left;">Instagram</h4>
-        <p>I am also available to message on Instagram if you prefer!</p>
-        <a href="https://www.instagram.com/bobbyfreakingnair/">@bobbyfreakingnair</a>
-
-      </div>
-    </div>
-
     <hr>
 
 
+    <!-- 
+    =======================================================================
 
+    This is a working contact form. To receive email, 
+    Replace YOUR_ACCESS_KEY_HERE with your actual Access Key.
 
+    Create Access Key here 👉 https://web3forms.com/
+
+     =======================================================================
+ -->
+
+    <div class="flex items-center min-h-screen bg-transparent dark:bg-gray-900" style="margin-top:-50px !important;">
+      <div class="container mx-auto">
+        <div class="max-w-md mx-auto  bg-white p-5 rounded-md shadow-sm">
+          <div class="text-center">
+            <h1 class="my-3 text-3xl font-semibold text-gray-700 dark:text-gray-200">
+              Email
+            </h1>
+            <p class="text-gray-400 dark:text-gray-400">
+              Contact me directly about business inquiries, project proposals, or questions.
+            </p>
+          </div>
+          <div class="m-7">
+            <form action="https://api.web3forms.com/submit" method="POST" id="form">
+              <input type="hidden" name="access_key" value="df86a2e6-e223-4860-9a42-730e47b253e0" />
+              <input type="hidden" name="subject" value="Message from bobbynair.com" />
+              <input type="hidden" name="redirect" value="https://web3forms.com/success" />
+              <input type="checkbox" name="botcheck" id="" style="display: none;" />
+              <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Name</label>
+                <input type="text" name="name" id="name" placeholder="John Doe" required
+                  class="w-full px-3 py-2 text-gray-600 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+              </div>
+              <div class="mb-6">
+                <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+                <input type="email" name="email" id="email" placeholder="you@company.com" required
+                  class="w-full text-gray-600 px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500" />
+              </div>
+              <div class="mb-6">
+                <label for="message" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Message</label>
+
+                <textarea rows="5" name="message" id="message" placeholder="Your Message"
+                  class="w-full px-3 py-2 placeholder-gray-300 text-gray-600 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-100 focus:border-indigo-300 dark:bg-gray-700 dark:text-white dark:placeholder-gray-500 dark:border-gray-600 dark:focus:ring-gray-900 dark:focus:border-gray-500"
+                  required></textarea>
+              </div>
+              <div class="mb-6">
+                <button type="submit"
+                  class="w-full px-3 py-4 text-white bg-green-500 rounded-md focus:bg-green-800 focus:outline-none">
+                  Send Message
+                </button>
+              </div>
+              <p class="text-base text-center text-gray-400" id="result"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!--Script tags are here because if they aren't here, for some reason it causes things to animate weirdly on load. Leave them here.-->
   <footer>
     2023 Yellow Records <br><span><a href="https://www.instagram.com/bobbyfreakingnair/">ig:
         @bobbyfreakingnair</a> · <a href="mailto:nairbobby5@gmail.com"> nairbobby5@gmail.com</a></span>
+    <br>&nbsp;
 
   </footer>
 </body>
