@@ -426,63 +426,6 @@ display: flex !important;
 
 
 
-.cafeheader{
-  font-family: 'Caveat', cursive;
-  height:200px;
-  line-height: 200px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-}
-.cafeheader h1{
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important; 
-  font-family: 'Caveat', cursive;
-    margin: 0px 0px 0px 15px;
-    color:var(--nav-text-color);
-    text-align: left;
-  font-weight: bold;
-  margin-left: 50px;
-    text-shadow: var(--header-shadow);
-}
-
-.cafeheader img{
-    height:50px;
- 
-    float: left;
-    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-}
-  
-.cafeheader2{
-  height:200px;
-  line-height: 200px;
-  background-image: url("/slowblur.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  
-  width: 100%;
-}
-.cafeheader2 h1{
-  font-family: 'Caveat', cursive;
-    margin: 0px 0px 0px 15px;
-    color:var(--nav-text-color);
-    text-align: left;
-  font-weight: bold;
-  margin-left: 50px;
-    text-shadow: var(--header-shadow);
-}
-
-.cafeheader2 img{
-    height:50px;
- 
-    float: left;
-    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-}
 .wordmark img {
   height: 100px;
   margin-top: 25px;
@@ -1049,61 +992,6 @@ height: 2px;
 
 
 
-
-.cafeheader{
-  height:125px;
-  line-height: 200px;
-  background-image: url("/caffeb.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  font-family: 'Caveat', cursive;
-  width: 100%;
-}
-.cafeheader h1{
-  font-size: 50px;
-    margin: 0px 0px 0px 15px;
-    color:var(--nav-text-color);
-    text-align: left;
-  font-weight: bold;
-  margin-left: 50px;
-    text-shadow: var(--header-shadow);
-}
-
-.cafeheader img{
-    height:50px;
- 
-    float: left;
-    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-}
-  .cafeheader2{
-  height:125px;
-  line-height: 200px;
-  background-image: url("/slowblur.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  font-family: 'Caveat', cursive;
-  width: 100%;
-}
-.cafeheader2 h1{
-  font-size: 50px;
-    margin: 0px 0px 0px 15px;
-    color:var(--nav-text-color);
-    text-align: left;
-  font-weight: bold;
-  margin-left: 50px;
-    text-shadow: var(--header-shadow);
-}
-
-.cafeheader2 img{
-    height:50px;
- 
-    float: left;
-    -webkit-filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-  filter: drop-shadow(0px 0px 5px rgb(0, 0, 0));
-}
   
 
 .wordmark img {
