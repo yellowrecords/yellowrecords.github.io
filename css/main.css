@@ -71,6 +71,9 @@ hr {
     text-align: center;
     height: 5px;
 }
+.text11 h4{
+  font-size:40px !important;
+}
 
 /*Desktop*/
 @media only screen and (min-width: 869px) {
@@ -87,6 +90,9 @@ display: none !important;
     top:0px;
   margin: 0 auto;
   width:450px;
+}
+.text11 h4{
+  font-size:75px !important;
 }
 /* MailChimp Form Embed Code - Classic - 12/17/2015 v10.7 */
   #mc_embed_form {
