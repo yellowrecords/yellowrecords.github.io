@@ -20,12 +20,15 @@
   <script src="/js/global.js"></script>
   <style>
     body {
-      background: linear-gradient(270deg, #72826b, #081602, #254526);
-      background-size: 600% 600%;
+      margin: 0px !important;
+      padding: 0px !important;
+      border: 0px !important;
+      background: linear-gradient(270deg, #000000, #010030, #0c0030, #0f0000);
+      background-size: 800% 800%;
 
-      -webkit-animation: AnimationName 59s ease infinite;
-      -moz-animation: AnimationName 59s ease infinite;
-      animation: AnimationName 59s ease infinite;
+      -webkit-animation: AnimationName 11s ease infinite;
+      -moz-animation: AnimationName 11s ease infinite;
+      animation: AnimationName 11s ease infinite;
     }
 
     @-webkit-keyframes AnimationName {
@@ -67,6 +70,11 @@
 
       100% {
         background-position: 0% 50%
+      }
+    }
+    @media only screen and (max-width: 600px)  {
+      .container11{
+  
       }
     }
   </style>
@@ -255,60 +263,6 @@
 
     </div>
     
-
-    <div class="card">
-
-      
-    <!-- Begin Mailchimp Signup Form -->
-    <style type="text/css">
-      #mc_embed_signup {
-        background: transparent;
-        clear: left;
-        font: 14px Helvetica, Arial, sans-serif;
-
-      }
-
-
-
-      /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-    </style>
-
-
-
-
-
-
-
-
-    <!--
-    <div class="ccard">
-      <div class="container">
-        <img class="cimage" src="/loveyou.jpg">
-
-        <h4><a href="/discography/loveyou/">Love You - Single</a></h4>
-        <h5>January 13, 2023</h5>
-        <div class="items2">
-          <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/yt.png"></a>
-          <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/apple.png"></a>
-          <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/spotify.png"></a>
-          <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/ytr.png"></a>
-          <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/amz.png"></a>
-
-        </div>
-        <h6>Now streaming on all platforms</h6>
-
-
-
-      </div>
-
-    </div>
--->
-
-    <hr>
-
-
-
     <div class="container11">
       <div class="left-image11"><div class="image-wrapper"></div></div>
       <div class="text11"><h4 style="-webkit-text-stroke: 1px black;
@@ -387,6 +341,61 @@
       </div>
       <div class="right-image11"><div class="image-wrapper"></div></div>
     </div>
+
+    <div class="card">
+
+      
+    <!-- Begin Mailchimp Signup Form -->
+    <style type="text/css">
+      #mc_embed_signup {
+        background: transparent;
+        clear: left;
+        font: 14px Helvetica, Arial, sans-serif;
+
+      }
+
+
+
+      /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+    </style>
+
+
+
+
+
+
+
+
+    <!--
+    <div class="ccard">
+      <div class="container">
+        <img class="cimage" src="/loveyou.jpg">
+
+        <h4><a href="/discography/loveyou/">Love You - Single</a></h4>
+        <h5>January 13, 2023</h5>
+        <div class="items2">
+          <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/yt.png"></a>
+          <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/apple.png"></a>
+          <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/spotify.png"></a>
+          <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/ytr.png"></a>
+          <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/amz.png"></a>
+
+        </div>
+        <h6>Now streaming on all platforms</h6>
+
+
+
+      </div>
+
+    </div>
+-->
+
+    <hr>
+
+
+
+    
     
     <style>
       .container11 {
@@ -400,7 +409,7 @@
       }
       
       .text11 {
-        flex: 3;
+        flex: 2 !important;
         font-size:32px;
         text-align:justify !important; font-family: 'Space Grotesk', sans-serif !important;
       }
@@ -418,10 +427,14 @@
 
 @media only screen and (max-width: 868px) {
 
+  .container11{
+
+  }
   .left-image11, .right-image11 {display:none;}
   
   .text11 {padding:15px;
 	text-align:left !important;
+}
 }
 
     </style>
