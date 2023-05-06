@@ -1304,7 +1304,7 @@ color:var(--nav-text-color);
   font-family: 'Roboto Mono', monospace;
   color:#ffffff !important;
    -webkit-text-stroke: 2px #495df1;
-   font-size:60px;
+   font-size:45px;
    animation: textShadow .6s infinite;
 }
 
