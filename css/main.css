@@ -1085,7 +1085,9 @@ height: 2px;
         text-align: center;
     }
     /*Header*/
-    
+    .pbis{
+      width:95%;
+    }
  .header{
         height:125px;
         line-height: 125px;
