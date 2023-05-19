@@ -1077,6 +1077,9 @@ height: 2px;
     border-radius:10px !important;
     background-color: rgba(192, 199, 255, 0.35);
   }
+  .pbis{
+    margin-top:50px;width:500px; border-radius:25px; backdrop-filter: blur(100px); background-color:rgba(192, 193, 255, 0.077);
+  }
 }
 /*Mobile*/
 @media only screen and (max-width: 868px) {
@@ -1086,7 +1089,7 @@ height: 2px;
     }
     /*Header*/
     .pbis{
-      width:95%;
+      margin-top:50px;width:94%; border-radius:25px; backdrop-filter: blur(100px); background-color:rgba(192, 193, 255, 0.077);
     }
  .header{
         height:125px;
