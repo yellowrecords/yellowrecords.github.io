@@ -176,6 +176,7 @@ background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,8,10,1) 82%, rgba(0
   font-family: 'Roboto Mono', monospace;
   border-style: solid;
   border-width: 3px;
+  z-index: 5000;
   border-color: rgba(255, 255, 255, 0.45);
   color:var(--main-text);
   text-align: center;
@@ -753,5 +754,19 @@ width:100%;
     text-align: left;
     -moz-text-align-last: center; /* Firefox 12+ */
     
+}
+.m-7{
+  width:95% !important;
+}
+.m-7 input, textarea{
+width:95% !important;
+height:40px;
+border-radius: 10px;
+}
+.m-7 textarea{
+  height:200px;
+}
+figure img{
+  width:100%;
 }
 }
