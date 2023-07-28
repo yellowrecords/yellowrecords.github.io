@@ -1,5 +1,6 @@
 # yellowrecords.github.io / [bobbynair.com](https://bobbynair.com)
-Q. What is this?
+**Q. What is this?**
+
 A. This repository is the source code for bobbynair.com, which is currently being hosted on GitHub Pages from this repo.
 ___
 What does each page do?
