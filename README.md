@@ -6,7 +6,7 @@ ___
 What does each page do?
 | Page | Description |
 | ------ | ----------- |
-| /index.html   | Landing Page |
+| /index.html   | Landing page |
 | /discography | Lists music |
 | /discography/(song) | Song page, has video (if there is one), streaming options, and lyrics |
 | /contact    | Contact form |
