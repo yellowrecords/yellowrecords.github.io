@@ -171,6 +171,28 @@ background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,8,10,1) 82%, rgba(0
 
   margin:0;
 }
+.tracklist{
+}
+.track{
+  padding:6px 15px;
+  display: flexbox;
+}
+.track img{
+  height:25px;
+  filter: invert();
+}
+.tracklist h4{
+  font-size: 25px !important;
+}
+.track audio{
+  float: right;
+}
+.track:nth-child(even){
+background-color: rgba(56, 56, 56, 0.463);
+}
+.track:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.399);
+  }
 .navitems a {
   font-weight: 700;
   float: left;
@@ -718,7 +740,6 @@ width:100%;
    .countdown{
     font-size:30px;
    }
-
    .musecard {
     z-index: 22;
     transition: 0.3s;
@@ -754,7 +775,6 @@ width:100%;
     margin: 10px 15px 0px 15px;
     text-align: left;
     -moz-text-align-last: center; /* Firefox 12+ */
-    
 }
 .m-7{
   width:95% !important;
@@ -778,5 +798,8 @@ figure img{
   width:95%;
   margin-left:auto;
   margin-right:auto;
+}
+.tracklist h4{
+margin-left: 5px;
 }
 }
