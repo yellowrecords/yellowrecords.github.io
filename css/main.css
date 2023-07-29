@@ -199,6 +199,9 @@ background-color: rgba(56, 56, 56, 0.463);
 .track:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.399);
   }
+  .container p{
+  margin-bottom: 15px;
+  }
 .navitems a {
   font-weight: 700;
   float: left;
@@ -659,6 +662,15 @@ font-size: 15px;
   width:90%;
   margin-left:auto;
   margin-right:auto;
+}
+.mobilepage{
+  width:95%;
+  margin-left:auto;
+  margin-right:auto;
+}
+.container p{
+font-size: 20px;
+margin-bottom: 15px !important;
 }
 .musicpage h1{
   font-size: 40px;
