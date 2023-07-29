@@ -290,6 +290,7 @@ background-color: rgba(56, 56, 56, 0.463);
  .homewithmask{
   display: flex
 }
+
 .leftmasks {
   float: left;
   width: 10%;
@@ -516,6 +517,7 @@ font-weight: 700;
 .albums img {
 height: 150px;
   width:150px;
+  margin-bottom: 10px;
 }
 
   /*these classes can be applied to elements to provide the given, yeah..*/
