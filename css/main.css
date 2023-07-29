@@ -820,4 +820,7 @@ figure img{
 .tracklist h4{
 margin-left: 5px;
 }
+.container h4{
+  font-size: 40px;
+}
 }
