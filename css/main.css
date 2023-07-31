@@ -232,6 +232,8 @@ background-color: rgba(56, 56, 56, 0.463);
   background-color: rgba(146, 146, 146, 0.233);
   border-color:var(--site-accent);
   transform: scale(1.05);
+  -webkit-filter: drop-shadow(0px 0px 5px var(--site-accent));
+  filter: drop-shadow(0px 0px 5px var(--site-accent));
 }
 .rightnav{
     display: flex;
@@ -253,15 +255,23 @@ background-color: rgba(56, 56, 56, 0.463);
     filter: grayscale(1);
  }
    .rightnavicons a:hover{
+    
+    transform: scale(1.1);
     filter: grayscale(0);
+    
     opacity: 100%;
     background-color:rgba(0,0,0,0);
-    
-  transform: scale(1.1);
+
+  
    }
    .rightnavicons img {
     height: 40px;
     width:40px;
+    transition: 700ms;
+ }
+ .rightnavicons img:hover{
+  -webkit-filter: drop-shadow(0px 0px 5px var(--site-accent));
+  filter: drop-shadow(0px 0px 5px var(--site-accent));
  }
  .discandvid {
   margin-left:auto;
@@ -285,6 +295,13 @@ background-color: rgba(56, 56, 56, 0.463);
 
 
   
+}
+.disc img{
+  transition: 1000ms;
+}
+.disc img:hover{
+  -webkit-filter: drop-shadow(0px 0px 7px var(--site-accent));
+  filter: drop-shadow(0px 0px 7px var(--site-accent)); 
 }
 .disc:hover{
   transform: scale(1.1);
@@ -488,8 +505,8 @@ border-radius: 15px;;
     width:40px;
 }
   .streamingicons img:hover{
-    transform: scale(1.3);
-    transition: transform .2s; /* Animation */
+    transform: scale(1.1);
+    transition: transform .4s; /* Animation */
   }
 
 .albumsdisplay{
@@ -529,7 +546,11 @@ height: 150px;
   width:150px;
   margin-bottom: 10px;
 }
-
+.albums a:hover{
+  -webkit-filter: drop-shadow(0px 0px 7px var(--site-accent));
+  filter: drop-shadow(0px 0px 7px var(--site-accent));
+  transform: scale(1.02);
+}
   /*these classes can be applied to elements to provide the given, yeah..*/
 .centered{ /*This bad boy will center a div*/
   margin-left:auto;
@@ -664,6 +685,7 @@ font-size: 15px;
 .navitems a:hover{
   background-color: transparent;
   color:var(--site-accent-light);
+  
 }
 .pagecontent{
     width:90%;
