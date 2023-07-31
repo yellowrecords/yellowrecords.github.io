@@ -231,6 +231,7 @@ background-color: rgba(56, 56, 56, 0.463);
 .navitems a:hover {
   background-color: rgba(146, 146, 146, 0.233);
   border-color:var(--site-accent);
+  transform: scale(1.05);
 }
 .rightnav{
     display: flex;
@@ -244,16 +245,19 @@ background-color: rgba(56, 56, 56, 0.463);
   .rightnavicons a {
     border:none;
     padding: 0;
-    transition: 500ms;
+    transition: 700ms;
     margin-left: 27px;
     height: 40px;
     width:40px;
+    
     filter: grayscale(1);
  }
    .rightnavicons a:hover{
     filter: grayscale(0);
     opacity: 100%;
     background-color:rgba(0,0,0,0);
+    
+  transform: scale(1.1);
    }
    .rightnavicons img {
     height: 40px;
@@ -275,11 +279,15 @@ background-color: rgba(56, 56, 56, 0.463);
   border: 1px solid transparent;
   margin-right: 10px;
   margin-bottom: 1px;
-
+  transition: transform .5s;
     float: left;
     padding: 20px;
 
 
+  
+}
+.disc:hover{
+  transform: scale(1.1);
   
 }
   .disc p{
@@ -751,10 +759,8 @@ width:100%;
  margin-left:0px !important;
      padding: 20px;
      float:left; 
- 
-
+    }
      
- }
    .disc img{
      width:300px !important;
    }
