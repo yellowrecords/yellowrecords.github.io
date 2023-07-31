@@ -279,6 +279,8 @@ background-color: rgba(56, 56, 56, 0.463);
     float: left;
     padding: 20px;
 
+
+  
 }
   .disc p{
     text-align: center !important;
@@ -578,10 +580,10 @@ margin-left:0px;
 /*ite*/
 @media only screen and (max-width: 1150px) {
   .disc{
-    width: 250px;
+    width: 200px;
   }
   .disc img{
-    width: 250px !important;
+    width: 200px !important;
   }
 }
 
@@ -750,6 +752,8 @@ width:100%;
      padding: 20px;
      float:left; 
  
+
+     
  }
    .disc img{
      width:300px !important;
