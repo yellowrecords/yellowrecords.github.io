@@ -10,8 +10,8 @@
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
   --site-accent:#b30a0a;
-  --site-accent-deep:#960909;
-  --site-accent-light:#fd9999;
+  --site-accent-deep:#099696;
+  --site-accent-light:#99fdfd;
   --page-accent:pink;
   /*These are the default colors for variables which change depending on the page. */
   --background: linear-gradient(270deg, #000000, #010030, #0c0030, #0f0000);
