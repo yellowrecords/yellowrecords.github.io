@@ -9,10 +9,10 @@
   --main-text:white;
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
-  --site-accent:#b30a0a;
+  --site-accent:#0ab3b3;
   --site-accent-deep:#099696;
   --site-accent-light:#99fdfd;
-  --page-accent:pink;
+  --page-accent:blue;
   /*These are the default colors for variables which change depending on the page. */
   --background: linear-gradient(270deg, #000000, #010030, #0c0030, #0f0000);
   --music-info-text: white;
