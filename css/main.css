@@ -9,12 +9,12 @@
   --main-text:white;
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
-  --site-accent:#0ab3b3;
+  --site-accent:#f2ff00;
   --site-accent-deep:#FC7A57;
   --site-accent-light:#FCD757;
   --page-accent:orange;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #010030, #0c0030, #0f0000);
+  --background: linear-gradient(270deg, #000000, #512d01, #653d1d, #410000);
   --music-info-text: white;
   --music-info-stroke: none;
 }
