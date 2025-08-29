@@ -27,12 +27,12 @@
     --page-text:white;
     --navbar-back:#2d363c;
 
-    --accent-color:#e6be3d;
+    --accent-color:#87a96b;
     --accent-color-light:#f2f2f2;
     --back-color:#72826b;
     --text-color:white;
     --nav-fill:rgba(45, 54, 60, .8);
-    --header-grad:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(17,0,175,1) 0%, rgba(55,72,224,1) 23%, rgba(0,131,215,1) 100%);
+    --header-grad:linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(52,152,56,1) 0%, rgba(8,97,11,1) 23%, rgba(77,121,78,1) 100%);
     --card-fill:transparent;
     --card-shadow:0px 0px 14px 3px rgba(255, 165, 0,1);
     --mob-shadow:0px 0px 5px 1px rgba(189,189,189,1);
@@ -40,12 +40,12 @@
     --link-hover:#100170;
     --control-text:white;
     --link-text:#ffffff;
-    --visited-text:rgb(185, 124, 255);
+    --visited-text:rgb(0, 210, 7);
     --control-hover:gainsboro;
     --control-click:white;
     --header-shadow:0px 0px 5px rgb(0, 0, 0);
     --secondary-nav-fill:rgba(0, 0, 0, 0.26);
-    --alert-fill:rgba(255, 115, 0, 0.418);
+    --alert-fill:rgba(0, 255, 9, 0.418);
 }
 
 /*Shared*/
