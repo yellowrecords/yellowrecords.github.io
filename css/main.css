@@ -11,10 +11,10 @@
   --header-background:url("/assets/img/head.jpg");
   --site-accent:#1a2421;
   --site-accent-deep:#1a2421;
-  --site-accent-light:#4a5d23;
+  --site-accent-light:#31430c;
   --page-accent:green;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #1a2421, #1a2421, #4a5d23);
+  --background: linear-gradient(270deg, #000000, #064431, #014833, #4a5d23);
   --music-info-text: white;
   --music-info-stroke: none;
 }
@@ -209,7 +209,7 @@ background-color: rgba(56, 56, 56, 0.463);
   border-style: solid;
   border-width: 3px;
   z-index: 5000;
-  border-color: rgba(255, 255, 255, 0.45);
+  border-color: rgba(82, 157, 82, 0.45);
   color:var(--main-text);
   text-align: center;
   padding: 14px 16px;
