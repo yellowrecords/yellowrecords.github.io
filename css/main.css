@@ -10,11 +10,11 @@
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
   --site-accent:#f2ff00;
-  --site-accent-deep:#FC7A57;
-  --site-accent-light:#FCD757;
-  --page-accent:orange;
+  --site-accent-deep:#fc7a57;
+  --site-accent-light:#Fcd757;
+  --page-accent:green;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #1A2421, #0B6623, #4A4D23);
+  --background: linear-gradient(270deg, #000000, #1a2421, #0b6623, #4a5d23);
   --music-info-text: white;
   --music-info-stroke: none;
 }
@@ -151,7 +151,7 @@
     top:0px;
 }
 .countdown{
-  color: rgb(255, 0, 0); font-family: 'Roboto Mono';
+  color: rgb(52, 228, 87); font-family: 'Roboto Mono';
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
