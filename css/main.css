@@ -9,12 +9,12 @@
   --main-text:white;
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
-  --site-accent:#f2ff00;
-  --site-accent-deep:#fc7a57;
-  --site-accent-light:#Fcd757;
+  --site-accent:#1a2421;
+  --site-accent-deep:#1a2421;
+  --site-accent-light:#4a5d23;
   --page-accent:green;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #1a2421, #0b6623, #4a5d23);
+  --background: linear-gradient(270deg, #000000, #1a2421, #1a2421, #4a5d23);
   --music-info-text: white;
   --music-info-stroke: none;
 }
