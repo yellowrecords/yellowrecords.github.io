@@ -14,7 +14,7 @@
   --site-accent-light:#FCD757;
   --page-accent:orange;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #512d01, #653d1d, #410000);
+  --background: linear-gradient(270deg, #000000, #1A2421, #0B6623, #4A4D23);
   --music-info-text: white;
   --music-info-stroke: none;
 }
