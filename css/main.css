@@ -11,7 +11,7 @@
   --header-background:url("/assets/img/head.jpg");
   --site-accent: green;
   --site-accent-deep:#024934;
-  --site-accent-light:#31430c;
+  --site-accent-light:#00980d;
   --page-accent: green;
   /*These are the default colors for variables which change depending on the page. */
   --background: linear-gradient(270deg, #000000, #064431, #01481b, #2f965c);
