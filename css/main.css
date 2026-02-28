@@ -6,15 +6,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
 
 :root{
-  --main-text:rgb(0, 0, 0);
+  --main-text:rgb(255, 255, 255);
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
-  --site-accent: black;
-  --site-accent-deep:#1C4035;
-  --site-accent-light:#755757;
+  --site-accent: white;
+  --site-accent-deep:#461F1F;
+  --site-accent-light:#984C4C;
   --page-accent: red;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #4E3232, #5E4F4F, #A57373);
+  --background: linear-gradient(270deg, #000000, #581515, #5B3636, #7D3C3C);
   --music-info-text: rgb(0, 255, 55);
   --music-info-stroke: none;
 }
@@ -149,23 +149,6 @@
     position:-webkit-sticky;
     position:sticky;
     top:0px;
-}
-.countdown{
-  color: green; font-family: 'Roboto Mono';
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  width:70%;
-  font-size: 65px;
-  padding:0px;
-  display: inline-block;
-  background: rgb(0,0,0);
-background: radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,8,10,1) 82%, rgba(0,0,0,0.3981967787114846) 98%, rgba(0,212,255,0) 100%);
-  border-radius: 10px;
-  font-stretch: ultra-expanded;
-  -moz-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-    -webkit-box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
-    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, .4), inset -2px -2px 2px rgba(0, 0, 0, .4);
 }
 .countdown p{
 
