@@ -6,15 +6,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
 
 :root{
-  --main-text:rgb(0, 255, 47);
+  --main-text:rgb(0, 0, 0);
   --nav-fill: rgba(45, 54, 60, .8);
   --header-background:url("/assets/img/head.jpg");
-  --site-accent: green;
-  --site-accent-deep:#024934;
-  --site-accent-light:#00980d;
-  --page-accent: green;
+  --site-accent: black;
+  --site-accent-deep:#1C4035;
+  --site-accent-light:#755757;
+  --page-accent: red;
   /*These are the default colors for variables which change depending on the page. */
-  --background: linear-gradient(270deg, #000000, #064431, #01481b, #2f965c);
+  --background: linear-gradient(270deg, #000000, #4E3232, #5E4F4F, #A57373);
   --music-info-text: rgb(0, 255, 55);
   --music-info-stroke: none;
 }
@@ -120,7 +120,7 @@
     
 }
 .musecard a{
-  color:rgb(34, 255, 0);
+  color:rgb(255, 255, 255);
 }
 
   .header{
@@ -209,7 +209,7 @@ background-color: rgba(56, 56, 56, 0.463);
   border-style: solid;
   border-width: 3px;
   z-index: 5000;
-  border-color: rgba(82, 157, 82, 0.45);
+  border-color: rgba(159, 83, 109, 0.45);
   color:var(--main-text);
   text-align: center;
   padding: 14px 16px;
