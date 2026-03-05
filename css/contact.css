@@ -1,38 +1,77 @@
-.m-7{
-    background-color: rgba(65, 65, 65, 0.504);
-    width:400px;
-    margin-left:auto;
-    margin-right:auto;
-    border-radius: 15px;
-    border: solid 3px white;
-    font-size: 30px;
-    margin-top: 15px;
-    margin-bottom:10px;
+.m-7 {
+  background-color: rgba(65, 65, 65, 0.5);
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto 24px;
+  padding: 24px clamp(20px, 5vw, 32px);
+  border-radius: 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  font-size: clamp(16px, 2.5vw, 20px);
+  box-sizing: border-box;
 }
-.m-7 h1{
-    margin: 10px 0 0 0;
-    font-size: 35px;
+.m-7 h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(28px, 4vw, 35px);
 }
-.m-7 label{
-color:rgb(217, 216, 216)
+.m-7 label {
+  color: rgba(255, 255, 255, 0.9);
+  display: block;
+  margin-bottom: 0.35em;
+  font-size: 0.95em;
 }
-.m-7 input, textarea{
-    background-color: rgba(53, 53, 53, 0.66);
-    border: solid 1px white;
-    width:350px;
-    font-size:20px;
+.m-7 input,
+.m-7 textarea {
+  background-color: rgba(40, 40, 40, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  color: var(--main-text, #fff);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-.m-7 textarea{
-    height:200px;
+.m-7 input::placeholder,
+.m-7 textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
 }
-.m-7 button{
-    padding:15px;
-    font-size: 20px;
-    margin-bottom:-10px;
-    border-radius: 15px;
-    color:white;
-    border: solid 3px var(--site-accent)
+.m-7 input:focus,
+.m-7 textarea:focus {
+  outline: none;
+  border-color: var(--site-accent-light, #984C4C);
+  box-shadow: 0 0 0 2px rgba(152, 76, 76, 0.25);
 }
-a{
-    color:var(--site-accent-light);
+.m-7 textarea {
+  height: 160px;
+  min-height: 120px;
+  resize: vertical;
+}
+.m-7 button {
+  padding: 14px 20px;
+  font-size: 1.05rem;
+  margin-top: 8px;
+  margin-bottom: 0;
+  border-radius: 12px;
+  color: white;
+  border: 2px solid var(--site-accent-light, #984C4C);
+  background-color: rgba(152, 76, 76, 0.4);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.m-7 button:hover {
+  background-color: rgba(152, 76, 76, 0.6);
+  border-color: var(--site-accent-light, #984C4C);
+}
+.contact-email-note {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+.contact-email-note a {
+  color: var(--site-accent-light, #984C4C);
+  text-decoration: none;
+}
+.contact-email-note a:hover {
+  text-decoration: underline;
 }
