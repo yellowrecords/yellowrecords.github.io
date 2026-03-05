@@ -315,6 +315,7 @@ background-color: rgba(56, 56, 56, 0.463);
   background-position: center;
 }
 .middlecontent {
+  margin:auto;
   font-family: 'Space Grotesk', sans-serif !important;
   display: flex;
   text-align: justify;
@@ -323,7 +324,7 @@ background-color: rgba(56, 56, 56, 0.463);
   text-align: center;
   clear:left;
   float: left;
-  width: 70%;
+  width: 100%;
   padding: 0 20px;
   font-size: 35px;
   padding:0px 50px;
