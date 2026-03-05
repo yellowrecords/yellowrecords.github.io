@@ -223,7 +223,7 @@ background-color: rgba(56, 56, 56, 0.463);
     justify-content: right;
     align-items: center;
     margin-bottom:0px;
-    width:465px;
+    width:500px;
     position: absolute;
     right:20px; top:0; bottom:0;
   }
@@ -561,7 +561,7 @@ footer a{
 .mobilelinks{
   display:none;
       margin: 0 auto;
-      width: 314px;
+      width: 360px;
       margin-top:4px;
 }
 .mobileicons a {
