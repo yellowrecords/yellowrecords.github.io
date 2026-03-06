@@ -27,7 +27,7 @@
     <link href="/css/slideshow.css" rel="stylesheet">
 </head>
 <body>
-  <div class="header" style="background-image:url('/assets/img/head.jpg');">
+  <div class="header" style="background-image:url('/assets/img/head.jpg');" data-header-title="Bobby Nair">
     Bobby Nair
 </div>
 
@@ -165,7 +165,7 @@
         var chip = document.getElementById('headerChip');
         if (!header || !chip) return;
         var titleEl = header.querySelector('.headermusicinfo span');
-        chip.textContent = (titleEl ? titleEl.textContent : header.textContent).replace(/\s+/g, ' ').trim();
+        chip.textContent = (header.getAttribute('data-header-title') || (titleEl ? titleEl.textContent : header.textContent)).replace(/\s+/g, ' ').trim();
         chip.setAttribute('aria-hidden', 'true');
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {

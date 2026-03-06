@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<div class="musicheader" style="background-image:url('/assets/img/album/kow-blur.jpg');">
+<div class="musicheader" style="background-image:url('/assets/img/album/kow-blur.jpg');" data-header-title="King of Wands*">
     <div class="headermusicinfo">
         <img class="headeralbumart" src="/assets/img/album/kow.jpg">
         <span>King of Wands*</span>
@@ -195,7 +195,7 @@
         var chip = document.getElementById('headerChip');
         if (!header || !chip) return;
         var titleEl = header.querySelector('.headermusicinfo span');
-        chip.textContent = (titleEl ? titleEl.textContent : header.textContent).replace(/\s+/g, ' ').trim();
+        chip.textContent = (header.getAttribute('data-header-title') || (titleEl ? titleEl.textContent : header.textContent)).replace(/\s+/g, ' ').trim();
         chip.setAttribute('aria-hidden', 'true');
         var observer = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
