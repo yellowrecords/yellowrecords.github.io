@@ -1,13 +1,103 @@
+.contact-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 560px;
+  margin: 0 auto 1.5rem;
+  padding: 0;
+  box-sizing: border-box;
+}
+.contact-card {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 22px 24px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* liquid glass */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(30, 30, 30, 0.55) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+.contact-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 0.5rem;
+}
+.contact-card-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+}
+.contact-card-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  opacity: 0.9;
+}
+/* mail.svg is stroke-based; show light on dark card */
+.contact-card:first-child .contact-card-icon {
+  filter: brightness(0) invert(1);
+}
+.contact-card-value {
+  margin: 0 0 1.25rem;
+  font-size: clamp(14px, 2vw, 16px);
+  color: rgba(255, 255, 255, 0.8);
+  word-break: break-all;
+}
+.contact-card-btn {
+  display: block;
+  text-align: center;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  margin-top: auto;
+}
+.contact-card-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
 .m-7 {
-  background-color: rgba(65, 65, 65, 0.5);
   width: 100%;
-  max-width: 420px;
+  max-width: 560px;
   margin: 20px auto 24px;
   padding: 24px clamp(20px, 5vw, 32px);
   border-radius: 16px;
-  border: 1.5px solid rgba(255, 255, 255, 0.25);
   font-size: clamp(16px, 2.5vw, 20px);
   box-sizing: border-box;
+  /* liquid glass – matches navbar / discography / video */
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(30, 30, 30, 0.55) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 .m-7 h1 {
   margin: 0 0 1rem;
@@ -74,4 +164,15 @@
 }
 .contact-email-note a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .contact-cards {
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  .contact-card {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
 }

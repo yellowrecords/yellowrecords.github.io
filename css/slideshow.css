@@ -28,18 +28,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  margin: 0 10px;
-  color: white;
-  font-size: 18px;
+  width: 44px;
+  height: 44px;
+  margin: 0 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 20px;
   line-height: 1;
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(30, 30, 30, 0.5) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
   border-radius: 50%;
   text-decoration: none;
   user-select: none;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.2s ease;
   z-index: 2;
 }
 
@@ -53,7 +62,18 @@
 
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(40, 40, 40, 0.6) 100%
+  );
+  transform: translateY(-50%) scale(1.06);
+}
+
+.prev:active,
+.next:active {
+  transform: translateY(-50%) scale(0.96);
 }
 
 .dot {
@@ -94,12 +114,13 @@
 @media only screen and (max-width: 620px) {
   .slideshow-container {
     border-radius: 12px;
+    touch-action: pan-y pinch-zoom; /* allow vertical scroll, we handle horizontal swipe */
   }
   .prev,
   .next {
-    width: 34px;
-    height: 34px;
-    font-size: 14px;
-    margin: 0 6px;
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+    margin: 0 8px;
   }
 }

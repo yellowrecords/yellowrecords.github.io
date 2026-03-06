@@ -23,9 +23,205 @@
     <meta name="theme-color" content="black"/>
 
     <style>
-        :root{
+        /* Album dropdowns – liquid glass (matches navbar) */
+        .album-dropdowns {
+          max-width: 720px;
+          margin: 0 auto 2rem;
+          padding: 0 clamp(16px, 4vw, 24px);
         }
-    </style>
+        .album-dropdown {
+          font-family: 'Playfair Display', serif;
+          margin-bottom: 12px;
+          border-radius: 16px;
+          overflow: hidden;
+          background: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0.08) 0%,
+            rgba(30, 30, 30, 0.55) 100%
+          );
+          backdrop-filter: blur(24px) saturate(1.6);
+          -webkit-backdrop-filter: blur(24px) saturate(1.6);
+          border: 1.5px solid rgba(255, 255, 255, 0.18);
+          box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+        .album-dropdown-header {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+          padding: 14px 18px;
+          cursor: pointer;
+          list-style: none;
+          text-align: left;
+          width: 100%;
+          border: none;
+          background: transparent;
+          color: var(--main-text);
+          font: inherit;
+          transition: background 0.2s ease;
+        }
+        .album-dropdown-header:hover {
+          background: rgba(255, 255, 255, 0.06);
+        }
+        .album-dropdown-header img {
+          width: 56px;
+          height: 56px;
+          object-fit: cover;
+          border-radius: 10px;
+          flex-shrink: 0;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+        .album-dropdown-title-wrap {
+          flex: 1;
+          min-width: 0;
+        }
+        .album-dropdown-title-wrap h4 {
+          font-family: 'Roboto Slab', serif;
+          font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+          margin: 0 0 2px;
+          font-weight: bold;
+        }
+        .album-dropdown-title-wrap h6 {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.85rem;
+          margin: 0;
+          font-weight: normal;
+          font-style: italic;
+          opacity: 0.85;
+        }
+        .album-dropdown-chevron {
+          flex-shrink: 0;
+          width: 24px;
+          height: 24px;
+          transition: transform 0.25s ease;
+          opacity: 0.8;
+        }
+        .album-dropdown.open .album-dropdown-chevron {
+          transform: rotate(180deg);
+        }
+        .album-dropdown-content {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.35s ease;
+        }
+        .album-dropdown.open .album-dropdown-content {
+          max-height: 3200px;
+        }
+        .album-dropdown-content-inner {
+          padding: 0 18px 20px;
+          border-top: 1px solid rgba(255, 255, 255, 0.12);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+        .album-dropdown-content-inner > .musecard-detail {
+          padding-top: 16px;
+        }
+        /* Streaming icons – minimal (album dropdowns only) */
+        .album-dropdown-content .streamingicons {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 8px;
+          margin: 14px 0 16px;
+          padding: 12px 0;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .album-dropdown-content .streamingicons::before {
+          content: "Listen on";
+          width: 100%;
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin-bottom: 8px;
+        }
+        .album-dropdown-content .streamingicons a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 6px 8px;
+          border-radius: 8px;
+          transition: background 0.2s ease;
+        }
+        .album-dropdown-content .streamingicons a:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+        .album-dropdown-content .streamingicons img {
+          height: 28px;
+          width: 28px;
+          display: block;
+        }
+        /* Tracklist – minimal (album dropdowns only) */
+        .album-dropdown-content .tracklist {
+          margin-top: 16px;
+          padding: 0;
+        }
+        .album-dropdown-content .tracklist h4 {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.7rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.5);
+          margin: 0 0 10px;
+          padding-bottom: 6px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .album-dropdown-content .tracklist .track {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 8px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+          transition: background 0.2s ease;
+        }
+        .album-dropdown-content .tracklist .track:last-child {
+          border-bottom: none;
+        }
+        .album-dropdown-content .tracklist .track:hover {
+          background: rgba(255, 255, 255, 0.04);
+          margin: 0 -12px;
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+        .album-dropdown-content .tracklist .track span {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: rgba(255, 255, 255, 0.4);
+          min-width: 28px;
+          text-align: right;
+          flex-shrink: 0;
+        }
+        .album-dropdown-content .tracklist .track:nth-child(even),
+        .album-dropdown-content .tracklist .track:nth-child(odd) {
+          background: transparent;
+        }
+        .album-dropdown-content .tracklist .track-page-link {
+          margin-left: auto;
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          color: rgba(255, 255, 255, 0.7);
+          text-decoration: none;
+          padding: 4px 10px;
+          border-radius: 6px;
+          transition: background 0.2s ease, color 0.2s ease;
+        }
+        .album-dropdown-content .tracklist .track-page-link:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.95);
+        }
+        .album-dropdown-content .musecard-detail p {
+          font-family: 'Roboto Mono', monospace;
+          font-size: clamp(16px, 2vw, 20px);
+          margin: 0 0 12px;
+        }
+      </style>
 </head>
 <body>
     <div class="header" style="background-image:url('/assets/img/head.jpg');">
@@ -52,6 +248,7 @@
         </div>
       </div>
     </nav>
+    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
 <div class="mobilepage">
     <section class="albumsdisplay albums-section">
@@ -65,271 +262,279 @@
       </section>
       <section class="albumsdisplay albums-section">
         <h2 class="albums-section-title">Albums</h2>
-        <div class="albums">
-            <a href="#dinosaur"><img src="/assets/img/IMG_9906.jpg" alt="Dinosaur"><span class="album-title">Dinosaur</span></a>
-            <a href="#NOGODDAREENTER"><img src="/assets/img/dots/GodC.webp" alt="NO GOD DARE ENTER"><span class="album-title">NO GOD DARE ENTER</span></a>
-            <a href="#iseewhatidont!"><img src="/assets/img/album/iseewhatidont! Cover.jpg" alt="iseewhatidont!"><span class="album-title">iseewhatidont!</span></a>
-            <a href="#slowpoke"><img src="/assets/img/album/slowpoke.jpg" alt="Slowpoke"><span class="album-title">Slowpoke</span></a>
-            <a href="#winter"><img src="/assets/img/album/imtw.jpg" alt="I Miss The Winter"><span class="album-title">I Miss The Winter</span></a>
-            <a href="#redux"><img src="/assets/img/album/redux.jpg" alt="Saturn REDUX"><span class="album-title">Saturn REDUX</span></a>
+        <div class="album-dropdowns" id="albumDetails">
+        <div class="album-dropdown" id="dinosaur" data-album="dinosaur">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="dinosaur-content" id="dinosaur-btn">
+            <img src="/assets/img/IMG_9906.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>Dinosaur (I moved to New York to find God)</h4>
+              <h6>September 10, 2025</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" id="dinosaur-content" role="region" aria-labelledby="dinosaur-btn" aria-hidden="true">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>ALL HAIL THE DINOSAUR!</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Picture of me</div>
+                  <div class="track"><span>2</span>I moved to New York to find God</div>
+                  <div class="track"><span>3</span>Ghosts in the blue light</div>
+                  <div class="track"><span>4</span>Hit my head</div>
+                  <div class="track"><span>5</span>O'</div>
+                  <div class="track"><span>6</span>Extra extra</div>
+                  <div class="track"><span>7</span>All the hope I have</div>
+                  <div class="track"><span>8</span>Promise ring</div>
+                  <div class="track"><span>9</span>Mononoke</div>
+                  <div class="track"><span>10</span>The truth (the extinction)</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="album-dropdown" id="nogoddareenter" data-album="nogoddareenter">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="nogoddareenter-content" id="nogoddareenter-btn">
+            <img src="/assets/img/dots/GodC.webp" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>NO GOD DARE ENTER: The Deluxe</h4>
+              <h6>January 10, 2025</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="nogoddareenter-content" role="region" aria-labelledby="nogoddareenter-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>A compilation of Bobby's NO GOD DARE ENTER series - featuring demo &amp; live tracks!</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Let Your Light Down</div>
+                  <div class="track"><span>2</span>Keep Cryin'</div>
+                  <div class="track"><span>3</span>Outlaws Like You (Good Boys)</div>
+                  <div class="track"><span>4</span>(Ran Out Of) November</div>
+                  <div class="track"><span>5</span>Clay</div>
+                  <div class="track"><span>6</span>Cobwebs (Rear Your Ugly Head)</div>
+                  <div class="track"><span>7</span>Love Lies Bleeding</div>
+                  <div class="track"><span>8</span>Doomed To Delusion</div>
+                  <div class="track"><span>9</span>LLB Mantra</div>
+                  <div class="track"><span>10</span>Keep Cryin' - Broadcast From Nowhere</div>
+                  <div class="track"><span>11</span>(Ran Out Of) November - Studio Demo</div>
+                  <div class="track"><span>12</span>Love Lies Bleeding - Broadcast From Nowhere</div>
+                  <div class="track"><span>13</span>God-Forsaken</div>
+                  <div class="track"><span>14</span>Doomed To Delusion - Broadcast From Nowhere</div>
+                  <div class="track"><span>15</span>Let Your Light Down - Broadcast From Nowhere</div>
+                  <div class="track"><span>16</span>Charlie's Song</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="album-dropdown" id="iseewhatidont" data-album="iseewhatidont">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="iseewhatidont-content" id="iseewhatidont-btn">
+            <img src="/assets/img/album/iseewhatidont! Cover.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>iseewhatidont!</h4>
+              <h6>September 15, 2023</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="iseewhatidont-content" role="region" aria-labelledby="iseewhatidont-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>Join Bobby as he embarks on one of his most ambitious journeys yet, transporting the listener into a dimension of murkiness and intrigue—where time is running out.</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Legs Won't Work!</div>
+                  <div class="track"><span>2</span>into my eyes</div>
+                  <div class="track"><span>3</span>beautiful boy</div>
+                  <div class="track"><span>4</span>Bad At Writing Songs</div>
+                  <div class="track"><span>5</span>Victim?</div>
+                  <div class="track"><span>6</span>love you</div>
+                  <div class="track"><span>7</span>youseewhatiwont!</div>
+                  <div class="track"><span>8</span>He's Doing Well.</div>
+                  <div class="track"><span>9</span>lately</div>
+                  <div class="track"><span>10</span>King of Wands*<a href="/discography/kingofwands/" class="track-page-link">Track Page</a></div>
+                  <div class="track"><span>11</span>I Saw You Kiss Her</div>
+                  <div class="track"><span>12</span>sorry i swore (featuring Dominic Rutherford)</div>
+                  <div class="track"><span>13</span>Snowman! (featuring TY Carter)</div>
+                  <div class="track"><span>14</span>walktonowhere</div>
+                  <div class="track"><span>15</span>find me when i land</div>
+                  <div class="track"><span>16</span>Jack The Rockstar* (featuring Jack Garman)</div>
+                  <div class="track"><span>17</span>song for nobody certain</div>
+                  <div class="track"><span>18</span>Everything I Loved!</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="album-dropdown" id="redux" data-album="redux">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="redux-content" id="redux-btn">
+            <img src="/assets/img/album/redux.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>Saturn REDUX</h4>
+              <h6>September 23, 2022</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="redux-content" role="region" aria-labelledby="redux-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>Take a trip back to Saturn, with five demo tracks now included. Experience the tracklist as it was originally intended.</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Saturn</div>
+                  <div class="track"><span>2</span>No Other Way (Demo)</div>
+                  <div class="track"><span>3</span>Navy Blue</div>
+                  <div class="track"><span>4</span>Kill The Butterflies (Demo)</div>
+                  <div class="track"><span>5</span>I'm Fine, You're Fine</div>
+                  <div class="track"><span>6</span>Café (Demo)<a href="/discography/cafe/" class="track-page-link">Track Page</a></div>
+                  <div class="track"><span>7</span>Falling Back</div>
+                  <div class="track"><span>8</span>My Annual Breakdown (Demo)</div>
+                  <div class="track"><span>9</span>You Told Me I Belonged</div>
+                  <div class="track"><span>10</span>You Told Me I Belonged (Redux)</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="album-dropdown" id="slowpoke" data-album="slowpoke">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="slowpoke-content" id="slowpoke-btn">
+            <img src="/assets/img/album/slowpoke.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>Slowpoke</h4>
+              <h6>May 20, 2022</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="slowpoke-content" role="region" aria-labelledby="slowpoke-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>The atmosphere is electrified on Slowpoke; merging gritty synths with melancholy piano in his most ambient work. Slowpoke sees Bobby exploring the effects of productivity and the pressures on today's youth.</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Look At Me</div>
+                  <div class="track"><span>2</span>On The Line (featuring Ty Carter)</div>
+                  <div class="track"><span>3</span>Candy Necklace Party</div>
+                  <div class="track"><span>4</span>You're Gonna Get Older</div>
+                  <div class="track"><span>5</span>Humanity</div>
+                  <div class="track"><span>6</span>If I Don't See You Again (featuring Jack Garman)</div>
+                  <div class="track"><span>7</span>Where Your Karma Gets You</div>
+                  <div class="track"><span>8</span>Until I Fall Down</div>
+                  <div class="track"><span>9</span>Bitter Sunrise</div>
+                  <div class="track"><span>10</span>Slowpoke</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="album-dropdown" id="winter" data-album="winter">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="winter-content" id="winter-btn">
+            <img src="/assets/img/album/imtw.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>I Miss The Winter</h4>
+              <h6>January 1, 2022</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="winter-content" role="region" aria-labelledby="winter-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>In the middle of a cold, dark winter, Bobby sings tales of exhaust and apathy. Listen what it's like to lose touch with the world from the confines of his room; during a winter that goes on for what seems like years.</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Why Argue</div>
+                  <div class="track"><span>2</span>Let's Talk About You</div>
+                  <div class="track"><span>3</span>Get Better</div>
+                  <div class="track"><span>4</span>Tired</div>
+                  <div class="track"><span>5</span>One More Time</div>
+                  <div class="track"><span>6</span>Internet Boy</div>
+                  <div class="track"><span>7</span>This Time Next Week</div>
+                  <div class="track"><span>8</span>I Miss The Winter</div>
+                  <div class="track"><span>9</span>Your Room</div>
+                  <div class="track"><span>10</span>My Bad</div>
+                  <div class="track"><span>11</span>Snow Angels</div>
+                  <div class="track"><span>12</span>Cloudy Boy</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="album-dropdown" id="saturn" data-album="saturn">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="saturn-content" id="saturn-btn">
+            <img src="/assets/img/album/saturn.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>Saturn</h4>
+              <h6>November 1, 2021</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" aria-hidden="true" id="saturn-content" role="region" aria-labelledby="saturn-btn">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>Bobby Nair's debut project, telling a story of heartbreak and destitution. From his work's conception, he has shown particular interest in conceptual stories.</p>
+                <div class="streamingicons">
+                  <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>Saturn</div>
+                  <div class="track"><span>2</span>Navy Blue</div>
+                  <div class="track"><span>3</span>I'm Fine, You're Fine</div>
+                  <div class="track"><span>4</span>Falling Back</div>
+                  <div class="track"><span>5</span>You Told Me I Belonged</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       </section>
-      <div style="background-image: url('/assets/img/dots/white\ stars.png" id="iseewhatidont!" class="musecard">
-        <div class="container">
-          <br>
-          <br>
-          <img width="250px" src="/assets/img/IMG_9906.jpg">
-          <h4>Dinosaur (I moved to New York to find God)</h4>
-          <h6>September 10, 2025</h6>
-          <p>ALL HAIL THE DINOSAUR!
-          <div class="streamingicons" >
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Picture of me</div>
-            <div class="track"><span>2</span>I moved to New York to find God</div>
-            <div class="track"><span>3</span>Ghosts in the blue light</div>
-            <div class="track"><span>4</span>Hit my head</div>
-            <div class="track"><span>5</span>O'</div>
-            <div class="track"><span>6</span>Extra extra</div>
-            <div class="track"><span>7</span>All the hope I have</div>
-            <div class="track"><span>8</span>Promise ring</div>
-            <div class="track"><span>9</span>Mononoke</div>
-            <div class="track"><span>10</span>The truth (the extinction)</div>
-            </div>
-            
-    <br>
- </div>
-      </div>
-      <div style="background-image: url('/assets/img/dots/orange\ stars.png" id= "#NOGODDAREENTER" class="musecard">
-        <div class="container">
-          <br>
-          <br>
-          <img width="250px" src="/assets/img/dots/GodC.webp">
-          <h4>NO GOD DARE ENTER: The Deluxe</h4>
-          <h6>January 10, 2025</h6>
-          <p>A compilation of Bobby's NO GOD DARE ENTER series - featuring demo & live tracks!
-          <div class="streamingicons" >
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Let Your Light Down</div>
-            <div class="track"><span>2</span>Keep Cryin'</div>
-            <div class="track"><span>3</span>Outlaws Like You (Good Boys)</div>
-            <div class="track"><span>4</span>(Ran Out Of) November</div>
-            <div class="track"><span>5</span>Clay</div>
-            <div class="track"><span>6</span>Cobwebs (Rear Your Ugly Head)</div>
-            <div class="track"><span>7</span>Love Lies Bleeding</div>
-            <div class="track"><span>8</span>Doomed To Delusion</div>
-            <div class="track"><span>9</span>LLB Mantra</div>
-            <div class="track"><span>10</span>Keep Cryin' - Broadcast From Nowhere</div>
-            <div class="track"><span>11</span>(Ran Out Of) November - Studio Demo</div>
-            <div class="track"><span>12</span>Love Lies Bleeding - Broadcast From Nowhere</div>
-            <div class="track"><span>13</span>God-Forsaken</div>
-            <div class="track"><span>14</span>Doomed To Delusion - Broadcast From Nowhere</div>
-            <div class="track"><span>15</span>Let Your Light Down - Broadcast From Nowhere</div>
-            <div class="track"><span>16</span>Charlie's Song</div>
-            </div>
-            
-    <br>
- </div>
-      </div>
-      <div style="background-image: url('/assets/img/dots/blue stars.png" id="iseewhatidont!" class="musecard">
-        <div class="container">
-          <br>
-          <br>
-          <img width="250px" src="/assets/img/album/iseewhatidont! Cover.jpg">
-          <h4>iseewhatidont!</h4>
-          <h6>September 15, 2023</h6>
-          <p>Join Bobby as he embarks on one of his most ambitious journeys yet, transporting the
-              listener into a dimension of murkiness and intrigue- where time is running out.
-          <div class="streamingicons" >
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Legs Won't Work!</div>
-            <div class="track"><span>2</span>into my eyes</div>
-            <div class="track"><span>3</span>beautiful boy</div>
-            <div class="track"><span>4</span>Bad At Writing Songs</div>
-            <div class="track"><span>5</span>Victim?</div>
-            <div class="track"><span>6</span>love you</div>
-            <div class="track"><span>7</span>youseewhatiwont!</div>
-            <div class="track"><span>8</span>He's Doing Well.</div>
-            <div class="track"><span>9</span>lately</div>
-            <div class="track"><span>10</span>King of Wands*</div>
-            <div class="track"><span>11</span>I Saw You Kiss Her</div>
-            <div class="track"><span>12</span>sorry i swore (featuring Dominic Rutherford)</div>
-            <div class="track"><span>13</span>Snowman! (featuring TY Carter)</div>
-            <div class="track"><span>14</span>walktonowhere</div>
-            <div class="track"><span>15</span>find me when i land</div>
-            <div class="track"><span>16</span>Jack The Rockstar* (featuring Jack Garman)</div>
-            <div class="track"><span>17</span>song for nobody certain</div>
-            <div class="track"><span>18</span>Everything I Loved!</div>
-            </div>
-        
-          <br>
-        </div>
-      </div>
-      <br>     
-        </div>
-      </div>
-      <div style="background-image: url('/assets/img/dots/red stars.png" id="redux" class="musecard">
-        <div class="container">
-          <br>
-          <br>
-          <img width="250px" src="/assets/img/album/redux.jpg">
-          <h4>Saturn REDUX</h4>
-          <h6>September 23, 2022</h6>
-          <p>Take a trip back to Saturn, with five demo tracks now included. Experience the tracklist as it was originally
-            intended.
-          <div class="streamingicons" >
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Saturn</div>
-            <div class="track"><span>2</span>No Other Way (Demo)</div>
-            <div class="track"><span>3</span>Navy Blue</div>
-            <div class="track"><span>4</span>Kill The Butterflies (Demo)</div>
-            <div class="track"><span>5</span>I'm Fine, You're Fine</div>
-            <div class="track"><span>6</span><a href="/discography/cafe/">Café (Demo)</a> <!--<audio controls src="/assets/music/albums/Saturn REDUX/Café (Demo) - Bobby Nair.mp3"></audio>--></div>
-            <div class="track"><span>7</span>Falling Back</div>
-            <div class="track"><span>8</span>My Annual Breakdown (Demo)</div>
-            <div class="track"><span>9</span>You Told Me I Belonged</div>
-            <div class="track"><span>10</span>You Told Me I Belonged (Redux)</div>
-            </div>
-        
-          <br>
-        </div>
-      </div>
-      <br>
-      <div style="background-image: url('/assets/img/dots/yellow stars.png');" id="slowpoke" class="musecard">
-        <div class="container">
-          <img width="250px" src="/assets/img/album/slowpoke.jpg">
-          <h4>Slowpoke</h4>
-          <h6>May 20, 2022</h6>
-          <p>The atmosphere is electrified on Slowpoke; merging gritty synths with melancholy piano in his most ambient work.
-              Slowpoke sees Bobby exploring the effects of productivity and the pressures on today's youth.
-          <div class="streamingicons" style="margin-bottom:-40px;">
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <br>
-        
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Look At Me</div>
-            <div class="track"><span>2</span>On The Line (featuring Ty Carter)</div>
-            <div class="track"><span>3</span>Candy Necklace Party</div>
-            <div class="track"><span>4</span>You're Gonna Get Older</div>
-            <div class="track"><span>5</span>Humanity</div>
-            <div class="track"><span>6</span>If I Don't See You Again (featuring Jack Garman)</div>
-            <div class="track"><span>7</span>Where Your Karma Gets You</div>
-            <div class="track"><span>8</span>Until I Fall Down</div>
-            <div class="track"><span>9</span>Bitter Sunrise</div>
-            <div class="track"><span>10</span>Slowpoke</div>
-            </div>
-          
-          <br>
-        </div>
-      </div>
-      <br>
-      <div style="background-image: url('/assets/img/dots/white stars.png');" id="winter" class="musecard">
-  
-        <div class="container">
-          <img width="250px" src="/assets/img/album/imtw.jpg">
-          <h4>I Miss The Winter</h4>
-          <h6>January 1, 2022</h6>
-          <p>In the middle of a cold, dark winter, Bobby sings tales of exhaust and apathy. Listen what it’s like
-              to lose touch with the world from the confines of his room; during a winter that goes on for what
-              seems like years.
-
-          <div class="streamingicons">
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Why Argue</div>
-            <div class="track"><span>2</span>Let's Talk About You</div>
-            <div class="track"><span>3</span>Get Better</div>
-            <div class="track"><span>4</span>Tired</div>
-            <div class="track"><span>5</span>One More Time</div>
-            <div class="track"><span>6</span>Internet Boy</div>
-            <div class="track"><span>7</span>This Time Next Week</div>
-            <div class="track"><span>8</span>I Miss The Winter</div>
-            <div class="track"><span>9</span>Your Room</div>
-            <div class="track"><span>10</span>My Bad</div>
-            <div class="track"><span>11</span>Snow Angels</div>
-            <div class="track"><span>12</span>Cloudy Boy</div>
-            </div>
-
-
-          </p>
-        </div>
-      </div>
-      <br>
-      <div style="background-image: url('/assets/img/dots/orange stars.png" id="saturn" class="musecard">
-        <div class="container">
-          <img width="250px" src="/assets/img/album/saturn.jpg">
-          <h4>Saturn</h4>
-          <h6>November 1, 2021</h6>
-          <p>Bobby Nair's debut project, telling a story of heartbreak and destitution. From his work's conception,
-              he has shown particular interest in conceptual stories.
-          <div class="streamingicons" style="margin-bottom:-40px;">
-            <a href="https://www.youtube.com/watch?v=ZwbfNUPxcI4" target="_blank"><img src="/assets/img/icons/yt.png"></a>
-            <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png"></a>
-            <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png"></a>
-            <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png"></a>
-            <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png"></a>
-  
-          </div>
-          <br>
-          <div class="tracklist">
-            <h4>Tracks</h4>
-            <div class="track"><span>1</span>Saturn</div>
-            <div class="track"><span>2</span>Navy Blue</div>
-            <div class="track"><span>3</span>I'm Fine, You're Fine</div>
-            <div class="track"><span>4</span>Falling Back</div>
-            <div class="track"><span>5</span>You Told Me I Belonged</div>
-            </div>
-        
-
-          </p>
-          <br>
-        </div>
-      </div>
       <section class="albumsdisplay albums-section">
         <h2 class="albums-section-title">More Singles</h2>
         <div class="albums">
@@ -384,6 +589,55 @@
       </div>
     </div>
 
+    <script>
+      (function() {
+        document.querySelectorAll('.album-dropdown-header').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var dropdown = this.closest('.album-dropdown');
+            var isOpen = dropdown.classList.toggle('open');
+            this.setAttribute('aria-expanded', isOpen);
+            var content = document.getElementById(this.getAttribute('aria-controls'));
+            if (content) content.setAttribute('aria-hidden', !isOpen);
+          });
+        });
+        var hash = window.location.hash.slice(1);
+        if (hash) {
+          var target = document.getElementById(hash);
+          if (target && target.classList.contains('album-dropdown')) {
+            var btn = target.querySelector('.album-dropdown-header');
+            if (btn && !target.classList.contains('open')) {
+              target.classList.add('open');
+              btn.setAttribute('aria-expanded', 'true');
+              var content = document.getElementById(btn.getAttribute('aria-controls'));
+              if (content) content.setAttribute('aria-hidden', 'false');
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        }
+      })();
+    </script>
+    <script>
+      (function() {
+        var header = document.querySelector('.header') || document.querySelector('.musicheader');
+        var chip = document.getElementById('headerChip');
+        if (!header || !chip) return;
+        var titleEl = header.querySelector('.headermusicinfo span');
+        chip.textContent = (titleEl ? titleEl.textContent : header.textContent).replace(/\s+/g, ' ').trim();
+        chip.setAttribute('aria-hidden', 'true');
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              chip.classList.remove('visible');
+              chip.setAttribute('aria-hidden', 'true');
+            } else {
+              chip.classList.add('visible');
+              chip.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
+        observer.observe(header);
+      })();
+    </script>
     <script>
       (function() {
         var linksTab = document.getElementById('linksTab');

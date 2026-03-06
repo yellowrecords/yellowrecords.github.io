@@ -109,14 +109,13 @@
         </div>
       </div>
     </nav>
+    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
   <div class="content">
 
     <section class="gallery">
 
       <div class="vidcontainer">
-        <h4 class="video-page-title">Videos</h4>
-
         <ol class="image-list grid-view">
             <li>
             <figure>
@@ -448,12 +447,6 @@
         font-family: 'Roboto Mono', monospace;
       }
 
-      .video-page-title {
-        font-size: clamp(2rem, 10vw, 70px);
-        text-align: left;
-        margin: 0 0 0.5rem;
-      }
-
       /* TOOLBAR
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
       .toolbar {
@@ -511,22 +504,30 @@
       }
 
       .image-list li {
-        background: var(--lightbrown);
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.08) 0%,
+          rgba(30, 30, 30, 0.55) 100%
+        );
         color: var(--darkblack);
-        border-radius: 15px;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.55);
-
+        border-radius: 16px;
+        backdrop-filter: blur(24px) saturate(1.6);
+        -webkit-backdrop-filter: blur(24px) saturate(1.6);
+        border: 1.5px solid rgba(255, 255, 255, 0.18);
+        box-shadow:
+          0 4px 24px rgba(0, 0, 0, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.12);
       }
 
       .image-list li:hover {
-        border: 1px solid rgba(255, 255, 255, 1);
-
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow:
+          0 6px 28px rgba(0, 0, 0, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
       }
 
       .image-list img {
-        border-radius: 15px 15px 0px 0px;
+        border-radius: 16px 16px 0 0;
       }
 
       .image-list p:first-child {
@@ -746,6 +747,28 @@
       </div>
     </div>
 
+    <script>
+      (function() {
+        var header = document.querySelector('.header') || document.querySelector('.musicheader');
+        var chip = document.getElementById('headerChip');
+        if (!header || !chip) return;
+        var titleEl = header.querySelector('.headermusicinfo span');
+        chip.textContent = (titleEl ? titleEl.textContent : header.textContent).replace(/\s+/g, ' ').trim();
+        chip.setAttribute('aria-hidden', 'true');
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              chip.classList.remove('visible');
+              chip.setAttribute('aria-hidden', 'true');
+            } else {
+              chip.classList.add('visible');
+              chip.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
+        observer.observe(header);
+      })();
+    </script>
     <script>
       (function() {
         var linksTab = document.getElementById('linksTab');

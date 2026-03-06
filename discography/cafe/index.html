@@ -58,6 +58,7 @@
         </div>
       </div>
     </nav>
+    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
        
 <div class="musicpage">
     <iframe
@@ -186,6 +187,28 @@
         <button class="bottom-links-btn" id="linksTab"><span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span><span class="tab-label">LINKS</span></button>
       </div>
     </div>
+    <script>
+      (function() {
+        var header = document.querySelector('.header') || document.querySelector('.musicheader');
+        var chip = document.getElementById('headerChip');
+        if (!header || !chip) return;
+        var titleEl = header.querySelector('.headermusicinfo span');
+        chip.textContent = (titleEl ? titleEl.textContent : header.textContent).replace(/\s+/g, ' ').trim();
+        chip.setAttribute('aria-hidden', 'true');
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              chip.classList.remove('visible');
+              chip.setAttribute('aria-hidden', 'true');
+            } else {
+              chip.classList.add('visible');
+              chip.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });
+        observer.observe(header);
+      })();
+    </script>
     <script>
       (function() {
         var linksTab = document.getElementById('linksTab');
