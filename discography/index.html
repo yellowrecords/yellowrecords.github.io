@@ -3,7 +3,7 @@
     <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Music & Discography – Bobby Nair</title>
     <meta name="description" content="Listen to Bobby Nair's music – albums Café, Love You, King of Wands, and more. Official discography and streaming links.">
     <meta name="keywords" content="bobby nair, discography, saturn, cafe, bobby nair music, love you song, king of wands">
@@ -171,12 +171,16 @@
           border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         .album-dropdown-content .tracklist .track {
-          display: flex;
-          align-items: center;
+          display: grid;
+          grid-template-columns: auto 1fr auto;
           gap: 12px;
+          align-items: start;
           padding: 8px 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
           transition: background 0.2s ease;
+          min-width: 0;
+          overflow-wrap: break-word;
+          word-break: break-word;
         }
         .album-dropdown-content .tracklist .track:last-child {
           border-bottom: none;
@@ -202,6 +206,8 @@
         }
         .album-dropdown-content .tracklist .track-page-link {
           margin-left: auto;
+          white-space: nowrap;
+          align-self: start;
           font-family: 'Roboto Mono', monospace;
           font-size: 0.75rem;
           font-weight: 600;
@@ -251,13 +257,13 @@
     <div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
 <div class="mobilepage">
-    <section class="albumsdisplay albums-section">
+    <section class="albumsdisplay albums-section singles-section">
         <h2 class="albums-section-title">Singles</h2>
-        <div class="albums">
-          <a href="dinosaur/"><img src="/assets/img/PromiseC.jpg" alt="Promise ring"><span class="album-title">Promise ring</span></a>
-          <a href="dinosaur"><img src="/assets/img/OC.jpg" alt="O'"><span class="album-title">O'</span></a>
-          <a href="dinosaur"><img src="/assets/img/ALLC.jpg" alt="All the hope I have"><span class="album-title">All the hope I have</span></a>
-          <a href="dinosaur"><img src="/assets/img/ExtraC.jpg" alt="Extra extra"><span class="album-title">Extra extra</span></a>
+        <div class="single-chips">
+          <div class="single-chip"><img src="/assets/img/PromiseC.jpg" alt="Promise ring"><span class="single-chip-title">Promise ring</span></div>
+          <div class="single-chip"><img src="/assets/img/OC.jpg" alt="O'"><span class="single-chip-title">O'</span></div>
+          <div class="single-chip"><img src="/assets/img/ALLC.jpg" alt="All the hope I have"><span class="single-chip-title">All the hope I have</span></div>
+          <div class="single-chip"><img src="/assets/img/ExtraC.jpg" alt="Extra extra"><span class="single-chip-title">Extra extra</span></div>
         </div>
       </section>
       <section class="albumsdisplay albums-section">
@@ -535,11 +541,11 @@
         </div>
       </div>
       </section>
-      <section class="albumsdisplay albums-section">
+      <section class="albumsdisplay albums-section singles-section">
         <h2 class="albums-section-title">More Singles</h2>
-        <div class="albums">
-          <a href="#winter"><img src="/assets/img/album/snowsong.jpg" alt="Snow Song"><span class="album-title">Snow Song</span></a>
-          <a href="/discography/kingofwands/"><img src="/assets/img/album/kow.jpg" alt="King of Wands*"><span class="album-title">King of Wands*</span></a>
+        <div class="single-chips">
+          <div class="single-chip"><img src="/assets/img/album/snowsong.jpg" alt="Snow Song"><span class="single-chip-title">Snow Song</span></div>
+          <div class="single-chip"><img src="/assets/img/album/kow.jpg" alt="King of Wands*"><span class="single-chip-title">King of Wands*</span></div>
         </div>
       </section>
       </div>
