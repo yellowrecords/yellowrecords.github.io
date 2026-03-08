@@ -678,6 +678,13 @@ border-radius: 15px;;
   width: 100%;
   margin: 0 auto;
 }
+@media (min-width: 641px) {
+  .single-chips {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
 .single-chip {
   position: relative;
   overflow: hidden;
