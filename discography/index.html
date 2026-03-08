@@ -258,7 +258,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 6px 8px;
+          padding: 16px 10px;
           border-radius: 8px;
           transition: background 0.2s ease;
         }
@@ -272,7 +272,7 @@
         }
         .album-dropdown-content .streamingicons .album-film-btn {
           gap: 6px;
-          padding: 6px 12px;
+          padding: 16px 14px;
           border: 1px solid rgba(255, 255, 255, 0.28);
           font-family: 'Roboto Mono', monospace;
           font-size: 0.7rem;
@@ -433,7 +433,7 @@
           letter-spacing: 0.04em;
           color: rgba(255, 255, 255, 0.7);
           text-decoration: none;
-          padding: 4px 10px;
+          padding: 14px 12px;
           border-radius: 6px;
           border: 1px solid rgba(255, 255, 255, 0.28);
           transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -460,7 +460,7 @@
           letter-spacing: 0.04em;
           color: rgba(255, 255, 255, 0.7);
           text-decoration: none;
-          padding: 4px 10px;
+          padding: 14px 12px;
           border-radius: 6px;
           border: 1px solid rgba(255, 255, 255, 0.28);
           transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -485,6 +485,54 @@
         .album-dropdown-content .tracklist .track-links .track-page-link,
         .album-dropdown-content .tracklist .track-links .track-music-video-link {
           margin-left: 0;
+        }
+        /* Mobile: album film first line, other links second; track links under title in 2-col grid */
+        @media (max-width: 640px) {
+          .album-dropdown-content .streamingicons::before {
+            display: none;
+          }
+          .album-dropdown-content .streamingicons .album-film-btn {
+            order: -1;
+            width: 100%;
+            margin-bottom: 6px;
+            box-sizing: border-box;
+          }
+          .album-dropdown-content .streamingicons {
+            flex-direction: row;
+            flex-wrap: wrap;
+          }
+          .album-dropdown-content .tracklist .track {
+            grid-template-columns: auto 1fr;
+            grid-template-rows: auto auto;
+            gap: 8px 12px;
+            padding-right: 28px;
+          }
+          .album-dropdown-content .tracklist .track > span:first-child {
+            grid-row: 1;
+            grid-column: 1;
+          }
+          .album-dropdown-content .tracklist .track > a.track-music-video-link {
+            grid-row: 2;
+            grid-column: 2 / -1;
+            margin-left: 0;
+          }
+          .album-dropdown-content .tracklist .track-links {
+            grid-row: 2;
+            grid-column: 2 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-left: 0;
+          }
+          .album-dropdown-content .tracklist .track-links .track-page-link,
+          .album-dropdown-content .tracklist .track-links .track-music-video-link {
+            min-width: 0;
+          }
+          .album-dropdown-content .tracklist .track:hover {
+            margin: 0;
+            padding-left: 0;
+            padding-right: 28px;
+          }
         }
         .single-chip .single-chip-video-link {
           margin-left: auto;
