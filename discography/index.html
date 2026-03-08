@@ -61,6 +61,9 @@
             inset 0 -1px 0 rgba(0, 0, 0, 0.08);
           transform: scale(1.01);
         }
+        .album-dropdown.open:hover {
+          transform: none;
+        }
         .album-dropdown-header {
           position: relative;
           overflow: hidden;
@@ -266,6 +269,86 @@
           height: 28px;
           width: 28px;
           display: block;
+        }
+        .album-dropdown-content .bandcamp-buy,
+        .album-dropdown-header .bandcamp-buy {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 18px;
+          border-radius: 14px;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0.06) 45%,
+            rgba(40, 45, 55, 0.25) 100%
+          );
+          backdrop-filter: blur(28px) saturate(1.8);
+          -webkit-backdrop-filter: blur(28px) saturate(1.8);
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          color: var(--main-text);
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          text-decoration: none;
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .album-dropdown-content .bandcamp-buy { margin-top: 12px; }
+        .album-dropdown-header .bandcamp-buy {
+          margin-top: 0;
+          margin-left: auto;
+          flex-shrink: 0;
+          gap: 5px;
+          width: 145px;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+        @media (max-width: 640px) {
+          .album-dropdown-header .bandcamp-buy-label {
+            display: none;
+          }
+          .album-dropdown-header .bandcamp-buy {
+            width: 100px;
+            min-width: 100px;
+            padding: 8px 12px;
+          }
+        }
+        .album-dropdown-content .bandcamp-buy:hover,
+        .album-dropdown-header .bandcamp-buy:hover {
+          border-color: rgba(255, 255, 255, 0.42);
+          box-shadow:
+            0 6px 28px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          transform: scale(1.02);
+        }
+        .album-dropdown-content .bandcamp-buy img {
+          height: 24px;
+          width: 24px;
+          display: block;
+          flex-shrink: 0;
+        }
+        .album-dropdown-header .bandcamp-buy img {
+          height: 22px;
+          width: 22px;
+          display: block;
+          flex-shrink: 0;
+        }
+        .album-dropdown-content .bandcamp-buy-price,
+        .album-dropdown-header .bandcamp-buy-price {
+          margin-left: 4px;
+          padding: 4px 10px;
+          border-radius: 8px;
+          background: rgba(0, 0, 0, 0.25);
+          border: 1px solid rgba(255, 255, 255, 0.12);
+          font-weight: 700;
+          letter-spacing: 0.05em;
         }
         /* Tracklist – minimal (album dropdowns only) */
         .album-dropdown-content .tracklist {
@@ -608,14 +691,15 @@
           </div>
         </div>
         <div class="album-dropdown" id="iseewhatidont" data-album="iseewhatidont">
-          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="iseewhatidont-content" id="iseewhatidont-btn">
+          <div class="album-dropdown-header" role="button" tabindex="0" aria-expanded="false" aria-controls="iseewhatidont-content" id="iseewhatidont-btn">
             <img src="/assets/img/album/iseewhatidont! Cover.jpg" alt="">
             <div class="album-dropdown-title-wrap">
               <h4>iseewhatidont!</h4>
               <h6>September 15, 2023</h6>
             </div>
+            <a href="https://bobbynair.bandcamp.com/album/iseewhatidont" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$15</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
+          </div>
           <div class="album-dropdown-content" aria-hidden="true" id="iseewhatidont-content" role="region" aria-labelledby="iseewhatidont-btn">
             <div class="album-dropdown-content-inner">
               <div class="musecard-detail">
@@ -653,14 +737,15 @@
           </div>
         </div>
         <div class="album-dropdown" id="redux" data-album="redux">
-          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="redux-content" id="redux-btn">
+          <div class="album-dropdown-header" role="button" tabindex="0" aria-expanded="false" aria-controls="redux-content" id="redux-btn">
             <img src="/assets/img/album/redux.jpg" alt="">
             <div class="album-dropdown-title-wrap">
               <h4>Saturn REDUX</h4>
               <h6>September 23, 2022</h6>
             </div>
+            <a href="https://bobbynair.bandcamp.com/album/saturn-redux" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
+          </div>
           <div class="album-dropdown-content" aria-hidden="true" id="redux-content" role="region" aria-labelledby="redux-btn">
             <div class="album-dropdown-content-inner">
               <div class="musecard-detail">
@@ -690,14 +775,15 @@
           </div>
         </div>
         <div class="album-dropdown" id="slowpoke" data-album="slowpoke">
-          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="slowpoke-content" id="slowpoke-btn">
+          <div class="album-dropdown-header" role="button" tabindex="0" aria-expanded="false" aria-controls="slowpoke-content" id="slowpoke-btn">
             <img src="/assets/img/album/slowpoke.jpg" alt="">
             <div class="album-dropdown-title-wrap">
               <h4>Slowpoke</h4>
               <h6>May 20, 2022</h6>
             </div>
+            <a href="https://bobbynair.bandcamp.com/album/slowpoke" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
+          </div>
           <div class="album-dropdown-content" aria-hidden="true" id="slowpoke-content" role="region" aria-labelledby="slowpoke-btn">
             <div class="album-dropdown-content-inner">
               <div class="musecard-detail">
@@ -727,14 +813,15 @@
           </div>
         </div>
         <div class="album-dropdown" id="winter" data-album="winter">
-          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="winter-content" id="winter-btn">
+          <div class="album-dropdown-header" role="button" tabindex="0" aria-expanded="false" aria-controls="winter-content" id="winter-btn">
             <img src="/assets/img/album/imtw.jpg" alt="">
             <div class="album-dropdown-title-wrap">
               <h4>I Miss The Winter</h4>
               <h6>January 1, 2022</h6>
             </div>
+            <a href="https://bobbynair.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$9</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
+          </div>
           <div class="album-dropdown-content" aria-hidden="true" id="winter-content" role="region" aria-labelledby="winter-btn">
             <div class="album-dropdown-content-inner">
               <div class="musecard-detail">
@@ -867,7 +954,8 @@
     <script>
       (function() {
         document.querySelectorAll('.album-dropdown-header').forEach(function(btn) {
-          btn.addEventListener('click', function() {
+          btn.addEventListener('click', function(e) {
+            if (e.target.closest && e.target.closest('a.bandcamp-buy')) return;
             var dropdown = this.closest('.album-dropdown');
             var isOpen = dropdown.classList.toggle('open');
             this.setAttribute('aria-expanded', isOpen);
@@ -885,6 +973,12 @@
                 };
                 content.addEventListener('transitionend', once);
               }
+            }
+          });
+          btn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.click();
             }
           });
         });
