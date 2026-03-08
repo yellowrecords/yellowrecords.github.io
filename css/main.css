@@ -156,6 +156,33 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.35),
       inset 0 -1px 0 rgba(0, 0, 0, 0.08);
   }
+  /* Header title: gradient + transparent white for legibility (punch-through) */
+  .header .header-gradient-text {
+    display: inline-block;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+      linear-gradient(270deg, #000000, #581515, #5B3636, #7D3C3C);
+    background-size: 100% 100%, 800% 800%;
+    background-position: 0 0, 0% 50%;
+    -webkit-animation: HeaderGradientText 11s ease infinite;
+    animation: HeaderGradientText 11s ease infinite;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font: inherit;
+    text-shadow: none;
+  }
+  @-webkit-keyframes HeaderGradientText {
+    0% { background-position: 0 0, 0% 50%; }
+    50% { background-position: 0 0, 100% 50%; }
+    100% { background-position: 0 0, 0% 50%; }
+  }
+  @keyframes HeaderGradientText {
+    0% { background-position: 0 0, 0% 50%; }
+    50% { background-position: 0 0, 100% 50%; }
+    100% { background-position: 0 0, 0% 50%; }
+  }
   .navbar {
     z-index: 5;
     background: transparent;
@@ -886,12 +913,12 @@ footer {
     height: 76px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 45%,
-      rgba(40, 45, 55, 0.25) 100%
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.04) 45%,
+      rgba(40, 45, 55, 0.22) 100%
     );
-    backdrop-filter: blur(28px) saturate(1.8);
-    -webkit-backdrop-filter: blur(28px) saturate(1.8);
+    backdrop-filter: blur(32px) saturate(1.8);
+    -webkit-backdrop-filter: blur(32px) saturate(1.8);
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.25),
@@ -960,12 +987,12 @@ footer {
     height: 76px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.08) 45%,
-      rgba(45, 50, 60, 0.3) 100%
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.04) 45%,
+      rgba(40, 45, 55, 0.22) 100%
     );
-    backdrop-filter: blur(28px) saturate(1.8);
-    -webkit-backdrop-filter: blur(28px) saturate(1.8);
+    backdrop-filter: blur(32px) saturate(1.8);
+    -webkit-backdrop-filter: blur(32px) saturate(1.8);
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.25),
@@ -1014,12 +1041,12 @@ footer {
     transform-origin: 100% 100%; /* grow from bottom-right (links button area) */
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.18) 0%,
-      rgba(255, 255, 255, 0.06) 45%,
-      rgba(40, 45, 55, 0.28) 100%
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.04) 45%,
+      rgba(40, 45, 55, 0.22) 100%
     );
-    backdrop-filter: blur(28px) saturate(1.8);
-    -webkit-backdrop-filter: blur(28px) saturate(1.8);
+    backdrop-filter: blur(32px) saturate(1.8);
+    -webkit-backdrop-filter: blur(32px) saturate(1.8);
     border: 1px solid rgba(255, 255, 255, 0.28);
     box-shadow:
       0 4px 24px rgba(0, 0, 0, 0.25),
