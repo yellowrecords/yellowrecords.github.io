@@ -110,7 +110,6 @@
               <p class="text-base text-center text-gray-400" id="result"></p>
             </form>
           </div>
-          <p class="contact-email-note">You can also email me directly at <a href="mailto:nairbobby5@gmail.com">nairbobby5@gmail.com</a>.</p>
     </div>
 </div>
 
@@ -195,6 +194,24 @@
             panel.classList.remove('open');
           }
         });
+      })();
+    </script>
+    <script>
+      (function() {
+        function setGlowPosition(el, e) {
+          var rect = el.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          el.style.setProperty('--mouse-x', x + '%');
+          el.style.setProperty('--mouse-y', y + '%');
+        }
+        function initCursorGlow(selector) {
+          document.querySelectorAll(selector).forEach(function(el) {
+            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
+          });
+        }
+        initCursorGlow('.navlinks a');
+        initCursorGlow('.contact-card-btn');
       })();
     </script>
 </body>

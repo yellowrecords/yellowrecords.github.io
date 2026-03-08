@@ -12,12 +12,12 @@
     <meta property="og:url" content="https://bobbynair.com/">
     <meta property="og:title" content="Bobby Nair | Official Site – Music, Film & More">
     <meta property="og:description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more.">
-    <meta property="og:image" content="https://bobbynair.com/assets/img/head.jpg">
+    <meta property="og:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide1.PNG">
     <meta property="og:site_name" content="Bobby Nair">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bobby Nair | Official Site – Music, Film & More">
     <meta name="twitter:description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more...">
-    <meta name="twitter:image" content="https://bobbynair.com/assets/img/head.jpg">
+    <meta name="twitter:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide1.PNG">
     <link rel="icon" href="/assets/img/favicon/favicon.ico">
     <link href="/css/main.css" rel="stylesheet">
     <meta name="theme-color" content="black"/>
@@ -231,6 +231,23 @@
             panel.classList.remove('open');
           }
         });
+      })();
+    </script>
+    <script>
+      (function() {
+        function setGlowPosition(el, e) {
+          var rect = el.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          el.style.setProperty('--mouse-x', x + '%');
+          el.style.setProperty('--mouse-y', y + '%');
+        }
+        function initCursorGlow(selector) {
+          document.querySelectorAll(selector).forEach(function(el) {
+            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
+          });
+        }
+        initCursorGlow('.navlinks a');
       })();
     </script>
 </body>

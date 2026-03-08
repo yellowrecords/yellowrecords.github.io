@@ -23,30 +23,46 @@
     <meta name="theme-color" content="black"/>
 
     <style>
-        /* Album dropdowns – liquid glass (matches navbar) */
+        /* Album dropdowns – liquid glass (matches navbar); width matches .single-chips */
         .album-dropdowns {
+          width: 100%;
           max-width: 720px;
           margin: 0 auto 2rem;
-          padding: 0 clamp(16px, 4vw, 24px);
+          padding: 0;
+          box-sizing: border-box;
         }
         .album-dropdown {
           font-family: 'Playfair Display', serif;
+          position: relative;
           margin-bottom: 12px;
           border-radius: 16px;
           overflow: hidden;
           background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.08) 0%,
-            rgba(30, 30, 30, 0.55) 100%
+            180deg,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0.06) 45%,
+            rgba(40, 45, 55, 0.25) 100%
           );
-          backdrop-filter: blur(24px) saturate(1.6);
-          -webkit-backdrop-filter: blur(24px) saturate(1.6);
-          border: 1.5px solid rgba(255, 255, 255, 0.18);
+          backdrop-filter: blur(28px) saturate(1.8);
+          -webkit-backdrop-filter: blur(28px) saturate(1.8);
+          border: 1px solid rgba(255, 255, 255, 0.28);
           box-shadow:
-            0 4px 24px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            0 4px 24px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .album-dropdown:hover {
+          border-color: rgba(255, 255, 255, 0.42);
+          box-shadow:
+            0 6px 28px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          transform: scale(1.01);
         }
         .album-dropdown-header {
+          position: relative;
+          overflow: hidden;
           display: flex;
           align-items: center;
           gap: 16px;
@@ -60,9 +76,29 @@
           color: var(--main-text);
           font: inherit;
           transition: background 0.2s ease;
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+        }
+        .album-dropdown-header::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: 0;
+          pointer-events: none;
+          background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.08) 35%,
+            transparent 55%
+          );
+          opacity: 0;
+          transition: opacity 0.2s ease;
         }
         .album-dropdown-header:hover {
           background: rgba(255, 255, 255, 0.06);
+        }
+        .album-dropdown-header:hover::before {
+          opacity: 1;
         }
         .album-dropdown-header img {
           width: 56px;
@@ -107,6 +143,82 @@
         }
         .album-dropdown.open .album-dropdown-content {
           max-height: 3200px;
+        }
+        /* Album dots/stars background when dropdown is open or closing (until animation ends) */
+        #saturn.open .album-dropdown-content,
+        #saturn.saturn-bg .album-dropdown-content,
+        #winter.open .album-dropdown-content,
+        #winter.winter-bg .album-dropdown-content,
+        #slowpoke.open .album-dropdown-content,
+        #slowpoke.slowpoke-bg .album-dropdown-content,
+        #redux.open .album-dropdown-content,
+        #redux.redux-bg .album-dropdown-content,
+        #iseewhatidont.open .album-dropdown-content,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content {
+          position: relative;
+        }
+        #saturn.open .album-dropdown-content::before,
+        #saturn.saturn-bg .album-dropdown-content::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/assets/img/dots/orange stars.png') center / cover no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        #winter.open .album-dropdown-content::before,
+        #winter.winter-bg .album-dropdown-content::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/assets/img/dots/white stars.png') center / cover no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        #slowpoke.open .album-dropdown-content::before,
+        #slowpoke.slowpoke-bg .album-dropdown-content::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/assets/img/dots/yellow stars.png') center / cover no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        #redux.open .album-dropdown-content::before,
+        #redux.redux-bg .album-dropdown-content::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/assets/img/dots/red stars.png') center / cover no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        #iseewhatidont.open .album-dropdown-content::before,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: url('/assets/img/dots/blue stars.png') center / cover no-repeat;
+          opacity: 0.12;
+          pointer-events: none;
+        }
+        #saturn.open .album-dropdown-content-inner,
+        #saturn.saturn-bg .album-dropdown-content-inner,
+        #winter.open .album-dropdown-content-inner,
+        #winter.winter-bg .album-dropdown-content-inner,
+        #slowpoke.open .album-dropdown-content-inner,
+        #slowpoke.slowpoke-bg .album-dropdown-content-inner,
+        #redux.open .album-dropdown-content-inner,
+        #redux.redux-bg .album-dropdown-content-inner,
+        #iseewhatidont.open .album-dropdown-content-inner,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content-inner {
+          position: relative;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.12) 0%,
+            rgba(0, 0, 0, 0.06) 50%,
+            rgba(0, 0, 0, 0.14) 100%
+          );
         }
         .album-dropdown-content-inner {
           padding: 0 18px 20px;
@@ -604,6 +716,19 @@
             this.setAttribute('aria-expanded', isOpen);
             var content = document.getElementById(this.getAttribute('aria-controls'));
             if (content) content.setAttribute('aria-hidden', !isOpen);
+            /* Keep dots/stars visible until close animation finishes */
+            var bgClass = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' }[dropdown.id];
+            if (bgClass) {
+              if (isOpen) {
+                dropdown.classList.add(bgClass);
+              } else {
+                var once = function() {
+                  content.removeEventListener('transitionend', once);
+                  dropdown.classList.remove(bgClass);
+                };
+                content.addEventListener('transitionend', once);
+              }
+            }
           });
         });
         var hash = window.location.hash.slice(1);
@@ -613,6 +738,8 @@
             var btn = target.querySelector('.album-dropdown-header');
             if (btn && !target.classList.contains('open')) {
               target.classList.add('open');
+              var openBg = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' }[target.id];
+              if (openBg) target.classList.add(openBg);
               btn.setAttribute('aria-expanded', 'true');
               var content = document.getElementById(btn.getAttribute('aria-controls'));
               if (content) content.setAttribute('aria-hidden', 'false');
@@ -657,6 +784,25 @@
             panel.classList.remove('open');
           }
         });
+      })();
+    </script>
+    <script>
+      (function() {
+        function setGlowPosition(el, e) {
+          var rect = el.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          el.style.setProperty('--mouse-x', x + '%');
+          el.style.setProperty('--mouse-y', y + '%');
+        }
+        function initCursorGlow(selector) {
+          document.querySelectorAll(selector).forEach(function(el) {
+            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
+          });
+        }
+        initCursorGlow('.single-chip');
+        initCursorGlow('.album-dropdown-header');
+        initCursorGlow('.navlinks a');
       })();
     </script>
 </body>
