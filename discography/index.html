@@ -1102,16 +1102,37 @@
 
     <script>
       (function() {
+        var bgClasses = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' };
+        function closeDropdown(dropdown) {
+          if (!dropdown.classList.contains('open')) return;
+          var header = dropdown.querySelector('.album-dropdown-header');
+          var content = header ? document.getElementById(header.getAttribute('aria-controls')) : null;
+          dropdown.classList.remove('open');
+          if (header) header.setAttribute('aria-expanded', 'false');
+          if (content) content.setAttribute('aria-hidden', 'true');
+          var bgClass = bgClasses[dropdown.id];
+          if (bgClass) {
+            var once = function() {
+              if (content) content.removeEventListener('transitionend', once);
+              dropdown.classList.remove(bgClass);
+            };
+            if (content) content.addEventListener('transitionend', once);
+          }
+        }
         document.querySelectorAll('.album-dropdown-header').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
             if (e.target.closest && e.target.closest('a.bandcamp-buy')) return;
             var dropdown = this.closest('.album-dropdown');
+            /* Accordion: close any other open album dropdown */
+            document.querySelectorAll('.album-dropdown.open').forEach(function(other) {
+              if (other !== dropdown) closeDropdown(other);
+            });
             var isOpen = dropdown.classList.toggle('open');
             this.setAttribute('aria-expanded', isOpen);
             var content = document.getElementById(this.getAttribute('aria-controls'));
             if (content) content.setAttribute('aria-hidden', !isOpen);
             /* Keep dots/stars visible until close animation finishes */
-            var bgClass = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' }[dropdown.id];
+            var bgClass = bgClasses[dropdown.id];
             if (bgClass) {
               if (isOpen) {
                 dropdown.classList.add(bgClass);
@@ -1122,6 +1143,13 @@
                 };
                 content.addEventListener('transitionend', once);
               }
+            }
+            /* Keep newly opened dropdown in view (other panels’ collapse can shift scroll) */
+            if (isOpen) {
+              dropdown.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              setTimeout(function() {
+                dropdown.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 380);
             }
           });
           btn.addEventListener('keydown', function(e) {
@@ -1137,6 +1165,9 @@
           if (target && target.classList.contains('album-dropdown')) {
             var btn = target.querySelector('.album-dropdown-header');
             if (btn && !target.classList.contains('open')) {
+              document.querySelectorAll('.album-dropdown.open').forEach(function(other) {
+                if (other !== target) closeDropdown(other);
+              });
               target.classList.add('open');
               var openBg = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' }[target.id];
               if (openBg) target.classList.add(openBg);
