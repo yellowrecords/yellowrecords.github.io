@@ -339,6 +339,108 @@
           font-size: clamp(16px, 2vw, 20px);
           margin: 0 0 12px;
         }
+        /* Latest release hero – click to scroll to album and expand */
+        .latest-hero-section {
+          margin-top: 1.5rem;
+        }
+        .latest-hero-section.albumsdisplay {
+          margin-bottom: 0;
+        }
+        .latest-hero {
+          display: block;
+          position: relative;
+          width: 100%;
+          max-width: 720px;
+          margin: 0 auto 2rem;
+          padding: 0;
+          text-decoration: none;
+          color: var(--main-text);
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+          background: linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.18) 0%,
+            rgba(255, 255, 255, 0.06) 45%,
+            rgba(40, 45, 55, 0.25) 100%
+          );
+          backdrop-filter: blur(28px) saturate(1.8);
+          -webkit-backdrop-filter: blur(28px) saturate(1.8);
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          box-shadow:
+            0 4px 24px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+        }
+        .latest-hero:hover {
+          border-color: rgba(255, 255, 255, 0.42);
+          box-shadow:
+            0 6px 28px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+          transform: scale(1.01);
+        }
+        .latest-hero::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          pointer-events: none;
+          background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(255, 255, 255, 0.3) 0%,
+            rgba(255, 255, 255, 0.08) 35%,
+            transparent 55%
+          );
+          opacity: 0;
+          transition: opacity 0.2s ease;
+        }
+        .latest-hero:hover::before,
+        .latest-hero.touch-active::before {
+          opacity: 1;
+        }
+        .latest-hero-inner {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          padding: 18px 20px;
+          text-align: left;
+        }
+        .latest-hero img {
+          width: 100px;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 12px;
+          flex-shrink: 0;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+        }
+        .latest-hero-text h3 {
+          font-family: 'Roboto Slab', serif;
+          font-size: clamp(1rem, 2.2vw, 1.2rem);
+          margin: 0 0 4px;
+          font-weight: 600;
+          opacity: 0.9;
+        }
+        .latest-hero-text .latest-hero-title {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(1.35rem, 3vw, 1.6rem);
+          font-weight: bold;
+          margin: 0 0 2px;
+        }
+        .latest-hero-text .latest-hero-meta {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.85rem;
+          font-style: italic;
+          opacity: 0.85;
+          margin: 0;
+        }
+        /* Scroll margin so "Discography" pill stays visible when hero links to #bites */
+        #bites {
+          scroll-margin-top: 80px;
+        }
       </style>
 </head>
 <body>
@@ -368,6 +470,18 @@
     <div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
 <div class="mobilepage">
+    <section class="albumsdisplay albums-section latest-hero-section">
+      <a href="#bites" id="latestHero" class="latest-hero" aria-label="Latest release: Bites – EP. Click to open album and see tracks.">
+        <div class="latest-hero-inner">
+          <img src="/assets/img/album/bites.jpg" alt="Bites - EP cover">
+          <div class="latest-hero-text">
+            <h3>The latest from Bobby Nair</h3>
+            <p class="latest-hero-title">Bites – EP</p>
+            <p class="latest-hero-meta">November 20, 2025 · Click to listen</p>
+          </div>
+        </div>
+      </a>
+    </section>
     <section class="albumsdisplay albums-section singles-section">
         <h2 class="albums-section-title">Singles</h2>
         <div class="single-chips">
@@ -380,6 +494,38 @@
       <section class="albumsdisplay albums-section">
         <h2 class="albums-section-title">Albums</h2>
         <div class="album-dropdowns" id="albumDetails">
+        <div class="album-dropdown" id="bites" data-album="bites">
+          <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="bites-content" id="bites-btn">
+            <img src="/assets/img/album/bites.jpg" alt="">
+            <div class="album-dropdown-title-wrap">
+              <h4>Bites - EP</h4>
+              <h6>November 20, 2025</h6>
+            </div>
+            <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="album-dropdown-content" id="bites-content" role="region" aria-labelledby="bites-btn" aria-hidden="true">
+            <div class="album-dropdown-content-inner">
+              <div class="musecard-detail">
+                <p>Bobby Nair's newest EP.</p>
+                <div class="streamingicons">
+                  <a href="https://open.spotify.com/album/7wcXC31TJcU3XToNVcG2mp" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
+                  <a href="https://music.apple.com/us/album/bites-ep/1848752344" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
+                  <a href="https://www.youtube.com/watch?v=fDqL4T4_KDA&list=OLAK5uy_mDFuDyfjEW8si9Dx8GJvb2vY1uucItuoE" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
+                  <a href="https://music.youtube.com/playlist?list=OLAK5uy_mCF0SDBSuCUY6vMU_36S0nKuyS0nH3bNA" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
+                  <a href="https://music.amazon.com/albums/B0FXJ1MVGP" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                </div>
+                <div class="tracklist">
+                  <h4>Tracks</h4>
+                  <div class="track"><span>1</span>I'm No Perfect Man</div>
+                  <div class="track"><span>2</span>How To Please</div>
+                  <div class="track"><span>3</span>Got A Light</div>
+                  <div class="track"><span>4</span>Pinches</div>
+                  <div class="track"><span>5</span>Umbrella Season</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="album-dropdown" id="dinosaur" data-album="dinosaur">
           <button type="button" class="album-dropdown-header" aria-expanded="false" aria-controls="dinosaur-content" id="dinosaur-btn">
             <img src="/assets/img/IMG_9906.jpg" alt="">
@@ -757,6 +903,20 @@
             }
           }
         }
+        /* Hero "latest release" link: scroll to album then expand it */
+        var latestHero = document.getElementById('latestHero');
+        if (latestHero) {
+          latestHero.addEventListener('click', function(e) {
+            var bites = document.getElementById('bites');
+            var bitesBtn = document.getElementById('bites-btn');
+            if (!bites || !bitesBtn) return;
+            e.preventDefault();
+            bites.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (!bites.classList.contains('open')) {
+              setTimeout(function() { bitesBtn.click(); }, 400);
+            }
+          });
+        }
       })();
     </script>
     <script>
@@ -798,20 +958,32 @@
     </script>
     <script>
       (function() {
-        function setGlowPosition(el, e) {
+        function setGlowPosition(el, clientX, clientY) {
           var rect = el.getBoundingClientRect();
-          var x = ((e.clientX - rect.left) / rect.width) * 100;
-          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          var x = ((clientX - rect.left) / rect.width) * 100;
+          var y = ((clientY - rect.top) / rect.height) * 100;
           el.style.setProperty('--mouse-x', x + '%');
           el.style.setProperty('--mouse-y', y + '%');
         }
         function initCursorGlow(selector) {
           document.querySelectorAll(selector).forEach(function(el) {
-            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
+            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e.clientX, e.clientY); });
+            el.addEventListener('touchstart', function(e) {
+              if (e.touches.length) {
+                setGlowPosition(el, e.touches[0].clientX, e.touches[0].clientY);
+                el.classList.add('touch-active');
+              }
+            }, { passive: true });
+            el.addEventListener('touchmove', function(e) {
+              if (e.touches.length) setGlowPosition(el, e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+            el.addEventListener('touchend', function() { el.classList.remove('touch-active'); });
+            el.addEventListener('touchcancel', function() { el.classList.remove('touch-active'); });
           });
         }
         initCursorGlow('.single-chip');
         initCursorGlow('.album-dropdown-header');
+        initCursorGlow('.latest-hero');
         initCursorGlow('.navlinks a');
       })();
     </script>
