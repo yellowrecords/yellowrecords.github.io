@@ -60,6 +60,7 @@
   font-size: clamp(14px, 2vw, 16px);
   color: rgba(255, 255, 255, 0.8);
   word-break: break-all;
+  text-align: left;
 }
 .contact-card-btn {
   position: relative;
@@ -107,10 +108,11 @@
   width: 100%;
   max-width: 560px;
   margin: 20px auto 24px;
-  padding: 24px clamp(20px, 5vw, 32px);
+  padding: 20px 20px 24px;
   border-radius: 16px;
   font-size: clamp(16px, 2.5vw, 20px);
   box-sizing: border-box;
+  text-align: left;
   /* Aero-style liquid glass (matches discography singles/album dropdowns) */
   background: linear-gradient(
     180deg,
@@ -126,6 +128,16 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.35),
     inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
+.m-7 form {
+  width: 100%;
+  display: block;
+}
+.m-7 form .mb-6 {
+  margin-bottom: 1.25rem;
+}
+.m-7 form .mb-6:last-of-type {
+  margin-bottom: 0;
+}
 .m-7 h1 {
   margin: 0 0 1rem;
   font-size: clamp(28px, 4vw, 35px);
@@ -133,7 +145,7 @@
 .m-7 label {
   color: rgba(255, 255, 255, 0.9);
   display: block;
-  margin-bottom: 0.35em;
+  margin-bottom: 0.25em;
   font-size: 0.95em;
 }
 .m-7 input,
@@ -148,6 +160,7 @@
   color: var(--main-text, #fff);
   box-sizing: border-box;
   transition: border-color 0.2s, box-shadow 0.2s;
+  text-align: left;
 }
 .m-7 input::placeholder,
 .m-7 textarea::placeholder {
@@ -164,21 +177,18 @@
   min-height: 120px;
   resize: vertical;
 }
-.m-7 button {
-  padding: 14px 20px;
-  font-size: 1.05rem;
-  margin-top: 8px;
+/* Form submit button uses same style as contact card buttons */
+.m-7 .contact-card-btn {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0.5rem;
   margin-bottom: 0;
-  border-radius: 12px;
-  color: white;
-  border: 2px solid var(--site-accent-light, #984C4C);
-  background-color: rgba(152, 76, 76, 0.4);
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
 }
-.m-7 button:hover {
-  background-color: rgba(152, 76, 76, 0.6);
-  border-color: var(--site-accent-light, #984C4C);
+.m-7 #result {
+  text-align: left;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
 }
 .contact-email-note {
   margin-top: 1rem;
