@@ -1144,13 +1144,7 @@
                 content.addEventListener('transitionend', once);
               }
             }
-            /* Keep newly opened dropdown in view (other panels’ collapse can shift scroll) */
-            if (isOpen) {
-              dropdown.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              setTimeout(function() {
-                dropdown.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }, 380);
-            }
+            /* Keep newly opened dropdown (other panels’ collapse can shift scroll) */
           });
           btn.addEventListener('keydown', function(e) {
             if (e.key === 'Enter' || e.key === ' ') {
