@@ -184,6 +184,7 @@
       (function() {
         var header = document.querySelector('.header') || document.querySelector('.musicheader');
         var chip = document.getElementById('headerChip');
+        var nav = document.querySelector('.navbar');
         if (!header || !chip) return;
         var titleEl = header.querySelector('.headermusicinfo span');
         chip.textContent = (header.getAttribute('data-header-title') || (titleEl ? titleEl.textContent : header.textContent)).replace(/\s+/g, ' ').trim();
@@ -193,9 +194,11 @@
             if (entry.isIntersecting) {
               chip.classList.remove('visible');
               chip.setAttribute('aria-hidden', 'true');
+              if (nav) nav.classList.remove('is-stuck');
             } else {
               chip.classList.add('visible');
               chip.setAttribute('aria-hidden', 'false');
+              if (nav) nav.classList.add('is-stuck');
             }
           });
         }, { rootMargin: '-1px 0px 0px 0px', threshold: 0 });

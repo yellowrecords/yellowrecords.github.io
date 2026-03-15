@@ -55,34 +55,44 @@
     <h4 class="whoisbobby">Bobby Nair?</h4>
 
     <div class="middlecontent">
-      <div class="slideshow-container">
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide1.PNG" alt="Bobby Nair is smiling eerily.">
+      <div class="slideshow-wrapper">
+        <div class="slideshow-container">
+          <div class="mySlides active">
+            <img src="/assets/img/slideshow/NewSlide1.PNG" alt="Bobby Nair is smiling eerily.">
+          </div>
+          <div class="mySlides">
+            <img src="/assets/img/slideshow/NewSlide2.PNG" alt="Bobby Nair is screaming next to a disco ball.">
+          </div>
+          <div class="mySlides">
+            <img src="/assets/img/slideshow/NewSlide3.PNG" alt="">
+          </div>
+          <div class="mySlides">
+            <img src="/assets/img/slideshow/NewSlide4.PNG" alt="">
+          </div>
+          <div class="mySlides">
+            <img src="/assets/img/slideshow/NewSlide5.PNG" alt="">
+          </div>
+          <div class="mySlides">
+            <img src="/assets/img/slideshow/NewSlide6.PNG" alt="">
+          </div>
         </div>
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide2.PNG" alt="Bobby Nair is screaming next to a disco ball.">
-        </div>
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide3.PNG" alt="">
-        </div>
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide4.PNG" alt="">
-        </div>
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide5.PNG" alt="">
-        </div>
-        <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide6.PNG" alt="">
-        </div>
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-        <div class="slideshow-dots">
-          <span class="dot" onclick="currentSlide(1)"></span>
-          <span class="dot" onclick="currentSlide(2)"></span>
-          <span class="dot" onclick="currentSlide(3)"></span>
-          <span class="dot" onclick="currentSlide(4)"></span>
-          <span class="dot" onclick="currentSlide(5)"></span>
-          <span class="dot" onclick="currentSlide(6)"></span>
+        <div class="slideshow-controls">
+          <a class="prev" onclick="plusSlides(-1)" aria-label="Previous slide">&#10094;</a>
+          <div class="slideshow-center">
+            <div class="slideshow-progress" id="slideshowProgressWrap" aria-hidden="true">
+              <div class="slideshow-progress-bar" id="slideshowProgressBar"></div>
+              <button type="button" class="slideshow-resume" id="slideshowResume" aria-label="Resume slideshow">Resume</button>
+            </div>
+            <div class="slideshow-dots">
+              <span class="dot" onclick="currentSlide(1)"></span>
+              <span class="dot" onclick="currentSlide(2)"></span>
+              <span class="dot" onclick="currentSlide(3)"></span>
+              <span class="dot" onclick="currentSlide(4)"></span>
+              <span class="dot" onclick="currentSlide(5)"></span>
+              <span class="dot" onclick="currentSlide(6)"></span>
+            </div>
+          </div>
+          <a class="next" onclick="plusSlides(1)" aria-label="Next slide">&#10095;</a>
         </div>
       </div>
       <script>
@@ -134,13 +144,61 @@
     </footer>
 <script>
       let slideIndex = 1;
+      const SLIDE_INTERVAL_MS = 7500;
+      let autoScrollTimer = null;
+      let autoScrollActive = true;
+
       showSlides(slideIndex);
+      (function() {
+        var btn = document.getElementById("slideshowResume");
+        if (btn) btn.addEventListener("click", resumeAutoScroll);
+      })();
+
+      function stopAutoScroll() {
+        autoScrollActive = false;
+        if (autoScrollTimer) {
+          clearInterval(autoScrollTimer);
+          autoScrollTimer = null;
+        }
+        resetProgressBar();
+        var wrap = document.getElementById("slideshowProgressWrap");
+        if (wrap) wrap.classList.add("paused");
+      }
+
+      function resumeAutoScroll() {
+        autoScrollActive = true;
+        var wrap = document.getElementById("slideshowProgressWrap");
+        if (wrap) wrap.classList.remove("paused");
+        startProgressBar();
+        autoScrollTimer = setInterval(tickAutoSlide, SLIDE_INTERVAL_MS);
+      }
+
+      function startProgressBar() {
+        if (!autoScrollActive) return;
+        var bar = document.getElementById("slideshowProgressBar");
+        if (!bar) return;
+        bar.style.transition = "none";
+        bar.style.width = "0%";
+        bar.offsetHeight; /* force reflow */
+        bar.style.transition = "width " + (SLIDE_INTERVAL_MS / 1000) + "s linear";
+        bar.style.width = "100%";
+      }
+
+      function resetProgressBar() {
+        var bar = document.getElementById("slideshowProgressBar");
+        if (bar) {
+          bar.style.transition = "none";
+          bar.style.width = "0%";
+        }
+      }
 
       function plusSlides(n) {
+        stopAutoScroll();
         showSlides(slideIndex += n);
       }
 
       function currentSlide(n) {
+        stopAutoScroll();
         showSlides(slideIndex = n);
       }
 
@@ -151,13 +209,27 @@
         if (n > slides.length) {slideIndex = 1}
         if (n < 1) {slideIndex = slides.length}
         for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
+          slides[i].classList.remove("active");
         }
         for (i = 0; i < dots.length; i++) {
           dots[i].className = dots[i].className.replace(" active", "");
         }
-        slides[slideIndex - 1].style.display = "block";
+        slides[slideIndex - 1].classList.add("active");
         dots[slideIndex - 1].className += " active";
+        if (autoScrollActive) {
+          startProgressBar();
+        }
+      }
+
+      function tickAutoSlide() {
+        if (!autoScrollActive) return;
+        slideIndex += 1;
+        if (slideIndex > document.getElementsByClassName("mySlides").length) slideIndex = 1;
+        showSlides(slideIndex);
+      }
+
+      if (autoScrollActive) {
+        autoScrollTimer = setInterval(tickAutoSlide, SLIDE_INTERVAL_MS);
       }
 
       (function() {
