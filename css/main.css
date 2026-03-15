@@ -141,7 +141,7 @@
     line-height: 200px;
     background-image: var(--header-background);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: right;
     background-size: auto 100%;
     font-weight: bold;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -160,8 +160,8 @@
   .header .header-gradient-text {
     display: inline-block;
     background:
-      linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-      linear-gradient(270deg, #000000, #581515, #5B3636, #7D3C3C);
+      linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+      linear-gradient(270deg, #000000, #000000, #000000, #000000);
     background-size: 100% 100%, 800% 800%;
     background-position: 0 0, 0% 50%;
     -webkit-animation: HeaderGradientText 11s ease infinite;
@@ -342,6 +342,11 @@
 .navicons img {
   height: 30px;
   width: 30px;
+  filter: grayscale(100%);
+  transition: filter 300ms;
+}
+.navicons a:hover img {
+  filter: grayscale(0%);
 }
 
 /* Sticky header chip – appears when header scrolls out of view */

@@ -52,27 +52,27 @@
       </div>
     </nav>
     <div class="header-chip" id="headerChip" aria-hidden="true"></div>
-    <h4 class="whoisbobby">About Me:</h4>
+    <h4 class="whoisbobby">Bobby Nair?</h4>
 
     <div class="middlecontent">
       <div class="slideshow-container">
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide1.png" alt="Bobby Nair is smiling eerily.">
+          <img src="/assets/img/slideshow/NewSlide1.PNG" alt="Bobby Nair is smiling eerily.">
         </div>
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide2.png" alt="Bobby Nair is screaming next to a disco ball.">
+          <img src="/assets/img/slideshow/NewSlide2.PNG" alt="Bobby Nair is screaming next to a disco ball.">
         </div>
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide3.png" alt="">
+          <img src="/assets/img/slideshow/NewSlide3.PNG" alt="">
         </div>
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide4.png" alt="">
+          <img src="/assets/img/slideshow/NewSlide4.PNG" alt="">
         </div>
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide5.png" alt="">
+          <img src="/assets/img/slideshow/NewSlide5.PNG" alt="">
         </div>
         <div class="mySlides fade">
-          <img src="/assets/img/slideshow/NewSlide6.png" alt="">
+          <img src="/assets/img/slideshow/NewSlide6.PNG" alt="">
         </div>
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -85,9 +85,31 @@
           <span class="dot" onclick="currentSlide(6)"></span>
         </div>
       </div>
-
+      <script>
+        async function loadCarousel() {
+          try {
+            const response = await fetch('./carousel.json');
+            const data = await response.json();
+            const container = document.getElementById('slideshow-container');
+      
+            // Loop through the slides and create the HTML
+            const html = data.slides.map(slide => `
+              <div class="slide">
+                <img src="${slide.image}" alt="${slide.alt}">
+                <h3>${slide.title}</h3>
+              </div>
+            `).join('');
+      
+            container.innerHTML = html;
+          } catch (error) {
+            console.error("Could not load carousel data:", error);
+          }
+        }
+      
+        loadCarousel();
+      </script>
       <p>Bobby Nair is a musician, filmmaker and visual artist from Akron, Ohio. He's currently based in New York City.</p>
-      <p class="coming-soon"><i>After biting into a mysterious fruit, a bright flash enveloped him. Since then, he's seemingly disappeared- though sightings report a disgruntled lookalike may be assuming his likeness. A bad-faith imposter? Perhaps so, perhaps not...</i></p>
+      <p class="coming-soon"><i>More info coming soon...</i></p>
 
       <div class="discandvid">
         <a href="/discography/" class="disc">
