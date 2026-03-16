@@ -454,6 +454,8 @@
 
       .image-list p:last-child {
         margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.75);
       }
 
 
@@ -467,6 +469,20 @@
 
       .grid-view figcaption {
         padding: 1rem;
+      }
+
+      /* Touch: tap highlight and active state (no hover on touch) */
+      @media (hover: none) {
+        .image-list li:active {
+          transform: scale(0.98);
+          border-color: rgba(255, 255, 255, 0.35);
+        }
+        .image-list li:hover {
+          transform: none;
+        }
+      }
+      .image-list a {
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0.15);
       }
 
 
@@ -488,7 +504,7 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 
-      /* MQ
+      /* MQ – mobile-first improvements
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
       @media screen and (max-width: 900px) {
         .toolbar input[type="range"] {
@@ -496,26 +512,136 @@
         }
       }
 
+      /* Mobile only: list layout like discography albums (thumbnail left, caption right) */
       @media screen and (max-width: 700px) {
-        .grid-view li {
-          text-align: center;
-          padding: 0.5rem;
+        .image-list {
+          margin: 1.5rem 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
         }
-
-        .grid-view figcaption {
-          padding: 0.5rem 0 0;
+        .grid-view.grid-view {
+          grid-template-columns: unset;
+          grid-gap: unset;
+        }
+        .image-list li {
+          padding: 0;
+          margin-bottom: 0.75rem;
+        }
+        .image-list li:last-child {
+          margin-bottom: 0;
+        }
+        .image-list li a {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 16px;
+          min-height: 0;
+          text-decoration: none;
+          padding: 0;
+        }
+        .image-list li a img {
+          width: 88px;
+          min-width: 88px;
+          height: auto;
+          max-height: none;
+          flex-shrink: 0;
+          object-fit: contain;
+          border-radius: 12px;
+          margin-left: 12px;
+        }
+        .image-list li figure {
+          margin: 0;
+        }
+        .image-list li figcaption {
+          flex: 1;
+          min-width: 0;
+          padding: 14px 18px 14px 0;
+          text-align: left;
+        }
+        .image-list li figcaption p:first-child {
+          font-size: 1.05rem;
+          margin: 0 0 2px;
+        }
+        .image-list li figcaption p:last-child {
+          font-size: 0.85rem;
+          margin-top: 0.25rem;
+        }
+        /* List view (when user toggles to list): keep same row layout on mobile */
+        .list-view.image-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+        .list-view.image-list li {
+          margin-bottom: 0.75rem;
+        }
+        .list-view.image-list li:last-child {
+          margin-bottom: 0;
+        }
+        .list-view figure {
+          display: flex;
+          grid-template-columns: unset;
+          grid-gap: unset;
+          align-items: center;
+          margin: 0;
+        }
+        .list-view figure a {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 16px;
+          width: 100%;
+        }
+        .list-view figure img {
+          width: 88px;
+          min-width: 88px;
+          height: auto;
+          flex-shrink: 0;
+          object-fit: contain;
+          border-radius: 12px;
+          max-width: none;
+          margin: 0 0 0 12px;
+        }
+        .list-view figcaption {
+          flex: 1;
+          min-width: 0;
+          padding: 14px 18px 14px 0;
+          text-align: left;
         }
       }
 
       @media screen and (max-width: 500px) {
-        :root {
-          --minRangeValue: 200px;
+        .gallery {
+          padding-left: max(1rem, env(safe-area-inset-left));
+          padding-right: max(1rem, env(safe-area-inset-right));
         }
         .vidcontainer {
-          padding: 0 1rem;
+          padding: 0 0.25rem;
         }
-        .gallery {
-          padding: 0 1rem;
+        .image-list {
+          margin: 1.25rem 0;
+          gap: 0.6rem;
+        }
+        .image-list li {
+          margin-bottom: 0.6rem;
+        }
+        .image-list li:last-child {
+          margin-bottom: 0;
+        }
+        .image-list li a img {
+          width: 80px;
+          min-width: 80px;
+        }
+        .image-list li figcaption {
+          padding: 12px 14px 12px 0;
+        }
+        .image-list li figcaption p:first-child {
+          font-size: 1rem;
+        }
+        .list-view figure img {
+          width: 80px;
+          min-width: 80px;
         }
       }
     </style>

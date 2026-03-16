@@ -834,20 +834,20 @@ border-radius: 15px;;
 
 /* —— Singles section: chips (cover + name, no links) —— */
 .albumsdisplay.singles-section {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .albumsdisplay.singles-section .albums-section-title {
-  font-size: clamp(1.35rem, 3.5vw, 1.75rem);
-  margin: 0 0 10px;
-  padding-bottom: 6px;
+  font-size: clamp(1.1rem, 3vw, 1.45rem);
+  margin: 0 0 6px;
+  padding-bottom: 4px;
 }
 .albumsdisplay.singles-section h2.albums-section-title {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 .single-chips {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   max-width: 720px;
   width: 100%;
   margin: 0 auto;
@@ -856,7 +856,7 @@ border-radius: 15px;;
   .single-chips {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 8px;
   }
 }
 .single-chip {
@@ -864,9 +864,9 @@ border-radius: 15px;;
   overflow: hidden;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 12px;
-  border-radius: 12px;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 10px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.16) 0%,
@@ -911,16 +911,16 @@ border-radius: 15px;;
   opacity: 1;
 }
 .single-chip img {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
   flex-shrink: 0;
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 .single-chip-title {
   font-family: 'Roboto Slab', serif;
-  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
   font-weight: 600;
   color: var(--main-text);
   line-height: 1.3;

@@ -324,15 +324,32 @@
         .album-dropdown-content .bandcamp-buy-in-content {
           display: none;
         }
+        .album-dropdown-content .streamingicons .bandcamp-buy-in-content {
+          display: none;
+        }
         @media (max-width: 640px) {
           .album-dropdown-header .bandcamp-buy {
             display: none !important;
           }
-          .album-dropdown-content .bandcamp-buy-in-content {
+          .album-dropdown-content .streamingicons .bandcamp-buy-in-content {
             display: inline-flex;
-            width: 100%;
-            box-sizing: border-box;
+            flex: 1;
+            min-width: 0;
+            margin: 0;
+            margin-top: 0;
+            padding: 8px 4px;
+            gap: 4px;
+            border-radius: 8px;
+            font-size: 0.7rem;
             justify-content: center;
+          }
+          .album-dropdown-content .streamingicons .bandcamp-buy-in-content img {
+            height: 28px;
+            width: 28px;
+          }
+          .album-dropdown-content .streamingicons .bandcamp-buy-in-content .bandcamp-buy-price {
+            padding: 2px 6px;
+            font-size: 0.65rem;
           }
         }
         @media (min-width: 641px) {
@@ -672,6 +689,100 @@
         #bites {
           scroll-margin-top: 80px;
         }
+        /* Compact mobile layout so more fits on screen */
+        @media (max-width: 640px) {
+          .albums-section {
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+          }
+          .latest-hero-inner {
+            padding: 12px 14px;
+            gap: 12px;
+          }
+          .latest-hero img {
+            width: 80px;
+            height: 80px;
+          }
+          .latest-hero-text h3 {
+            font-size: 0.85rem;
+          }
+          .latest-hero-text .latest-hero-title {
+            font-size: 1.1rem;
+          }
+          .latest-hero-text .latest-hero-meta {
+            font-size: 0.8rem;
+          }
+          .album-dropdown-header {
+            padding: 10px 12px;
+            gap: 10px;
+          }
+          .album-dropdown-header img {
+            width: 46px;
+            height: 46px;
+            border-radius: 8px;
+          }
+          .album-dropdown-title-wrap h4 {
+            font-size: 1rem;
+          }
+          .album-dropdown-title-wrap h6 {
+            font-size: 0.75rem;
+          }
+          .album-dropdown-chevron {
+            width: 20px;
+            height: 20px;
+          }
+          .album-dropdown-content-inner {
+            padding: 0 14px 14px;
+          }
+          .album-dropdown-content .musecard-detail p {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+          }
+          .album-dropdown-content .streamingicons {
+            margin: 8px 0 10px;
+            padding: 8px 0;
+            gap: 6px;
+          }
+          .album-dropdown-content .streamingicons a {
+            padding: 8px 4px;
+          }
+          .album-dropdown-content .streamingicons .album-film-btn {
+            padding: 10px 8px;
+          }
+          .album-dropdown-content .tracklist h4 {
+            margin-bottom: 6px;
+            padding-bottom: 4px;
+          }
+          .album-dropdown-content .tracklist .track {
+            padding: 2px 0;
+            font-size: 0.95rem;
+          }
+          .album-dropdown-content .tracklist .track span {
+            font-size: 0.9rem;
+          }
+          .album-dropdown-content .tracklist .track:hover {
+            margin: 0;
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .album-dropdown-content .tracklist .track-page-link,
+          .album-dropdown-content .tracklist .track-music-video-link {
+            padding: 10px 10px;
+          }
+          .album-dropdown-content .album-film-link {
+            padding: 6px 10px;
+          }
+          .single-chips {
+            row-gap: 6px;
+          }
+          .single-chip img {
+            width: 40px;
+            height: 40px;
+          }
+          .single-chip .single-chip-title {
+            font-size: 0.8rem;
+          }
+        }
       </style>
 </head>
 <body>
@@ -856,8 +967,8 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                  <a href="https://bobbynair.bandcamp.com/album/iseewhatidont" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$15</span></a>
                 </div>
-                <a href="https://bobbynair.bandcamp.com/album/iseewhatidont" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$15</span></a>
                 <div class="tracklist">
                   <h4>Tracks</h4>
                   <div class="track"><span>1</span>Legs Won't Work!</div>
@@ -903,8 +1014,8 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                  <a href="https://bobbynair.bandcamp.com/album/saturn-redux" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
                 </div>
-                <a href="https://bobbynair.bandcamp.com/album/saturn-redux" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
                 <div class="tracklist">
                   <h4>Tracks</h4>
                   <div class="track"><span>1</span>Saturn</div>
@@ -942,8 +1053,8 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                  <a href="https://bobbynair.bandcamp.com/album/slowpoke" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
                 </div>
-                <a href="https://bobbynair.bandcamp.com/album/slowpoke" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
                 <div class="tracklist">
                   <h4>Tracks</h4>
                   <div class="track"><span>1</span>Look At Me</div>
@@ -981,8 +1092,8 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
+                  <a href="https://bobbynair.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$9</span></a>
                 </div>
-                <a href="https://bobbynair.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$9</span></a>
                 <div class="tracklist">
                   <h4>Tracks</h4>
                   <div class="track"><span>1</span>Why Argue</div>
