@@ -391,13 +391,13 @@
 .discandvid {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 80px;
   padding: 0 20px;
   margin-bottom: 10px;
 }
 .disc {
   display: block;
-  max-width: 350px;
+  max-width: 460px;
   text-align: center;
   text-decoration: none;
   padding: 20px;
@@ -405,7 +405,7 @@
 }
 .disc img {
   width: 100%;
-  max-width: 350px;
+  max-width: 460px;
   height: auto;
   transition: transform 0.5s;
 }
@@ -416,29 +416,63 @@
   text-align: center !important;
   color: var(--main-text);
   margin-top: 8px;
+  font-size: 11px;
 }
-.middlecontent {
-  max-width: 1100px;
-  margin: 1rem auto 0;
+/* Home hero: default stacked (mobile) */
+.hero {
   font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(18px, 3vw, 24px);
+  max-width: 1200px;
+  margin: 1.5rem auto 0;
+  padding: 0 clamp(20px, 5vw, 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+.hero-text {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 clamp(20px, 5vw, 50px);
-  font-size: clamp(18px, 3vw, 24px);
+  width: 100%;
+}
+.hero-text .whoisbobby {
+  margin: 0 0 0;
+  padding-bottom: 0;
+  line-height: 1;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 10vw, 88px);
+  font-weight: bold;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.hero-text p {
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.6;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.015em;
+  margin: 0.25em 0;
+}
+.hero-text p:first-of-type {
+  margin-top: -0.2em;
+  margin-bottom: 0.1em;
+  line-height: 1.35;
+  font-size: clamp(22px, 4.2vw, 34px);
 }
 .coming-soon {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.85em;
-  margin-top: 0.25em;
+  line-height: 1;
+  margin-top: -0.15em;
   margin-bottom: 0;
 }
 .whoisbobby {
-  margin: 0;
-  margin-top: 1.25rem;
+  margin: 0 0 0;
+  line-height: 1;
   font-family: 'Playfair Display', serif;
-  font-size: clamp(40px, 8vw, 70px);
+  font-size: clamp(48px, 10vw, 88px);
   font-weight: bold;
   text-align: center;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -457,7 +491,142 @@
   margin-top: 1.5em;
 }
 .discandvid {
-  margin-top: 1.5em;
+  margin-top: 1em;
+}
+
+.hero-footer-links {
+  display: none;
+}
+
+/* Desktop: two columns, keep original header size */
+@media (min-width: 901px) {
+  body:has(.hero) {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  body:has(.hero) .navbar {
+    margin-bottom: 0;
+  }
+  body:has(.hero) footer {
+    margin-top: 0;
+    padding: 12px 20px;
+    flex-shrink: 0;
+  }
+  body:has(.hero) .hero {
+    flex: 1;
+    min-height: 0;
+    min-height: 65vh;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 2rem;
+    margin: 0;
+    padding: 0 16px 16px;
+    max-width: 100%;
+  }
+  body:has(.hero) .slideshow-wrapper {
+    flex: 0 1 55%;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+  }
+  body:has(.hero) .slideshow-container {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    aspect-ratio: auto;
+  }
+  body:has(.hero) .slideshow-controls {
+    margin-top: 6px;
+    padding: 4px 0;
+    flex-shrink: 0;
+  }
+  body:has(.hero) .hero-text {
+    flex: 1 1 45%;
+    min-width: 0;
+    min-height: 0;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: space-between;
+    overflow: auto;
+    gap: 0;
+  }
+  body:has(.hero) .hero-text .whoisbobby {
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1;
+    text-align: left;
+    margin: 0 0 0;
+    padding-bottom: 0;
+  }
+  body:has(.hero) .hero-text p {
+    text-align: left;
+    margin: 0.1em 0;
+    font-size: clamp(14px, 1.25vw, 18px);
+    line-height: 1.5;
+  }
+  body:has(.hero) .hero-text p:first-of-type {
+    font-size: clamp(19px, 2.2vw, 28px);
+    margin-top: -0.15em;
+    margin-bottom: 0.08em;
+    line-height: 1.35;
+  }
+  body:has(.hero) .hero-text .coming-soon {
+    line-height: 1;
+    margin-top: -0.12em;
+    margin-bottom: 0;
+  }
+  body:has(.hero) .hero-text .discandvid {
+    margin-top: 0.5rem;
+    justify-content: center;
+    align-self: center;
+    gap: 72px;
+  }
+  body:has(.hero) .disc {
+    max-width: 288px;
+    padding: 6px;
+  }
+  body:has(.hero) .disc img {
+    max-width: 100%;
+  }
+  body:has(.hero) .disc p {
+    margin-top: 4px;
+    font-size: 9px;
+  }
+
+  .hero-footer-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    gap: 4px;
+    margin-top: 0.5rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .hero-footer-links .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .hero-footer-links .footer-links a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+  }
+
+  .hero-footer-links .footer-links a:hover {
+    color: #fff;
+  }
+
+  body:has(.hero) footer {
+    display: none;
+  }
 }
 
 
@@ -810,76 +979,10 @@ footer {
   display: none;
 }
 
-@media only screen and (max-width: 1150px) {
-  .disc {
-    max-width: 250px;
-  }
-}
-
-/*halfway*/
-
-@media only screen and (max-width: 910px) {
-  .navicons a {
-    height: 28px;
-    width: 28px;
-  }
-  .navicons img {
-    height: 28px;
-    width: 28px;
-  }
-  .navicons {
-    gap: 8px;
-  }
-  .musicpage iframe{
-    width:100%;
-  }
-  .homevideo{
-    width:100%;
-  }
-}
-/*Mobile Style*/
-@media only screen and (max-width: 620px) {
-  .albumsdisplay {
-    overflow: visible;
-    width: 100%;
-    padding: 0 12px;
-  }
-  .albums {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 18px 16px;
-  }
-  .albums-section-title {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    margin-bottom: 12px;
-    padding-bottom: 6px;
-  }
-  .album-title {
-    min-height: 2.4em;
-    font-size: 0.875rem;
-  }
-  .albumsdisplay {
-    margin-bottom: 22px;
-  }
-  .header {
-    text-align: left;
-    font-size: 40px;
-    height: 100px;
-    line-height: 100px;
-    margin: 16px 16px 0;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.28);
-    box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.25),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-  }
+/* Mobile-style nav (bottom bar) for both mobile and tablet – all pages */
+@media only screen and (max-width: 900px) {
   .navbar {
     display: none;
-  }
-  .header-chip {
-    font-size: 18px;
-    padding: 8px 20px;
-    top: max(12px, env(safe-area-inset-top, 12px));
   }
   body {
     padding-bottom: 80px;
@@ -965,7 +1068,6 @@ footer {
     letter-spacing: 0.5px;
     line-height: 1.2;
   }
-  /* Same padding as .bottom-tab so pill/bar don't change size when active */
   .bottom-tab.active {
     color: #fff;
     background-color: rgba(255, 255, 255, 0.15);
@@ -1034,9 +1136,9 @@ footer {
     max-width: 320px;
     position: absolute;
     right: 16px;
-    bottom: calc(76px + 14px + 8px); /* above the bar + padding + gap, aligns with links button */
+    bottom: calc(76px + 14px + 8px);
     left: auto;
-    transform-origin: 100% 100%; /* grow from bottom-right (links button area) */
+    transform-origin: 100% 100%;
     background: linear-gradient(
       180deg,
       rgba(255, 255, 255, 0.16) 0%,
@@ -1110,6 +1212,118 @@ footer {
     height: 26px;
     width: 26px;
   }
+}
+
+@media only screen and (max-width: 1150px) {
+  .disc {
+    max-width: 298px;
+  }
+}
+
+/*halfway*/
+
+@media only screen and (max-width: 910px) {
+  .navicons a {
+    height: 28px;
+    width: 28px;
+  }
+  .navicons img {
+    height: 28px;
+    width: 28px;
+  }
+  .navicons {
+    gap: 8px;
+  }
+  .musicpage iframe{
+    width:100%;
+  }
+  .homevideo{
+    width:100%;
+  }
+}
+
+/* Tablet-ish: between mobile and desktop – layout only; nav is in (max-width: 900px) */
+@media only screen and (min-width: 621px) and (max-width: 900px) {
+  .hero {
+    max-width: 900px;
+    padding: 0 24px;
+    margin-top: 1.25rem;
+  }
+  .hero-text .whoisbobby {
+    margin-bottom: 0.5em;
+    font-size: clamp(36px, 7vw, 50px);
+    text-align: left;
+  }
+  .hero-text {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-text p {
+    text-align: left;
+  }
+  .hero-text p:first-of-type {
+    font-size: clamp(18px, 3.4vw, 24px);
+    line-height: 1.4;
+  }
+  footer {
+    margin-top: 16px;
+  }
+}
+/*Mobile Style*/
+@media only screen and (max-width: 620px) {
+  .hero {
+    margin-top: 1.25rem;
+    padding: 0 16px;
+  }
+  .middlecontent {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+  }
+  .hero-text {
+    width: 100%;
+    align-items: center;
+  }
+  .albumsdisplay {
+    overflow: visible;
+    width: 100%;
+    padding: 0 12px;
+  }
+  .albums {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 18px 16px;
+  }
+  .albums-section-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+  }
+  .album-title {
+    min-height: 2.4em;
+    font-size: 0.875rem;
+  }
+  .albumsdisplay {
+    margin-bottom: 22px;
+  }
+  .header {
+    text-align: left;
+    font-size: 40px;
+    height: 100px;
+    line-height: 100px;
+    margin: 16px 16px 0;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  }
+  .header-chip {
+    font-size: 18px;
+    padding: 8px 20px;
+    top: max(12px, env(safe-area-inset-top, 12px));
+  }
   .pagecontent {
     width: 90%;
     margin: 0 auto;
@@ -1154,14 +1368,34 @@ footer {
   .middlecontent p {
     text-align: left;
   }
+  .hero-text {
+    align-items: flex-start;
+    text-align: left;
+  }
+  .hero-text .whoisbobby {
+    font-size: clamp(32px, 8vw, 42px);
+    text-align: left;
+  }
+  .hero-text p {
+    text-align: left;
+  }
+  .hero-text p:first-of-type {
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.4;
+  }
+  .hero-text p:first-of-type {
+    margin-top: 0.4em;
+  }
   .discandvid {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
     padding: 0;
+    align-self: center;
   }
   .disc {
-    max-width: 280px;
+    max-width: 260px;
     width: 100%;
   }
   .countdown {
@@ -1203,5 +1437,9 @@ footer {
   }
   .container h4 {
     font-size: 40px;
+  }
+  footer {
+    margin-top: 0;
+    padding-top: 12px;
   }
 }
