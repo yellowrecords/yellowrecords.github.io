@@ -994,7 +994,7 @@ footer {
       left: 0;
       width: 100%;
       min-height: 12px;
-      height: 100px;
+      height: 12px;
       background-color: #000000;
       z-index: 5;
       pointer-events: none;
