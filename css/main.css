@@ -979,6 +979,29 @@ footer {
   display: none;
 }
 
+/* iOS Safari 26+ ignores theme-color and samples fixed elements near viewport edge.
+   This fixed black bar is only shown in Safari on mobile so the toolbar tints black;
+   it sits behind the bottom nav (z-index 5) and is not visible. */
+.safari-theme-tint {
+  display: none;
+}
+@supports (-webkit-touch-callout: none) and (font: -apple-system-body) {
+  @media only screen and (max-width: 900px) {
+    .safari-theme-tint {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      min-height: 12px;
+      height: 100px;
+      background-color: #000000;
+      z-index: 5;
+      pointer-events: none;
+    }
+  }
+}
+
 /* Mobile-style nav (bottom bar) for both mobile and tablet – all pages */
 @media only screen and (max-width: 900px) {
   .navbar {
@@ -1001,7 +1024,7 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding: 0 16px max(14px, env(safe-area-inset-bottom));
+    padding: 0 16px max(8px, env(safe-area-inset-bottom, 0));
     pointer-events: none;
   }
   .bottom-nav-tabs {
