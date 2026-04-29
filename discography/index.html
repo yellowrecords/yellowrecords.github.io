@@ -685,6 +685,44 @@
           opacity: 0.85;
           margin: 0;
         }
+        .latest-hero-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          align-items: center;
+          margin-top: 10px;
+        }
+        .latest-hero-links a {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          padding: 8px 12px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.28);
+          background: rgba(0, 0, 0, 0.18);
+          color: rgba(255, 255, 255, 0.9);
+          text-decoration: none;
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        }
+        .latest-hero-links a:hover {
+          background: rgba(0, 0, 0, 0.28);
+          border-color: rgba(255, 255, 255, 0.42);
+          transform: translateY(-1px);
+        }
+        .latest-hero-links a img {
+          width: 18px;
+          height: 18px;
+          display: block;
+          filter: grayscale(100%);
+        }
+        .latest-hero-links a:hover img {
+          filter: grayscale(0%);
+        }
         /* Scroll margin so "Discography" pill stays visible when hero links to #bites */
         #bites {
           scroll-margin-top: 80px;
@@ -804,7 +842,7 @@
           <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
           <a href="https://www.youtube.com/@bobbynairmusic" target="_blank"><img src="/assets/img/icons/yt.png" alt="YouTube"></a>
           <a href="https://genius.com/artists/Bobby-nair" target="_blank"><img src="/assets/img/icons/genius.png" alt="Genius"></a>
-          <a href="https://bobbynair.bandcamp.com/" target="_blank"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
+          <a href="https://bobbynairmusic.bandcamp.com/" target="_blank"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
         </div>
       </div>
     </nav>
@@ -812,20 +850,25 @@
 
 <div class="mobilepage">
     <section class="albumsdisplay albums-section latest-hero-section">
-      <a href="#bites" id="latestHero" class="latest-hero" aria-label="Latest release: Bites – EP. Click to open album and see tracks.">
+      <div id="latestHero" class="latest-hero" role="link" tabindex="0" aria-label="Latest release: Half A Mind (Single). Released April 17, 2026.">
         <div class="latest-hero-inner">
-          <img src="/assets/img/album/bites.jpg" alt="Bites - EP cover">
+          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover">
           <div class="latest-hero-text">
             <h3>The latest from Bobby Nair</h3>
-            <p class="latest-hero-title">Bites – EP</p>
-            <p class="latest-hero-meta">November 20, 2025 · Click to listen</p>
+            <p class="latest-hero-title">Half A Mind (Single)</p>
+            <p class="latest-hero-meta">April 17, 2026</p>
+            <div class="latest-hero-links" aria-label="Listen on">
+              <a href="https://open.spotify.com/track/2b35pqbXDCDq2xps2HGLTU?" target="_blank" rel="noopener noreferrer"><img src="/assets/img/icons/spotify.png" alt="">Spotify</a>
+              <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer"><img src="/assets/img/icons/am.png" alt="">Apple Music</a>
+            </div>
           </div>
         </div>
-      </a>
+      </div>
     </section>
     <section class="albumsdisplay albums-section singles-section">
         <h2 class="albums-section-title">Singles</h2>
         <div class="single-chips">
+          <div class="single-chip" id="halfamind"><img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover"><span class="single-chip-title">Half A Mind (Single)</span></div>
           <div class="single-chip"><img src="/assets/img/PromiseC.jpg" alt="Promise ring"><span class="single-chip-title">Promise ring</span></div>
           <div class="single-chip"><img src="/assets/img/OC.jpg" alt="O'"><span class="single-chip-title">O'</span></div>
           <div class="single-chip"><img src="/assets/img/ALLC.jpg" alt="All the hope I have"><span class="single-chip-title">All the hope I have</span></div>
@@ -954,7 +997,7 @@
               <h4>iseewhatidont!</h4>
               <h6>September 15, 2023</h6>
             </div>
-            <a href="https://bobbynair.bandcamp.com/album/iseewhatidont" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$15</span></a>
+            <a href="https://bobbynairmusic.bandcamp.com/album/iseewhatidont" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="iseewhatidont-content" role="region" aria-labelledby="iseewhatidont-btn">
@@ -967,7 +1010,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynair.bandcamp.com/album/iseewhatidont" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$15</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/iseewhatidont" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1001,7 +1044,7 @@
               <h4>Saturn REDUX</h4>
               <h6>September 23, 2022</h6>
             </div>
-            <a href="https://bobbynair.bandcamp.com/album/saturn-redux" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
+            <a href="https://bobbynairmusic.bandcamp.com/album/saturn-redux-tracks" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="redux-content" role="region" aria-labelledby="redux-btn">
@@ -1014,7 +1057,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynair.bandcamp.com/album/saturn-redux" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/saturn-redux-tracks" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1040,7 +1083,7 @@
               <h4>Slowpoke</h4>
               <h6>May 20, 2022</h6>
             </div>
-            <a href="https://bobbynair.bandcamp.com/album/slowpoke" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
+            <a href="https://bobbynairmusic.bandcamp.com/album/slowpoke" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="slowpoke-content" role="region" aria-labelledby="slowpoke-btn">
@@ -1053,7 +1096,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynair.bandcamp.com/album/slowpoke" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$10</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/slowpoke" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1079,7 +1122,7 @@
               <h4>I Miss The Winter</h4>
               <h6>January 1, 2022</h6>
             </div>
-            <a href="https://bobbynair.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$9</span></a>
+            <a href="https://bobbynairmusic.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="winter-content" role="region" aria-labelledby="winter-btn">
@@ -1092,7 +1135,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynair.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span> <span class="bandcamp-buy-price">$9</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1183,7 +1226,7 @@
         </div>
         <div class="bottom-nav-section">
           <div class="bottom-nav-section-title">Support Bobby</div>
-          <a href="https://bobbynair.bandcamp.com/" target="_blank"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"><span>Bandcamp</span></a>
+          <a href="https://bobbynairmusic.bandcamp.com/" target="_blank"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"><span>Bandcamp</span></a>
         </div>
       </div>
       <div class="bottom-nav-bar">
@@ -1284,17 +1327,23 @@
             }
           }
         }
-        /* Hero "latest release" link: scroll to album then expand it */
+        /* Hero "latest release" link: scroll to item */
         var latestHero = document.getElementById('latestHero');
         if (latestHero) {
+          function scrollToLatest() {
+            var target = document.getElementById('halfamind');
+            if (!target) return;
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
           latestHero.addEventListener('click', function(e) {
-            var bites = document.getElementById('bites');
-            var bitesBtn = document.getElementById('bites-btn');
-            if (!bites || !bitesBtn) return;
-            e.preventDefault();
-            bites.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            if (!bites.classList.contains('open')) {
-              setTimeout(function() { bitesBtn.click(); }, 400);
+            if (e.target && e.target.closest && e.target.closest('a')) return;
+            scrollToLatest();
+          });
+          latestHero.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (e.target && e.target.closest && e.target.closest('a')) return;
+              e.preventDefault();
+              scrollToLatest();
             }
           });
         }

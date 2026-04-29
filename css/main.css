@@ -567,7 +567,7 @@
     line-height: 1.5;
   }
   body:has(.hero) .hero-text p:first-of-type {
-    font-size: clamp(19px, 2.2vw, 28px);
+    font-size: clamp(16px, 1.8vw, 22px);
     margin-top: -0.15em;
     margin-bottom: 0.08em;
     line-height: 1.35;
