@@ -20,6 +20,9 @@
     <meta name="twitter:title" content="Music & Discography – Bobby Nair">
     <meta name="twitter:description" content="Listen to Bobby Nair's music – albums Café, Love You, King of Wands, and more.">
     <meta name="twitter:image" content="https://bobbynair.com/assets/img/head.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Rubik+Iso&family=Space+Grotesk&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/img/favicon/favicon.ico">
     <link href="/css/main.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
@@ -29,7 +32,7 @@
         /* Album dropdowns – liquid glass (matches navbar); width matches .single-chips */
         .album-dropdowns {
           width: 100%;
-          max-width: 720px;
+          max-width: var(--narrow-max-width);
           margin: 0 auto 2rem;
           padding: 0;
           box-sizing: border-box;
@@ -37,42 +40,58 @@
         .album-dropdown {
           font-family: 'Playfair Display', serif;
           position: relative;
-          margin-bottom: 12px;
-          border-radius: 16px;
+          margin-bottom: 10px;
+          border-radius: var(--radius-md);
           overflow: hidden;
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.18) 0%,
-            rgba(255, 255, 255, 0.06) 45%,
-            rgba(40, 45, 55, 0.25) 100%
+          isolation: isolate;
+          background: var(--glass-bg);
+          backdrop-filter: var(--glass-blur);
+          -webkit-backdrop-filter: var(--glass-blur);
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease;
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+        }
+        .album-dropdown::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          border-radius: inherit;
+          pointer-events: none;
+          background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(138, 205, 199, 0.3) 0%,
+            rgba(62, 122, 118, 0.11) 35%,
+            transparent 56%
           );
-          backdrop-filter: blur(28px) saturate(1.8);
-          -webkit-backdrop-filter: blur(28px) saturate(1.8);
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          box-shadow:
-            0 4px 24px rgba(0, 0, 0, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.35),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+          opacity: 0;
+          transition: opacity 0.2s ease;
         }
-        .album-dropdown:hover {
-          border-color: rgba(255, 255, 255, 0.42);
-          box-shadow:
-            0 6px 28px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(255, 255, 255, 0.45),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-          transform: scale(1.01);
+        .album-dropdown > * {
+          position: relative;
+          z-index: 1;
         }
-        .album-dropdown.open:hover {
-          transform: none;
+        .album-dropdown.open {
+          border-color: rgba(218, 255, 252, 0.28);
+        }
+        .album-dropdown:not(.open):hover {
+          border-color: rgba(138, 205, 199, 0.4);
+          box-shadow:
+            0 4px 20px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.12);
+        }
+        .album-dropdown:not(.open):hover::before,
+        .album-dropdown:not(.open).touch-active::before {
+          opacity: 1;
         }
         .album-dropdown-header {
-          position: relative;
-          overflow: hidden;
           display: flex;
           align-items: center;
-          gap: 16px;
-          padding: 14px 18px;
+          gap: 14px;
+          padding: 12px 16px;
           cursor: pointer;
           list-style: none;
           text-align: left;
@@ -81,38 +100,18 @@
           background: transparent;
           color: var(--main-text);
           font: inherit;
-          transition: background 0.2s ease;
-          --mouse-x: 50%;
-          --mouse-y: 50%;
+          transition: background 0.15s ease;
         }
-        .album-dropdown-header::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 0;
-          pointer-events: none;
-          background: radial-gradient(
-            circle at var(--mouse-x) var(--mouse-y),
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.08) 35%,
-            transparent 55%
-          );
-          opacity: 0;
-          transition: opacity 0.2s ease;
-        }
-        .album-dropdown-header:hover {
-          background: rgba(255, 255, 255, 0.06);
-        }
-        .album-dropdown-header:hover::before {
-          opacity: 1;
+        .album-dropdown:not(.open) .album-dropdown-header:hover {
+          background: rgba(255, 255, 255, 0.025);
         }
         .album-dropdown-header img {
           width: 56px;
           height: 56px;
           object-fit: cover;
-          border-radius: 10px;
+          border-radius: var(--radius-inner);
           flex-shrink: 0;
-          border: 1px solid rgba(255, 255, 255, 0.22);
+          border: 1px solid rgba(255, 255, 255, 0.18);
         }
         .album-dropdown-title-wrap {
           flex: 1;
@@ -120,24 +119,28 @@
         }
         .album-dropdown-title-wrap h4 {
           font-family: 'Roboto Slab', serif;
-          font-size: clamp(1.1rem, 2.5vw, 1.35rem);
-          margin: 0 0 2px;
-          font-weight: bold;
+          font-size: clamp(1rem, 2.2vw, 1.2rem);
+          margin: 0 0 3px;
+          font-weight: 600;
+          line-height: 1.25;
         }
         .album-dropdown-title-wrap h6 {
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.85rem;
+          font-size: 0.78rem;
           margin: 0;
           font-weight: normal;
-          font-style: italic;
-          opacity: 0.85;
+          font-style: normal;
+          opacity: 0.5;
         }
         .album-dropdown-chevron {
           flex-shrink: 0;
-          width: 24px;
-          height: 24px;
-          transition: transform 0.25s ease;
-          opacity: 0.8;
+          width: 18px;
+          height: 18px;
+          transition: transform 0.25s ease, opacity 0.15s ease;
+          opacity: 0.4;
+        }
+        .album-dropdown-header:hover .album-dropdown-chevron {
+          opacity: 0.65;
         }
         .album-dropdown.open .album-dropdown-chevron {
           transform: rotate(180deg);
@@ -168,8 +171,10 @@
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/assets/img/dots/orange stars.png') center / cover no-repeat;
+          z-index: 0;
+          background: url('/assets/img/dots/orange stars.png') center / 140% no-repeat;
           opacity: 0.12;
+          mix-blend-mode: screen;
           pointer-events: none;
         }
         #winter.open .album-dropdown-content::before,
@@ -177,8 +182,10 @@
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/assets/img/dots/white stars.png') center / cover no-repeat;
-          opacity: 0.12;
+          z-index: 0;
+          background: url('/assets/img/dots/white stars.png') center / 140% no-repeat;
+          opacity: 0.1;
+          mix-blend-mode: screen;
           pointer-events: none;
         }
         #slowpoke.open .album-dropdown-content::before,
@@ -186,8 +193,10 @@
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/assets/img/dots/yellow stars.png') center / cover no-repeat;
+          z-index: 0;
+          background: url('/assets/img/dots/yellow stars.png') center / 140% no-repeat;
           opacity: 0.12;
+          mix-blend-mode: screen;
           pointer-events: none;
         }
         #redux.open .album-dropdown-content::before,
@@ -195,8 +204,10 @@
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/assets/img/dots/red stars.png') center / cover no-repeat;
+          z-index: 0;
+          background: url('/assets/img/dots/red stars.png') center / 140% no-repeat;
           opacity: 0.12;
+          mix-blend-mode: screen;
           pointer-events: none;
         }
         #iseewhatidont.open .album-dropdown-content::before,
@@ -204,8 +215,10 @@
           content: '';
           position: absolute;
           inset: 0;
-          background: url('/assets/img/dots/blue stars.png') center / cover no-repeat;
+          z-index: 0;
+          background: url('/assets/img/dots/blue stars.png') center / 140% no-repeat;
           opacity: 0.12;
+          mix-blend-mode: screen;
           pointer-events: none;
         }
         #saturn.open .album-dropdown-content-inner,
@@ -219,338 +232,263 @@
         #iseewhatidont.open .album-dropdown-content-inner,
         #iseewhatidont.iseewhatidont-bg .album-dropdown-content-inner {
           position: relative;
+          z-index: 1;
           background: linear-gradient(
             180deg,
-            rgba(0, 0, 0, 0.12) 0%,
-            rgba(0, 0, 0, 0.06) 50%,
-            rgba(0, 0, 0, 0.14) 100%
+            rgba(0, 0, 0, 0.38) 0%,
+            rgba(0, 0, 0, 0.28) 50%,
+            rgba(0, 0, 0, 0.38) 100%
           );
         }
         .album-dropdown-content-inner {
-          padding: 0 18px 20px;
-          border-top: 1px solid rgba(255, 255, 255, 0.12);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+          position: relative;
+          z-index: 1;
+          padding: 0 16px 16px;
+          border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
         .album-dropdown-content-inner > .musecard-detail {
-          padding-top: 16px;
+          padding-top: 14px;
         }
-        /* Streaming icons – minimal (album dropdowns only) */
+        .album-dropdown-content .musecard-detail p {
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.85rem;
+          line-height: 1.5;
+          margin: 0 0 12px;
+          opacity: 0.7;
+        }
+        /* Streaming icons */
         .album-dropdown-content .streamingicons {
           display: flex;
           flex-wrap: wrap;
           align-items: center;
-          gap: 8px;
-          margin: 14px 0 16px;
-          padding: 12px 0;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .album-dropdown-content .streamingicons::before {
-          content: "Listen on";
-          width: 100%;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.7rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.5);
-          margin-bottom: 8px;
+          gap: 2px;
+          margin: 0 0 14px;
+          padding: 0;
         }
         .album-dropdown-content .streamingicons a {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 16px 10px;
-          border-radius: 8px;
-          transition: background 0.2s ease;
+          border-radius: var(--radius-thumb);
+          transition: background 0.15s ease, opacity 0.15s ease;
+          opacity: 0.85;
+        }
+        .album-dropdown-content .streamingicons a:not(.album-film-btn) {
+          flex: 1 1 0;
+          min-width: 0;
+          padding: 8px 2px;
         }
         .album-dropdown-content .streamingicons a:hover {
-          background: rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.06);
+          opacity: 1;
         }
         .album-dropdown-content .streamingicons img {
-          height: 28px;
-          width: 28px;
-          display: block;
-        }
-        .album-dropdown-content .streamingicons .album-film-btn {
-          gap: 6px;
-          padding: 16px 14px;
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.7rem;
-          font-weight: 600;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.9);
-          text-decoration: none;
-        }
-        .album-dropdown-content .streamingicons .album-film-btn:hover {
-          background: rgba(0, 0, 0, 0.25);
-          border-color: rgba(255, 255, 255, 0.4);
-        }
-        .album-dropdown-content .streamingicons .album-film-btn img {
-          height: 22px;
-          width: 22px;
-        }
-        .album-dropdown-content .bandcamp-buy,
-        .album-dropdown-header .bandcamp-buy {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 10px 18px;
-          border-radius: 14px;
-          background: transparent;
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          box-shadow: none;
-          color: var(--main-text);
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          text-transform: uppercase;
-          text-decoration: none;
-          transition: opacity 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-        }
-        .album-dropdown-content .bandcamp-buy { margin-top: 12px; }
-        .album-dropdown-header .bandcamp-buy {
-          margin-top: 0;
-          margin-left: auto;
-          flex-shrink: 0;
-          gap: 5px;
-          width: 145px;
-          justify-content: center;
-          box-sizing: border-box;
-        }
-        .album-dropdown-content .bandcamp-buy-in-content {
-          display: none;
-        }
-        .album-dropdown-content .streamingicons .bandcamp-buy-in-content {
-          display: none;
-        }
-        @media (max-width: 640px) {
-          .album-dropdown-header .bandcamp-buy {
-            display: none !important;
-          }
-          .album-dropdown-content .streamingicons .bandcamp-buy-in-content {
-            display: inline-flex;
-            flex: 1;
-            min-width: 0;
-            margin: 0;
-            margin-top: 0;
-            padding: 8px 4px;
-            gap: 4px;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            justify-content: center;
-          }
-          .album-dropdown-content .streamingicons .bandcamp-buy-in-content img {
-            height: 28px;
-            width: 28px;
-          }
-          .album-dropdown-content .streamingicons .bandcamp-buy-in-content .bandcamp-buy-price {
-            padding: 2px 6px;
-            font-size: 0.65rem;
-          }
-        }
-        @media (min-width: 641px) {
-          .album-dropdown-header .bandcamp-buy-label {
-            display: inline;
-          }
-        }
-        @media (max-width: 640px) {
-          .album-dropdown-header .bandcamp-buy-label {
-            display: none;
-          }
-        }
-        .album-dropdown-content .bandcamp-buy:hover,
-        .album-dropdown-header .bandcamp-buy:hover {
-          opacity: 0.9;
-          border-color: rgba(255, 255, 255, 0.42);
-          background: rgba(0, 0, 0, 0.25);
-        }
-        .album-dropdown-content .bandcamp-buy img {
           height: 24px;
           width: 24px;
           display: block;
-          flex-shrink: 0;
         }
-        .album-dropdown-header .bandcamp-buy img {
-          height: 22px;
-          width: 22px;
-          display: block;
-          flex-shrink: 0;
+        .album-dropdown-content .streamingicons .album-film-btn {
+          flex: 1 1 100%;
+          width: 100%;
+          gap: 5px;
+          padding: 6px 10px;
+          margin-right: 0;
+          margin-bottom: 4px;
+          border: 1px solid rgba(255, 255, 255, 0.18);
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.65rem;
+          font-weight: 600;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
+          color: rgba(255, 255, 255, 0.8);
+          text-decoration: none;
+          opacity: 1;
+          box-sizing: border-box;
         }
-        .album-dropdown-content .bandcamp-buy-price,
-        .album-dropdown-header .bandcamp-buy-price {
-          margin-left: 4px;
-          padding: 4px 10px;
-          border-radius: 8px;
-          background: rgba(0, 0, 0, 0.25);
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          font-weight: 700;
-          letter-spacing: 0.05em;
+        .album-dropdown-content .streamingicons .album-film-btn:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(255, 255, 255, 0.28);
         }
-        /* Tracklist – minimal (album dropdowns only) */
+        .album-dropdown-content .streamingicons .album-film-btn img {
+          height: 18px;
+          width: 18px;
+        }
+        /* Tracklist */
         .album-dropdown-content .tracklist {
-          margin-top: 16px;
+          margin-top: 4px;
           padding: 0;
         }
         .album-dropdown-content .tracklist h4 {
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.7rem;
+          font-size: 0.65rem !important;
           font-weight: 600;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.1em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.5);
-          margin: 0 0 10px;
-          padding-bottom: 6px;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.4);
+          margin: 0 0 8px;
+          padding: 0;
+          border: none;
         }
         .album-dropdown-content .tracklist .track {
           display: grid;
-          grid-template-columns: auto 1fr auto;
-          gap: 12px;
-          align-items: center;
-          padding: 8px 0;
+          grid-template-columns: 28px minmax(0, 1fr) auto;
+          align-items: baseline;
+          column-gap: 10px;
+          padding: 7px 0 !important;
           border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-          transition: background 0.2s ease;
+          background: transparent !important;
           min-width: 0;
-          overflow-wrap: break-word;
-          word-break: break-word;
+          font-family: 'Roboto Slab', serif;
+          font-size: 0.9rem;
+          line-height: 1.35;
+        }
+        .album-dropdown-content .tracklist .track:not(:has(.track-music-video-link)) > :not(span:first-child) {
+          grid-column: 2 / -1;
+        }
+        .album-dropdown-content .tracklist .track:nth-child(even),
+        .album-dropdown-content .tracklist .track:nth-child(odd) {
+          background: transparent !important;
         }
         .album-dropdown-content .tracklist .track:last-child {
           border-bottom: none;
         }
-        .album-dropdown-content .tracklist .track:hover {
-          background: rgba(255, 255, 255, 0.04);
-          margin: 0 -12px;
-          padding-left: 12px;
-          padding-right: 12px;
-        }
-        .album-dropdown-content .tracklist .track span {
+        .album-dropdown-content .tracklist .track > span:first-child {
+          grid-column: 1;
+          width: 28px;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.8rem;
-          font-weight: 600;
-          color: rgba(255, 255, 255, 0.4);
-          min-width: 28px;
+          font-size: 0.75rem;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.35);
           text-align: right;
-          flex-shrink: 0;
+          font-variant-numeric: tabular-nums;
         }
-        .album-dropdown-content .tracklist .track:nth-child(even),
-        .album-dropdown-content .tracklist .track:nth-child(odd) {
-          background: transparent;
+        .album-dropdown-content .tracklist .track-title {
+          grid-column: 2;
+          min-width: 0;
+          font-family: 'Roboto Slab', serif;
+          font-weight: normal;
+          color: inherit;
+          overflow-wrap: break-word;
+          word-break: break-word;
         }
-        .album-dropdown-content .tracklist .track-page-link {
+        .album-dropdown-content .tracklist .track-title-link {
+          grid-column: 2;
+          min-width: 0;
           display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          margin-left: auto;
-          white-space: nowrap;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          color: rgba(255, 255, 255, 0.7);
-          text-decoration: none;
-          padding: 14px 12px;
-          border-radius: 6px;
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-        }
-        .album-dropdown-content .tracklist .track-page-link svg {
-          width: 14px;
-          height: 14px;
-          flex-shrink: 0;
-        }
-        .album-dropdown-content .tracklist .track-page-link:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.95);
-          border-color: rgba(255, 255, 255, 0.42);
-        }
-        .album-dropdown-content .tracklist .track-music-video-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 5px;
-          margin-left: 8px;
-          white-space: nowrap;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          color: rgba(255, 255, 255, 0.7);
-          text-decoration: none;
-          padding: 14px 12px;
-          border-radius: 6px;
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-        }
-        .album-dropdown-content .tracklist .track-music-video-link:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: rgba(255, 255, 255, 0.95);
-          border-color: rgba(255, 255, 255, 0.42);
-        }
-        .album-dropdown-content .tracklist .track-music-video-link svg {
-          width: 14px;
-          height: 14px;
-          flex-shrink: 0;
-        }
-        .album-dropdown-content .tracklist .track-links {
-          display: inline-flex;
+          align-items: baseline;
           flex-wrap: wrap;
           gap: 6px;
+          color: inherit;
+          text-decoration: none;
+          overflow-wrap: break-word;
+          word-break: break-word;
+        }
+        .album-dropdown-content .tracklist .track-title-link:hover {
+          color: rgba(255, 255, 255, 0.95);
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
+        .album-dropdown-content .tracklist .track-link-icon {
+          width: 13px;
+          height: 13px;
+          flex-shrink: 0;
+          opacity: 0.45;
+        }
+        .album-dropdown-content .tracklist .track-title-link:hover .track-link-icon {
+          opacity: 0.85;
+        }
+        .album-dropdown-content .tracklist .track-music-video-link {
+          grid-column: 3;
+          display: inline-flex;
           align-items: center;
-          margin-left: auto;
+          justify-content: center;
+          gap: 4px;
+          padding: 0 0 0 8px;
+          border-radius: var(--radius-thumb);
+          border: none;
+          color: rgba(255, 255, 255, 0.5);
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.65rem;
+          font-weight: 500;
+          line-height: 1;
+          white-space: nowrap;
+          text-decoration: none;
+          transition: color 0.15s ease, background 0.15s ease;
         }
-        .album-dropdown-content .tracklist .track-links .track-page-link,
-        .album-dropdown-content .tracklist .track-links .track-music-video-link {
-          margin-left: 0;
+        .album-dropdown-content .tracklist .track-music-video-link:hover {
+          color: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.06);
         }
-        /* Mobile: album film first line, other links second; track links under title in 2-col grid */
+        .album-dropdown-content .tracklist .track-music-video-link svg {
+          width: 12px;
+          height: 12px;
+          flex-shrink: 0;
+        }
+        .album-dropdown-content .tracklist .track-music-video-link span {
+          font-family: inherit;
+          font-weight: inherit;
+          color: inherit;
+          flex-shrink: unset;
+        }
+        /* Mobile album card layout */
         @media (max-width: 640px) {
-          .album-dropdown-content .streamingicons::before {
-            display: none;
+          #saturn.open .album-dropdown-content::before,
+          #saturn.saturn-bg .album-dropdown-content::before,
+          #winter.open .album-dropdown-content::before,
+          #winter.winter-bg .album-dropdown-content::before,
+          #slowpoke.open .album-dropdown-content::before,
+          #slowpoke.slowpoke-bg .album-dropdown-content::before,
+          #redux.open .album-dropdown-content::before,
+          #redux.redux-bg .album-dropdown-content::before,
+          #iseewhatidont.open .album-dropdown-content::before,
+          #iseewhatidont.iseewhatidont-bg .album-dropdown-content::before {
+            opacity: 0.06;
           }
-          .album-dropdown-content .streamingicons .album-film-btn {
-            order: -1;
-            width: 100%;
-            margin-bottom: 6px;
-            box-sizing: border-box;
+          #saturn.open .album-dropdown-content-inner,
+          #saturn.saturn-bg .album-dropdown-content-inner,
+          #winter.open .album-dropdown-content-inner,
+          #winter.winter-bg .album-dropdown-content-inner,
+          #slowpoke.open .album-dropdown-content-inner,
+          #slowpoke.slowpoke-bg .album-dropdown-content-inner,
+          #redux.open .album-dropdown-content-inner,
+          #redux.redux-bg .album-dropdown-content-inner,
+          #iseewhatidont.open .album-dropdown-content-inner,
+          #iseewhatidont.iseewhatidont-bg .album-dropdown-content-inner {
+            background: linear-gradient(
+              180deg,
+              rgba(0, 0, 0, 0.45) 0%,
+              rgba(0, 0, 0, 0.38) 50%,
+              rgba(0, 0, 0, 0.45) 100%
+            );
+          }
+          .album-dropdown-content-inner {
+            padding: 0 16px 16px;
           }
           .album-dropdown-content .streamingicons {
-            flex-direction: row;
-            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 14px;
+          }
+          .album-dropdown-content .streamingicons .album-film-btn {
+            padding: 12px 16px;
+            font-size: 0.78rem;
+            min-height: 48px;
+            margin-bottom: 4px;
+          }
+          .album-dropdown-content .streamingicons a:not(.album-film-btn) {
+            padding: 8px 2px;
+            min-height: 44px;
+          }
+          .album-dropdown-content .streamingicons img {
+            height: 24px;
+            width: 24px;
           }
           .album-dropdown-content .tracklist .track {
-            grid-template-columns: auto 1fr;
-            grid-template-rows: auto auto;
-            gap: 8px 12px;
-            padding-right: 28px;
+            padding: 8px 0;
+            font-size: 0.92rem;
           }
-          .album-dropdown-content .tracklist .track > span:first-child {
-            grid-row: 1;
-            grid-column: 1;
-          }
-          .album-dropdown-content .tracklist .track > a.track-music-video-link {
-            grid-row: 2;
-            grid-column: 2 / -1;
-            margin-left: 0;
-          }
-          .album-dropdown-content .tracklist .track-links {
-            grid-row: 2;
-            grid-column: 2 / -1;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-left: 0;
-          }
-          .album-dropdown-content .tracklist .track-links .track-page-link,
-          .album-dropdown-content .tracklist .track-links .track-music-video-link {
-            min-width: 0;
-          }
-          .album-dropdown-content .tracklist .track:hover {
-            margin: 0;
-            padding-left: 0;
-            padding-right: 28px;
+          .album-dropdown-content .tracklist .track-music-video-link {
+            padding: 4px 0 4px 8px;
+            font-size: 0.68rem;
           }
         }
         .single-chip .single-chip-video-link {
@@ -562,7 +500,7 @@
           gap: 6px;
           margin-top: 10px;
           padding: 6px 12px;
-          border-radius: 8px;
+          border-radius: var(--radius-thumb);
           border: 1px solid rgba(255, 255, 255, 0.28);
           color: rgba(255, 255, 255, 0.85);
           font-family: 'Roboto Mono', monospace;
@@ -582,146 +520,88 @@
           height: 16px;
           flex-shrink: 0;
         }
-        .album-dropdown-content .musecard-detail p {
-          font-family: 'Roboto Mono', monospace;
-          font-size: clamp(16px, 2vw, 20px);
-          margin: 0 0 12px;
-        }
-        /* Latest release hero – click to scroll to album and expand */
+        /* Latest release – featured block above Singles */
         .latest-hero-section {
-          margin-top: 1.5rem;
+          margin-top: 1.25rem;
+          margin-bottom: 1.75rem;
+          padding-bottom: 1.5rem;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .latest-hero-section.albumsdisplay {
-          margin-bottom: 0;
+        .latest-hero-section .albums-section-title {
+          margin-bottom: 14px;
         }
         .latest-hero {
-          display: block;
-          position: relative;
-          width: 100%;
-          max-width: 720px;
-          margin: 0 auto 2rem;
-          padding: 0;
-          text-decoration: none;
-          color: var(--main-text);
-          border-radius: 16px;
-          overflow: hidden;
-          cursor: pointer;
-          --mouse-x: 50%;
-          --mouse-y: 50%;
-          background: linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.18) 0%,
-            rgba(255, 255, 255, 0.06) 45%,
-            rgba(40, 45, 55, 0.25) 100%
-          );
-          backdrop-filter: blur(28px) saturate(1.8);
-          -webkit-backdrop-filter: blur(28px) saturate(1.8);
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          box-shadow:
-            0 4px 24px rgba(0, 0, 0, 0.25),
-            inset 0 1px 0 rgba(255, 255, 255, 0.35),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-          transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
-        }
-        .latest-hero:hover {
-          border-color: rgba(255, 255, 255, 0.42);
-          box-shadow:
-            0 6px 28px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(255, 255, 255, 0.45),
-            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
-          transform: scale(1.01);
-        }
-        .latest-hero::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: inherit;
-          pointer-events: none;
-          background: radial-gradient(
-            circle at var(--mouse-x) var(--mouse-y),
-            rgba(255, 255, 255, 0.3) 0%,
-            rgba(255, 255, 255, 0.08) 35%,
-            transparent 55%
-          );
-          opacity: 0;
-          transition: opacity 0.2s ease;
-        }
-        .latest-hero:hover::before,
-        .latest-hero.touch-active::before {
-          opacity: 1;
-        }
-        .latest-hero-inner {
-          display: flex;
+          display: grid;
+          grid-template-columns: minmax(0, 132px) minmax(0, 1fr);
+          gap: 16px;
           align-items: center;
-          gap: 20px;
-          padding: 18px 20px;
-          text-align: left;
+          width: 100%;
+          max-width: var(--narrow-max-width);
+          margin: 0 auto;
+          padding: 0;
+          color: var(--main-text);
         }
-        .latest-hero img {
-          width: 100px;
-          height: 100px;
+        .latest-hero-art {
+          margin: 0;
+          align-self: start;
+          width: 100%;
+          aspect-ratio: 1;
+          overflow: hidden;
+          border-radius: var(--radius-inner);
+        }
+        .latest-hero-art img {
+          display: block;
+          width: 100%;
+          height: 100%;
           object-fit: cover;
-          border-radius: 12px;
-          flex-shrink: 0;
-          border: 1px solid rgba(255, 255, 255, 0.22);
+          border-radius: inherit;
+          border: 1px solid rgba(255, 255, 255, 0.18);
         }
-        .latest-hero-text h3 {
+        .latest-hero-body {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 2px;
+          min-width: 0;
+        }
+        .latest-hero-title {
           font-family: 'Roboto Slab', serif;
-          font-size: clamp(1rem, 2.2vw, 1.2rem);
-          margin: 0 0 4px;
+          font-size: clamp(1.15rem, 2.6vw, 1.45rem);
           font-weight: 600;
-          opacity: 0.9;
-        }
-        .latest-hero-text .latest-hero-title {
-          font-family: 'Playfair Display', serif;
-          font-size: clamp(1.35rem, 3vw, 1.6rem);
-          font-weight: bold;
-          margin: 0 0 2px;
-        }
-        .latest-hero-text .latest-hero-meta {
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.85rem;
-          font-style: italic;
-          opacity: 0.85;
+          line-height: 1.3;
           margin: 0;
         }
-        .latest-hero-links {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 10px;
-          align-items: center;
-          margin-top: 10px;
-        }
-        .latest-hero-links a {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          padding: 8px 12px;
-          border-radius: 12px;
-          border: 1px solid rgba(255, 255, 255, 0.28);
-          background: rgba(0, 0, 0, 0.18);
-          color: rgba(255, 255, 255, 0.9);
-          text-decoration: none;
+        .latest-hero-meta {
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
-          font-weight: 600;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+          font-size: 0.78rem;
+          font-weight: normal;
+          font-style: normal;
+          opacity: 0.5;
+          margin: 0;
         }
-        .latest-hero-links a:hover {
-          background: rgba(0, 0, 0, 0.28);
-          border-color: rgba(255, 255, 255, 0.42);
-          transform: translateY(-1px);
+        .latest-hero-streaming {
+          display: flex;
+          align-items: center;
+          gap: 0;
+          margin: 8px 0 0 -6px;
         }
-        .latest-hero-links a img {
-          width: 18px;
-          height: 18px;
+        .latest-hero-streaming a {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px 6px;
+          border-radius: var(--radius-thumb);
+          opacity: 0.8;
+          transition: opacity 0.15s ease, background 0.15s ease;
+        }
+        .latest-hero-streaming a:hover {
+          opacity: 1;
+          background: rgba(255, 255, 255, 0.06);
+        }
+        .latest-hero-streaming img {
+          width: 24px;
+          height: 24px;
           display: block;
-          filter: grayscale(100%);
-        }
-        .latest-hero-links a:hover img {
-          filter: grayscale(0%);
         }
         /* Scroll margin so "Discography" pill stays visible when hero links to #bites */
         #bites {
@@ -733,31 +613,43 @@
             margin-top: 0.75rem;
             margin-bottom: 0.75rem;
           }
-          .latest-hero-inner {
-            padding: 12px 14px;
+          .latest-hero-section {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+          }
+          .latest-hero-section .albums-section-title {
+            font-size: clamp(1.15rem, 2.8vw, 1.4rem);
+            margin-bottom: 10px;
+          }
+          .latest-hero {
+            grid-template-columns: 88px minmax(0, 1fr);
             gap: 12px;
           }
-          .latest-hero img {
-            width: 80px;
-            height: 80px;
+          .latest-hero-art {
+            width: 88px;
+            height: 88px;
+            aspect-ratio: auto;
+            flex-shrink: 0;
           }
-          .latest-hero-text h3 {
-            font-size: 0.85rem;
+          .latest-hero-title {
+            font-size: 1.05rem;
           }
-          .latest-hero-text .latest-hero-title {
-            font-size: 1.1rem;
+          .latest-hero-meta {
+            font-size: 0.72rem;
           }
-          .latest-hero-text .latest-hero-meta {
-            font-size: 0.8rem;
+          .latest-hero-streaming {
+            margin-top: 6px;
+          }
+          .latest-hero-streaming a {
+            padding: 4px 6px;
           }
           .album-dropdown-header {
             padding: 10px 12px;
             gap: 10px;
           }
           .album-dropdown-header img {
-            width: 46px;
-            height: 46px;
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
           }
           .album-dropdown-title-wrap h4 {
             font-size: 1rem;
@@ -770,45 +662,18 @@
             height: 20px;
           }
           .album-dropdown-content-inner {
-            padding: 0 14px 14px;
+            padding: 0 16px 16px;
           }
           .album-dropdown-content .musecard-detail p {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-          }
-          .album-dropdown-content .streamingicons {
-            margin: 8px 0 10px;
-            padding: 8px 0;
-            gap: 6px;
-          }
-          .album-dropdown-content .streamingicons a {
-            padding: 8px 4px;
-          }
-          .album-dropdown-content .streamingicons .album-film-btn {
-            padding: 10px 8px;
-          }
-          .album-dropdown-content .tracklist h4 {
-            margin-bottom: 6px;
-            padding-bottom: 4px;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+            line-height: 1.45;
           }
           .album-dropdown-content .tracklist .track {
-            padding: 2px 0;
-            font-size: 0.95rem;
+            padding: 10px 0;
           }
           .album-dropdown-content .tracklist .track span {
-            font-size: 0.9rem;
-          }
-          .album-dropdown-content .tracklist .track:hover {
-            margin: 0;
-            padding-left: 0;
-            padding-right: 0;
-          }
-          .album-dropdown-content .tracklist .track-page-link,
-          .album-dropdown-content .tracklist .track-music-video-link {
-            padding: 10px 10px;
-          }
-          .album-dropdown-content .album-film-link {
-            padding: 6px 10px;
+            font-size: 0.75rem;
           }
           .single-chips {
             row-gap: 6px;
@@ -816,9 +681,6 @@
           .single-chip img {
             width: 40px;
             height: 40px;
-          }
-          .single-chip .single-chip-title {
-            font-size: 0.8rem;
           }
         }
       </style>
@@ -850,17 +712,17 @@
 
 <div class="mobilepage">
     <section class="albumsdisplay albums-section latest-hero-section">
-      <div id="latestHero" class="latest-hero" role="link" tabindex="0" aria-label="Latest release: Half A Mind (Single). Released April 17, 2026.">
-        <div class="latest-hero-inner">
-          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover">
-          <div class="latest-hero-text">
-            <h3>The latest from Bobby Nair</h3>
-            <p class="latest-hero-title">Half A Mind (Single)</p>
-            <p class="latest-hero-meta">April 17, 2026</p>
-            <div class="latest-hero-links" aria-label="Listen on">
-              <a href="https://open.spotify.com/track/2b35pqbXDCDq2xps2HGLTU?" target="_blank" rel="noopener noreferrer"><img src="/assets/img/icons/spotify.png" alt="">Spotify</a>
-              <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer"><img src="/assets/img/icons/am.png" alt="">Apple Music</a>
-            </div>
+      <h2 class="albums-section-title">Latest release</h2>
+      <div class="latest-hero">
+        <figure class="latest-hero-art">
+          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover" width="132" height="132">
+        </figure>
+        <div class="latest-hero-body">
+          <p class="latest-hero-title">Half A Mind (Single)</p>
+          <p class="latest-hero-meta">April 17, 2026</p>
+          <div class="latest-hero-streaming" aria-label="Listen on">
+            <a href="https://open.spotify.com/track/2b35pqbXDCDq2xps2HGLTU?" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
+            <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
           </div>
         </div>
       </div>
@@ -937,7 +799,7 @@
                   <div class="track"><span>3</span>Ghosts in the blue light</div>
                   <div class="track"><span>4</span>Hit my head</div>
                   <div class="track"><span>5</span>O'</div>
-                  <div class="track"><span>6</span>Extra extra<a href="https://www.youtube.com/watch?v=MsBeuRov45Q" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></div>
+                  <div class="track"><span>6</span><span class="track-title">Extra extra</span><a href="https://www.youtube.com/watch?v=MsBeuRov45Q" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>7</span>All the hope I have</div>
                   <div class="track"><span>8</span>Promise ring</div>
                   <div class="track"><span>9</span>Mononoke</div>
@@ -969,7 +831,7 @@
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
-                  <div class="track"><span>1</span>Let Your Light Down<a href="https://www.youtube.com/watch?v=aE7C7081f80" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></div>
+                  <div class="track"><span>1</span><span class="track-title">Let Your Light Down</span><a href="https://www.youtube.com/watch?v=aE7C7081f80" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>2</span>Keep Cryin'</div>
                   <div class="track"><span>3</span>Outlaws Like You (Good Boys)</div>
                   <div class="track"><span>4</span>(Ran Out Of) November</div>
@@ -997,7 +859,6 @@
               <h4>iseewhatidont!</h4>
               <h6>September 15, 2023</h6>
             </div>
-            <a href="https://bobbynairmusic.bandcamp.com/album/iseewhatidont" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="iseewhatidont-content" role="region" aria-labelledby="iseewhatidont-btn">
@@ -1010,7 +871,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynairmusic.bandcamp.com/album/iseewhatidont" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/iseewhatidont" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1019,17 +880,17 @@
                   <div class="track"><span>3</span>beautiful boy</div>
                   <div class="track"><span>4</span>Bad At Writing Songs</div>
                   <div class="track"><span>5</span>Victim?</div>
-                  <div class="track"><span>6</span>love you<span class="track-links"><a href="/discography/loveyou/" class="track-page-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Track Page</a><a href="https://www.youtube.com/watch?v=wGPCDon_f6Q" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></span></div>
+                  <div class="track"><span>6</span><a href="/discography/loveyou/" class="track-title-link">love you<svg class="track-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a><a href="https://www.youtube.com/watch?v=wGPCDon_f6Q" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>7</span>youseewhatiwont!</div>
                   <div class="track"><span>8</span>He's Doing Well.</div>
                   <div class="track"><span>9</span>lately</div>
-                  <div class="track"><span>10</span>King of Wands*<span class="track-links"><a href="/discography/kingofwands/" class="track-page-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Track Page</a><a href="https://www.youtube.com/watch?v=OgwU5Qcdduk" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></span></div>
+                  <div class="track"><span>10</span><a href="/discography/kingofwands/" class="track-title-link">King of Wands*<svg class="track-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a><a href="https://www.youtube.com/watch?v=OgwU5Qcdduk" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>11</span>I Saw You Kiss Her</div>
                   <div class="track"><span>12</span>sorry i swore (featuring Dominic Rutherford)</div>
                   <div class="track"><span>13</span>Snowman! (featuring TY Carter)</div>
                   <div class="track"><span>14</span>walktonowhere</div>
                   <div class="track"><span>15</span>find me when i land</div>
-                  <div class="track"><span>16</span>Jack The Rockstar* (featuring Jack Garman)<a href="https://www.youtube.com/watch?v=DGB4n233i4k" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></div>
+                  <div class="track"><span>16</span><span class="track-title">Jack The Rockstar* (featuring Jack Garman)</span><a href="https://www.youtube.com/watch?v=DGB4n233i4k" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>17</span>song for nobody certain</div>
                   <div class="track"><span>18</span>Everything I Loved!</div>
                 </div>
@@ -1044,7 +905,6 @@
               <h4>Saturn REDUX</h4>
               <h6>September 23, 2022</h6>
             </div>
-            <a href="https://bobbynairmusic.bandcamp.com/album/saturn-redux-tracks" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="redux-content" role="region" aria-labelledby="redux-btn">
@@ -1057,7 +917,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynairmusic.bandcamp.com/album/saturn-redux-tracks" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/saturn-redux-tracks" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1066,7 +926,7 @@
                   <div class="track"><span>3</span>Navy Blue</div>
                   <div class="track"><span>4</span>Kill The Butterflies (Demo)</div>
                   <div class="track"><span>5</span>I'm Fine, You're Fine</div>
-                  <div class="track"><span>6</span>Café (Demo)<span class="track-links"><a href="/discography/cafe/" class="track-page-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> Track Page</a><a href="https://www.youtube.com/watch?v=ERn8i826_K8" class="track-music-video-link" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg> Music Video</a></span></div>
+                  <div class="track"><span>6</span><a href="/discography/cafe/" class="track-title-link">Café (Demo)<svg class="track-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a><a href="https://www.youtube.com/watch?v=ERn8i826_K8" class="track-music-video-link" target="_blank" rel="noopener" title="Music video" aria-label="Music video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"/></svg><span>Video</span></a></div>
                   <div class="track"><span>7</span>Falling Back</div>
                   <div class="track"><span>8</span>My Annual Breakdown (Demo)</div>
                   <div class="track"><span>9</span>You Told Me I Belonged</div>
@@ -1083,7 +943,6 @@
               <h4>Slowpoke</h4>
               <h6>May 20, 2022</h6>
             </div>
-            <a href="https://bobbynairmusic.bandcamp.com/album/slowpoke" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="slowpoke-content" role="region" aria-labelledby="slowpoke-btn">
@@ -1096,7 +955,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynairmusic.bandcamp.com/album/slowpoke" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/slowpoke" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1122,7 +981,6 @@
               <h4>I Miss The Winter</h4>
               <h6>January 1, 2022</h6>
             </div>
-            <a href="https://bobbynairmusic.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy" target="_blank" rel="noopener" onclick="event.stopPropagation()"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
             <svg class="album-dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
           </div>
           <div class="album-dropdown-content" aria-hidden="true" id="winter-content" role="region" aria-labelledby="winter-btn">
@@ -1135,7 +993,7 @@
                   <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
                   <a href="https://music.youtube.com/channel/UC05wXvH7XcOEYioeIHUkBlQ" target="_blank"><img src="/assets/img/icons/ytmusic.png" alt="YouTube Music"></a>
                   <a href="https://music.amazon.com/artists/B08NFB7BJQ/bobby-nair" target="_blank"><img src="/assets/img/icons/amznmusic.png" alt="Amazon Music"></a>
-                  <a href="https://bobbynairmusic.bandcamp.com/album/i-miss-the-winter" class="bandcamp-buy bandcamp-buy-in-content" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"> <span class="bandcamp-buy-label">BUY</span></a>
+                  <a href="https://bobbynairmusic.bandcamp.com/album/i-miss-the-winter" target="_blank" rel="noopener"><img src="/assets/img/icons/bandcamp.png" alt="Bandcamp"></a>
                 </div>
                 <div class="tracklist">
                   <h4>Tracks</h4>
@@ -1276,7 +1134,7 @@
         }
         document.querySelectorAll('.album-dropdown-header').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
-            if (e.target.closest && e.target.closest('a.bandcamp-buy')) return;
+            if (e.target.closest && e.target.closest('a')) return;
             var dropdown = this.closest('.album-dropdown');
             /* Accordion: close any other open album dropdown */
             document.querySelectorAll('.album-dropdown.open').forEach(function(other) {
@@ -1326,26 +1184,6 @@
               target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
           }
-        }
-        /* Hero "latest release" link: scroll to item */
-        var latestHero = document.getElementById('latestHero');
-        if (latestHero) {
-          function scrollToLatest() {
-            var target = document.getElementById('halfamind');
-            if (!target) return;
-            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-          latestHero.addEventListener('click', function(e) {
-            if (e.target && e.target.closest && e.target.closest('a')) return;
-            scrollToLatest();
-          });
-          latestHero.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-              if (e.target && e.target.closest && e.target.closest('a')) return;
-              e.preventDefault();
-              scrollToLatest();
-            }
-          });
         }
       })();
     </script>
@@ -1412,8 +1250,7 @@
           });
         }
         initCursorGlow('.single-chip');
-        initCursorGlow('.album-dropdown-header');
-        initCursorGlow('.latest-hero');
+        initCursorGlow('.album-dropdown');
         initCursorGlow('.navlinks a');
       })();
     </script>

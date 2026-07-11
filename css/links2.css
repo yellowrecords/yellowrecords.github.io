@@ -1,6 +1,4 @@
-/* */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Serif&display=swap');
+/*fonts loaded via <link> in HTML for faster parallel fetch*/
 body{
     background: linear-gradient(-45deg, #000f4d, #001f04, #00175c, #00162e);
 	background-size: 400% 400%;

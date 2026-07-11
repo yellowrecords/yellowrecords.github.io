@@ -20,8 +20,12 @@
     <meta name="twitter:title" content="Bobby Nair | Official Site – Music, Film & More">
     <meta name="twitter:description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more...">
     <meta name="twitter:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide1.PNG">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Rubik+Iso&family=Space+Grotesk&display=swap" rel="stylesheet">
     <link rel="icon" href="/assets/img/favicon/favicon.ico">
     <link href="/css/main.css" rel="stylesheet">
+    <link rel="preload" as="image" href="/assets/img/slideshow/NewSlide1.jpg" fetchpriority="high">
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <script type="application/ld+json">
@@ -58,22 +62,22 @@
       <div class="slideshow-wrapper">
         <div class="slideshow-container">
           <div class="mySlides active">
-            <img src="/assets/img/slideshow/NewSlide1.jpg" alt="Bomby is combing his hair with his double behind him">
+            <img src="/assets/img/slideshow/NewSlide1.jpg" alt="Bomby is combing his hair with his double behind him" fetchpriority="high" decoding="async" width="1200" height="675">
           </div>
           <div class="mySlides">
-            <img src="/assets/img/slideshow/NewSlide2.jpg" alt="Bobby Nair is playing melodica on top of a washing machine.">
+            <img src="/assets/img/slideshow/NewSlide2.jpg" alt="Bobby Nair is playing melodica on top of a washing machine." loading="lazy" decoding="async" width="1200" height="675">
           </div>
           <div class="mySlides">
-            <img src="/assets/img/slideshow/NewSlide3.jpg" alt="Bobby Nair is posing in sound mixing gear">
+            <img src="/assets/img/slideshow/NewSlide3.jpg" alt="Bobby Nair is posing in sound mixing gear" loading="lazy" decoding="async" width="1200" height="675">
           </div>
           <div class="mySlides">
-            <img src="/assets/img/slideshow/NewSlide4.jpg" alt="Bomby runs away from an obsessed cameraman">
+            <img src="/assets/img/slideshow/NewSlide4.jpg" alt="Bomby runs away from an obsessed cameraman" loading="lazy" decoding="async" width="1200" height="675">
           </div>
           <div class="mySlides">
-            <img src="/assets/img/slideshow/NewSlide5.jpg" alt="Bomby skips down the Central Park path with his lunch">
+            <img src="/assets/img/slideshow/NewSlide5.jpg" alt="Bomby skips down the Central Park path with his lunch" loading="lazy" decoding="async" width="1200" height="675">
           </div>
           <div class="mySlides">
-            <img src="/assets/img/slideshow/NewSlide6.jpg" alt="Bobby Nair addresses a concert crowd">
+            <img src="/assets/img/slideshow/NewSlide6.jpg" alt="Bobby Nair addresses a concert crowd" loading="lazy" decoding="async" width="1200" height="675">
           </div>
         </div>
         <div class="slideshow-controls">
@@ -96,42 +100,24 @@
         </div>
       </div>
       <div class="hero-text">
-        <h4 class="whoisbobby">Who Is Bobby Nair?</h4>
-      <script>
-        async function loadCarousel() {
-          try {
-            const response = await fetch('./carousel.json');
-            const data = await response.json();
-            const container = document.getElementById('slideshow-container');
-      
-            // Loop through the slides and create the HTML
-            const html = data.slides.map(slide => `
-              <div class="slide">
-                <img src="${slide.image}" alt="${slide.alt}">
-                <h3>${slide.title}</h3>
-              </div>
-            `).join('');
-      
-            container.innerHTML = html;
-          } catch (error) {
-            console.error("Could not load carousel data:", error);
-          }
-        }
-      
-        loadCarousel();
-      </script>
-        <p>Bobby Nair is a musician, filmmaker and visual artist from Akron, Ohio. He specializes in sound design & mixing for films and develops projects independantly- as well as collaborations with the Yellow Media Group.</p>
-        <p class="coming-soon"><i>Half A Mind is out now - World's A Bomb: 2026...</i></p>
+        <div class="hero-intro">
+          <h4 class="whoisbobby">Who Is Bobby Nair?</h4>
+          <p>Bobby Nair is a musician, filmmaker and visual artist from Akron, Ohio. He specializes in sound design & mixing for films and develops projects independantly- as well as collaborations with the Yellow Media Group.</p>
+          <p class="coming-soon"><i>Half A Mind is out now - World's A Bomb: 2026...</i></p>
+        </div>
 
+        <div class="hero-bottom">
+        <div class="discandvid-group">
         <div class="discandvid">
           <a href="/discography/" class="disc">
-            <img src="/assets/img/discography.png" alt="Discography" />
+            <img src="/assets/img/discography.webp" alt="Discography" loading="lazy" decoding="async" width="966" height="566" />
             <p>Discography</p>
           </a>
           <a href="/video/" class="disc">
-            <img src="/assets/img/videos.png" alt="Videos" />
+            <img src="/assets/img/videos.webp" alt="Videos" loading="lazy" decoding="async" width="966" height="566" />
             <p>Videos</p>
           </a>
+        </div>
         </div>
 
         <div class="hero-footer-links">
@@ -140,6 +126,7 @@
             <a href="https://www.instagram.com/bobbyfreakingnair/">@bobbyfreakingnair</a>
             <a href="mailto:nairbobby5@gmail.com">nairbobby5@gmail.com</a>
           </span>
+        </div>
         </div>
       </div>
     </div>
