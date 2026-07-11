@@ -1,6 +1,10 @@
 /* Contact page – matches site glass aesthetic */
 
 .contact-page {
+  --theme-hover-border: rgba(218, 255, 252, 0.46);
+  --theme-hover-fill: rgba(62, 122, 118, 0.13);
+  --theme-hover-glow: rgba(138, 205, 199, 0.26);
+  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
   max-width: var(--narrow-max-width);
   margin: 0 auto;
   padding: 1.25rem var(--site-gutter) 3rem;
@@ -49,8 +53,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.18) 0%,
-    rgba(255, 255, 255, 0.05) 35%,
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -59,11 +63,12 @@
 
 .contact-card:hover,
 .contact-form-card:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--theme-hover-border);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+    0 0 22px rgba(62, 122, 118, 0.16),
+    inset 0 1px 0 rgba(190, 238, 233, 0.4),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.12);
 }
 
 .contact-card:hover::before,
@@ -141,11 +146,17 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius-pill);
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(190, 238, 233, 0.34),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.12);
   text-decoration: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   margin-top: auto;
   --mouse-x: 50%;
   --mouse-y: 50%;
@@ -159,8 +170,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.28) 0%,
-    rgba(255, 255, 255, 0.08) 35%,
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -168,8 +179,13 @@
 }
 
 .contact-card-btn:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  background-color: var(--theme-hover-fill);
+  border-color: var(--theme-hover-border);
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.24),
+    0 0 18px rgba(62, 122, 118, 0.16),
+    inset 0 1px 0 rgba(190, 238, 233, 0.42),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.16);
 }
 
 .contact-card-btn:hover::before {
@@ -207,8 +223,10 @@
 .contact-form-card input,
 .contact-form-card textarea {
   font-family: 'Roboto Mono', monospace;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 100%;
@@ -216,6 +234,10 @@
   font-size: 0.95rem;
   color: var(--main-text, #fff);
   box-sizing: border-box;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(190, 238, 233, 0.26),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.1);
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   text-align: left;
 }
@@ -228,9 +250,16 @@
 .contact-form-card input:focus,
 .contact-form-card textarea:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.13) 0%, rgba(62, 122, 118, 0.08) 100%),
+    var(--glass-bg);
+  border-color: var(--theme-hover-border);
+  box-shadow:
+    0 5px 22px rgba(0, 0, 0, 0.22),
+    0 0 0 3px rgba(138, 205, 199, 0.12),
+    0 0 20px rgba(62, 122, 118, 0.16),
+    inset 0 1px 0 rgba(190, 238, 233, 0.42),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.16);
 }
 
 .contact-form-card textarea {

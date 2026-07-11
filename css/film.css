@@ -1,6 +1,10 @@
 /* Film page layout – matches site glass aesthetic */
 
 .film-page {
+  --theme-hover-border: rgba(218, 255, 252, 0.46);
+  --theme-hover-fill: rgba(62, 122, 118, 0.13);
+  --theme-hover-glow: rgba(138, 205, 199, 0.26);
+  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
   max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 1.25rem var(--site-gutter) 3rem;
@@ -50,8 +54,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.06) 35%,
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -64,10 +68,11 @@
 }
 
 .film-featured-link:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--theme-hover-border);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    0 0 22px rgba(62, 122, 118, 0.16),
+    inset 0 1px 0 rgba(190, 238, 233, 0.45);
   transform: translateY(-2px);
 }
 
@@ -114,22 +119,18 @@
 
 /* ── Predator Puncherz promo ── */
 .film-featured--promo .film-featured-link {
-  background: linear-gradient(
-    145deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(255, 255, 255, 0.08) 55%,
-    rgba(232, 93, 4, 0.07) 100%
-  );
-  border-color: rgba(255, 170, 100, 0.28);
+  background: var(--glass-bg);
+  border-color: rgba(218, 255, 252, 0.26);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .film-featured--promo .film-featured-link:hover {
   transform: none;
-  border-color: rgba(255, 170, 100, 0.42);
+  border-color: var(--theme-hover-border);
   box-shadow:
     0 6px 24px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+    0 0 20px rgba(62, 122, 118, 0.16),
+    inset 0 1px 0 rgba(190, 238, 233, 0.38);
 }
 
 .film-featured--promo .film-featured-link:hover .film-featured-media img {
@@ -139,8 +140,8 @@
 .film-featured--promo .film-featured-link::before {
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 180, 120, 0.18) 0%,
-    rgba(255, 255, 255, 0.04) 35%,
+    var(--theme-hover-glow) 0%,
+    rgba(62, 122, 118, 0.08) 35%,
     transparent 55%
   );
 }
@@ -174,7 +175,7 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(255, 140, 60, 0.06) 100%
+    rgba(62, 122, 118, 0.07) 100%
   );
 }
 
@@ -200,8 +201,8 @@
 }
 
 .film-featured--promo .film-featured-link:hover .film-featured-cta {
-  color: rgba(255, 255, 255, 0.9);
-  text-decoration-color: rgba(255, 255, 255, 0.5);
+  color: rgba(218, 255, 252, 0.94);
+  text-decoration-color: rgba(138, 205, 199, 0.58);
 }
 
 /* Compact row — tablet & desktop (shorter than full hero split) */
@@ -409,8 +410,8 @@
 
 .film-search-toggle:hover,
 .film-search-close:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background-color: var(--theme-hover-fill);
+  color: rgba(218, 255, 252, 0.96);
 }
 
 .film-search-wrap {
@@ -430,11 +431,11 @@
 }
 
 .film-search-wrap:focus-within {
-  border-color: rgba(255, 255, 255, 0.4);
+  border-color: var(--theme-hover-border);
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    0 0 0 3px rgba(255, 255, 255, 0.08);
+    inset 0 1px 0 rgba(190, 238, 233, 0.45),
+    0 0 0 3px rgba(138, 205, 199, 0.1);
 }
 
 .film-search-wrap svg.film-search-icon {
@@ -499,8 +500,8 @@
   width: 0;
   height: 0;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: var(--theme-hover-fill);
+  box-shadow: inset 0 1px 0 rgba(190, 238, 233, 0.18);
   pointer-events: none;
   z-index: 0;
   opacity: 0;
@@ -545,8 +546,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.06) 35%,
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -558,7 +559,7 @@
 }
 
 .film-filter-btn:not(.active):hover {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: var(--theme-hover-fill);
 }
 
 .film-filter-btn:hover::before {
@@ -581,7 +582,7 @@
   font-size: 0.8rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(62, 122, 118, 0.13);
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -611,8 +612,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.22) 0%,
-    rgba(255, 255, 255, 0.06) 35%,
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -620,8 +621,8 @@
 }
 
 .film-filter-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  color: #fff;
+  background-color: rgba(62, 122, 118, 0.2);
+  color: rgba(218, 255, 252, 0.96);
 }
 
 .film-filter-toggle:hover::before {
@@ -666,8 +667,8 @@
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(255, 255, 255, 0.04) 35%,
+    var(--theme-hover-glow) 0%,
+    rgba(62, 122, 118, 0.07) 35%,
     transparent 55%
   );
   opacity: 0;
@@ -676,10 +677,11 @@
 }
 
 .film-card:hover {
-  border-color: rgba(255, 255, 255, 0.36);
+  border-color: var(--theme-hover-border);
   box-shadow:
     0 5px 20px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.38);
+    0 0 18px rgba(62, 122, 118, 0.14),
+    inset 0 1px 0 rgba(190, 238, 233, 0.38);
 }
 
 .film-card:hover::before {
@@ -1265,7 +1267,7 @@
 
 @media (hover: none) {
   .film-card:active {
-    border-color: rgba(255, 255, 255, 0.36);
+    border-color: var(--theme-hover-border);
   }
 
   .film-featured-link:active {
