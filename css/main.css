@@ -2080,7 +2080,75 @@ footer {
   }
 }
 /*Mobile Style*/
+@-webkit-keyframes MobileSimpleGlow {
+  0% {
+    opacity: 0.32;
+    -webkit-transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+    transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    -webkit-transform: translate3d(0, 8%, 0) skewY(-2deg) scale(1.08);
+    transform: translate3d(0, 8%, 0) skewY(-2deg) scale(1.08);
+  }
+  100% {
+    opacity: 0.42;
+    -webkit-transform: translate3d(18%, 1%, 0) skewY(4deg) scale(1.04);
+    transform: translate3d(18%, 1%, 0) skewY(4deg) scale(1.04);
+  }
+}
+@keyframes MobileSimpleGlow {
+  0% {
+    opacity: 0.32;
+    -webkit-transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+    transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+  }
+  50% {
+    opacity: 0.72;
+    -webkit-transform: translate3d(0, 8%, 0) skewY(-2deg) scale(1.08);
+    transform: translate3d(0, 8%, 0) skewY(-2deg) scale(1.08);
+  }
+  100% {
+    opacity: 0.42;
+    -webkit-transform: translate3d(18%, 1%, 0) skewY(4deg) scale(1.04);
+    transform: translate3d(18%, 1%, 0) skewY(4deg) scale(1.04);
+  }
+}
 @media only screen and (max-width: 620px) {
+  html::before,
+  body::after {
+    -webkit-animation: none;
+    animation: none;
+    will-change: auto;
+  }
+  html::before {
+    background:
+      radial-gradient(ellipse 95% 42% at 50% 52%, rgba(62, 122, 118, 0.12) 0%, transparent 70%),
+      var(--background);
+    background-size: 100% 100%, 100% 100%;
+    background-position: 50% 50%, 0 0;
+  }
+  html::after {
+    inset: 8% -42% auto;
+    height: 62vh;
+    background:
+      linear-gradient(102deg, transparent 12%, rgba(190, 238, 233, 0.2) 38%, rgba(72, 152, 145, 0.32) 50%, rgba(34, 104, 100, 0.18) 62%, transparent 88%),
+      linear-gradient(96deg, transparent 18%, rgba(255, 255, 255, 0.1) 46%, rgba(158, 236, 228, 0.18) 52%, transparent 78%);
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    mix-blend-mode: normal;
+    -webkit-filter: blur(12px);
+    filter: blur(12px);
+    opacity: 0.32;
+    will-change: transform, opacity;
+    -webkit-transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+    transform: translate3d(-18%, -4%, 0) skewY(-7deg) scale(1);
+    -webkit-animation: MobileSimpleGlow 12s ease-in-out infinite alternate;
+    animation: MobileSimpleGlow 12s ease-in-out infinite alternate;
+  }
+  body::after {
+    display: none;
+  }
   .hero {
     margin-top: 1.25rem;
     padding: 0 var(--site-gutter);
@@ -2243,5 +2311,14 @@ footer {
   footer {
     margin-top: 0;
     padding-top: 12px;
+  }
+}
+
+@media only screen and (max-width: 620px) and (prefers-reduced-motion: reduce) {
+  html::after {
+    -webkit-animation: none;
+    animation: none;
+    opacity: 0.38;
+    will-change: auto;
   }
 }
