@@ -16,20 +16,30 @@
     <meta property="og:description" content="Listen to Bobby Nair's music – albums Café, Love You, King of Wands, and more. Official discography.">
     <meta property="og:image" content="https://bobbynair.com/assets/img/head.jpg">
     <meta property="og:site_name" content="Bobby Nair">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Music & Discography – Bobby Nair">
     <meta name="twitter:description" content="Listen to Bobby Nair's music – albums Café, Love You, King of Wands, and more.">
     <meta name="twitter:image" content="https://bobbynair.com/assets/img/head.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Rubik+Iso&family=Space+Grotesk&display=swap" rel="stylesheet">
-    <link rel="icon" href="/assets/img/favicon/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Space+Grotesk&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
     <link href="/css/main.css" rel="stylesheet">
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
     <style>
-        /* Album dropdowns – liquid glass (matches navbar); width matches .single-chips */
+        .mobilepage {
+          --theme-hover-border: rgba(218, 255, 252, 0.46);
+          --theme-hover-fill: rgba(62, 122, 118, 0.13);
+          --theme-hover-glow: rgba(138, 205, 199, 0.26);
+          --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
+        }
+        /* Album dropdowns – liquid glass (matches navbar) */
         .album-dropdowns {
           width: 100%;
           max-width: var(--narrow-max-width);
@@ -153,6 +163,22 @@
         .album-dropdown.open .album-dropdown-content {
           max-height: 3200px;
         }
+        /* Dark overlay when expanded (all albums) */
+        .album-dropdown.open .album-dropdown-content,
+        .album-dropdown.album-bg .album-dropdown-content {
+          position: relative;
+        }
+        .album-dropdown.open .album-dropdown-content-inner,
+        .album-dropdown.album-bg .album-dropdown-content-inner {
+          position: relative;
+          z-index: 1;
+          background: linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.26) 0%,
+            rgba(0, 0, 0, 0.18) 50%,
+            rgba(0, 0, 0, 0.26) 100%
+          );
+        }
         /* Album dots/stars background when dropdown is open or closing (until animation ends) */
         #saturn.open .album-dropdown-content,
         #saturn.saturn-bg .album-dropdown-content,
@@ -172,8 +198,8 @@
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/orange stars.png') center / 140% no-repeat;
-          opacity: 0.12;
+          background: url('/assets/img/dots/orange stars.png') center / 136% no-repeat;
+          opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
@@ -183,8 +209,8 @@
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/white stars.png') center / 140% no-repeat;
-          opacity: 0.1;
+          background: url('/assets/img/dots/white stars.png') center / 136% no-repeat;
+          opacity: 0.12;
           mix-blend-mode: screen;
           pointer-events: none;
         }
@@ -194,8 +220,8 @@
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/yellow stars.png') center / 140% no-repeat;
-          opacity: 0.12;
+          background: url('/assets/img/dots/yellow stars.png') center / 136% no-repeat;
+          opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
@@ -205,8 +231,8 @@
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/red stars.png') center / 140% no-repeat;
-          opacity: 0.12;
+          background: url('/assets/img/dots/red stars.png') center / 136% no-repeat;
+          opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
@@ -216,29 +242,10 @@
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/blue stars.png') center / 140% no-repeat;
-          opacity: 0.12;
+          background: url('/assets/img/dots/blue stars.png') center / 136% no-repeat;
+          opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
-        }
-        #saturn.open .album-dropdown-content-inner,
-        #saturn.saturn-bg .album-dropdown-content-inner,
-        #winter.open .album-dropdown-content-inner,
-        #winter.winter-bg .album-dropdown-content-inner,
-        #slowpoke.open .album-dropdown-content-inner,
-        #slowpoke.slowpoke-bg .album-dropdown-content-inner,
-        #redux.open .album-dropdown-content-inner,
-        #redux.redux-bg .album-dropdown-content-inner,
-        #iseewhatidont.open .album-dropdown-content-inner,
-        #iseewhatidont.iseewhatidont-bg .album-dropdown-content-inner {
-          position: relative;
-          z-index: 1;
-          background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.38) 0%,
-            rgba(0, 0, 0, 0.28) 50%,
-            rgba(0, 0, 0, 0.38) 100%
-          );
         }
         .album-dropdown-content-inner {
           position: relative;
@@ -276,42 +283,85 @@
         .album-dropdown-content .streamingicons a:not(.album-film-btn) {
           flex: 1 1 0;
           min-width: 0;
-          padding: 8px 2px;
+          padding: 5px 2px;
         }
         .album-dropdown-content .streamingicons a:hover {
           background: rgba(255, 255, 255, 0.06);
           opacity: 1;
         }
         .album-dropdown-content .streamingicons img {
-          height: 24px;
-          width: 24px;
+          height: 34px;
+          width: 34px;
           display: block;
         }
         .album-dropdown-content .streamingicons .album-film-btn {
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
           flex: 1 1 100%;
           width: 100%;
-          gap: 5px;
-          padding: 6px 10px;
+          gap: 8px;
+          padding: 10px 20px;
           margin-right: 0;
-          margin-bottom: 4px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          margin-bottom: 8px;
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.65rem;
-          font-weight: 600;
+          font-size: 0.75rem;
+          font-weight: 700;
           letter-spacing: 0.06em;
           text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.8);
+          color: #fff;
           text-decoration: none;
-          opacity: 1;
+          background: var(--glass-bg);
+          backdrop-filter: var(--glass-blur);
+          -webkit-backdrop-filter: var(--glass-blur);
+          border: var(--glass-border);
+          border-radius: var(--radius-pill);
+          box-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.22),
+            inset 0 1px 0 rgba(190, 238, 233, 0.34),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.12);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
           box-sizing: border-box;
+          opacity: 1;
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+        }
+        .album-dropdown-content .streamingicons .album-film-btn::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          pointer-events: none;
+          background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            var(--theme-hover-glow) 0%,
+            var(--theme-hover-glow-soft) 35%,
+            transparent 55%
+          );
+          opacity: 0;
+          transition: opacity 0.2s ease;
         }
         .album-dropdown-content .streamingicons .album-film-btn:hover {
-          background: rgba(255, 255, 255, 0.06);
-          border-color: rgba(255, 255, 255, 0.28);
+          background-color: var(--theme-hover-fill);
+          border-color: var(--theme-hover-border);
+          box-shadow:
+            0 5px 20px rgba(0, 0, 0, 0.24),
+            0 0 18px rgba(62, 122, 118, 0.16),
+            inset 0 1px 0 rgba(190, 238, 233, 0.42),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.16);
+        }
+        .album-dropdown-content .streamingicons .album-film-btn:hover::before {
+          opacity: 1;
+        }
+        .album-dropdown-content .streamingicons .album-film-btn > * {
+          position: relative;
+          z-index: 1;
         }
         .album-dropdown-content .streamingicons .album-film-btn img {
-          height: 18px;
-          width: 18px;
+          height: 20px;
+          width: 20px;
         }
         /* Tracklist */
         .album-dropdown-content .tracklist {
@@ -442,23 +492,15 @@
           #redux.redux-bg .album-dropdown-content::before,
           #iseewhatidont.open .album-dropdown-content::before,
           #iseewhatidont.iseewhatidont-bg .album-dropdown-content::before {
-            opacity: 0.06;
+            opacity: 0.07;
           }
-          #saturn.open .album-dropdown-content-inner,
-          #saturn.saturn-bg .album-dropdown-content-inner,
-          #winter.open .album-dropdown-content-inner,
-          #winter.winter-bg .album-dropdown-content-inner,
-          #slowpoke.open .album-dropdown-content-inner,
-          #slowpoke.slowpoke-bg .album-dropdown-content-inner,
-          #redux.open .album-dropdown-content-inner,
-          #redux.redux-bg .album-dropdown-content-inner,
-          #iseewhatidont.open .album-dropdown-content-inner,
-          #iseewhatidont.iseewhatidont-bg .album-dropdown-content-inner {
+          .album-dropdown.open .album-dropdown-content-inner,
+          .album-dropdown.album-bg .album-dropdown-content-inner {
             background: linear-gradient(
               180deg,
-              rgba(0, 0, 0, 0.45) 0%,
-              rgba(0, 0, 0, 0.38) 50%,
-              rgba(0, 0, 0, 0.45) 100%
+              rgba(0, 0, 0, 0.32) 0%,
+              rgba(0, 0, 0, 0.24) 50%,
+              rgba(0, 0, 0, 0.32) 100%
             );
           }
           .album-dropdown-content-inner {
@@ -469,18 +511,22 @@
             margin-bottom: 14px;
           }
           .album-dropdown-content .streamingicons .album-film-btn {
-            padding: 12px 16px;
-            font-size: 0.78rem;
-            min-height: 48px;
-            margin-bottom: 4px;
+            padding: 10px 18px;
+            font-size: 0.72rem;
+            min-height: 44px;
+            margin-bottom: 6px;
+          }
+          .album-dropdown-content .streamingicons .album-film-btn img {
+            height: 18px;
+            width: 18px;
           }
           .album-dropdown-content .streamingicons a:not(.album-film-btn) {
-            padding: 8px 2px;
-            min-height: 44px;
+            padding: 4px 1px;
+            min-height: 0;
           }
           .album-dropdown-content .streamingicons img {
-            height: 24px;
-            width: 24px;
+            height: 32px;
+            width: 32px;
           }
           .album-dropdown-content .tracklist .track {
             padding: 8px 0;
@@ -490,9 +536,6 @@
             padding: 4px 0 4px 8px;
             font-size: 0.68rem;
           }
-        }
-        .single-chip .single-chip-video-link {
-          margin-left: auto;
         }
         .album-dropdown-content .album-film-link {
           display: inline-flex;
@@ -520,12 +563,10 @@
           height: 16px;
           flex-shrink: 0;
         }
-        /* Latest release – featured block above Singles */
+        /* Latest release – featured block */
         .latest-hero-section {
-          margin-top: 1.25rem;
-          margin-bottom: 1.75rem;
-          padding-bottom: 1.5rem;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          margin-top: 0;
+          margin-bottom: 0.5rem;
         }
         .latest-hero-section .albums-section-title {
           margin-bottom: 14px;
@@ -538,8 +579,39 @@
           width: 100%;
           max-width: var(--narrow-max-width);
           margin: 0 auto;
-          padding: 0;
+          padding: 14px 16px;
           color: var(--main-text);
+          border-radius: var(--radius-md);
+          position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          background: var(--glass-bg);
+          backdrop-filter: var(--glass-blur);
+          -webkit-backdrop-filter: var(--glass-blur);
+          border: var(--glass-border);
+          box-shadow: var(--glass-shadow);
+        }
+        .albums-section.latest-hero-section + .albums-section {
+          margin-top: 0;
+          padding-top: 1.65rem;
+          position: relative;
+        }
+        .albums-section.latest-hero-section + .albums-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: min(68%, 300px);
+          height: 1px;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(138, 205, 199, 0.42) 50%,
+            transparent 100%
+          );
+          box-shadow: 0 0 16px rgba(62, 122, 118, 0.18);
+          pointer-events: none;
         }
         .latest-hero-art {
           margin: 0;
@@ -559,39 +631,51 @@
         }
         .latest-hero-body {
           display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+          min-width: 0;
+        }
+        .latest-hero-info {
+          display: flex;
           flex-direction: column;
           justify-content: center;
-          gap: 2px;
+          gap: 4px;
           min-width: 0;
+          flex: 1;
         }
         .latest-hero-title {
           font-family: 'Roboto Slab', serif;
-          font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+          font-size: clamp(1.4rem, 3.2vw, 1.85rem);
           font-weight: 600;
-          line-height: 1.3;
+          line-height: 1.25;
           margin: 0;
         }
         .latest-hero-meta {
           font-family: 'Roboto Mono', monospace;
-          font-size: 0.78rem;
+          font-size: clamp(0.9rem, 2vw, 1.05rem);
           font-weight: normal;
           font-style: normal;
-          opacity: 0.5;
+          opacity: 0.55;
           margin: 0;
         }
         .latest-hero-streaming {
           display: flex;
+          flex-direction: column;
           align-items: center;
-          gap: 0;
-          margin: 8px 0 0 -6px;
+          justify-content: center;
+          gap: 6px;
+          margin: 0;
+          flex-shrink: 0;
         }
         .latest-hero-streaming a {
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 4px 6px;
+          padding: 6px 8px;
           border-radius: var(--radius-thumb);
-          opacity: 0.8;
+          opacity: 0.85;
           transition: opacity 0.15s ease, background 0.15s ease;
         }
         .latest-hero-streaming a:hover {
@@ -599,8 +683,8 @@
           background: rgba(255, 255, 255, 0.06);
         }
         .latest-hero-streaming img {
-          width: 24px;
-          height: 24px;
+          width: 34px;
+          height: 34px;
           display: block;
         }
         /* Scroll margin so "Discography" pill stays visible when hero links to #bites */
@@ -615,7 +699,6 @@
           }
           .latest-hero-section {
             margin-bottom: 1rem;
-            padding-bottom: 1rem;
           }
           .latest-hero-section .albums-section-title {
             font-size: clamp(1.15rem, 2.8vw, 1.4rem);
@@ -624,6 +707,10 @@
           .latest-hero {
             grid-template-columns: 88px minmax(0, 1fr);
             gap: 12px;
+            padding: 12px 14px;
+          }
+          .albums-section.latest-hero-section + .albums-section {
+            padding-top: 1.25rem;
           }
           .latest-hero-art {
             width: 88px;
@@ -631,17 +718,24 @@
             aspect-ratio: auto;
             flex-shrink: 0;
           }
+          .latest-hero-body {
+            gap: 10px;
+          }
           .latest-hero-title {
-            font-size: 1.05rem;
+            font-size: 1.2rem;
           }
           .latest-hero-meta {
-            font-size: 0.72rem;
+            font-size: 0.85rem;
           }
           .latest-hero-streaming {
-            margin-top: 6px;
+            gap: 4px;
           }
           .latest-hero-streaming a {
-            padding: 4px 6px;
+            padding: 4px 5px;
+          }
+          .latest-hero-streaming img {
+            width: 28px;
+            height: 28px;
           }
           .album-dropdown-header {
             padding: 10px 12px;
@@ -675,19 +769,12 @@
           .album-dropdown-content .tracklist .track span {
             font-size: 0.75rem;
           }
-          .single-chips {
-            row-gap: 6px;
-          }
-          .single-chip img {
-            width: 40px;
-            height: 40px;
-          }
         }
       </style>
 </head>
 <body>
-    <div class="header" style="background-image:url('/assets/img/head.jpg');" data-header-title="Discography">
-        <span class="header-gradient-text">Discography</span>
+    <div class="header" style="background-image:url('/assets/img/head.png');" data-header-title="Discography">
+        <h1 class="header-gradient-text">Discography</h1>
     </div>
 
 
@@ -715,11 +802,13 @@
       <h2 class="albums-section-title">Latest release</h2>
       <div class="latest-hero">
         <figure class="latest-hero-art">
-          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover" width="132" height="132">
+          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind cover" width="132" height="132">
         </figure>
         <div class="latest-hero-body">
-          <p class="latest-hero-title">Half A Mind (Single)</p>
-          <p class="latest-hero-meta">April 17, 2026</p>
+          <div class="latest-hero-info">
+            <p class="latest-hero-title">Half A Mind</p>
+            <p class="latest-hero-meta">April 17, 2026</p>
+          </div>
           <div class="latest-hero-streaming" aria-label="Listen on">
             <a href="https://open.spotify.com/track/2b35pqbXDCDq2xps2HGLTU?" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
             <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
@@ -727,16 +816,6 @@
         </div>
       </div>
     </section>
-    <section class="albumsdisplay albums-section singles-section">
-        <h2 class="albums-section-title">Singles</h2>
-        <div class="single-chips">
-          <div class="single-chip" id="halfamind"><img src="/assets/img/album/halfamind.webp" alt="Half A Mind (Single) cover"><span class="single-chip-title">Half A Mind (Single)</span></div>
-          <div class="single-chip"><img src="/assets/img/PromiseC.jpg" alt="Promise ring"><span class="single-chip-title">Promise ring</span></div>
-          <div class="single-chip"><img src="/assets/img/OC.jpg" alt="O'"><span class="single-chip-title">O'</span></div>
-          <div class="single-chip"><img src="/assets/img/ALLC.jpg" alt="All the hope I have"><span class="single-chip-title">All the hope I have</span></div>
-          <div class="single-chip"><img src="/assets/img/ExtraC.jpg" alt="Extra extra"><span class="single-chip-title">Extra extra</span></div>
-        </div>
-      </section>
       <section class="albumsdisplay albums-section">
         <h2 class="albums-section-title">Albums</h2>
         <div class="album-dropdowns" id="albumDetails">
@@ -1048,13 +1127,6 @@
         </div>
       </div>
       </section>
-      <section class="albumsdisplay albums-section singles-section">
-        <h2 class="albums-section-title">More Singles</h2>
-        <div class="single-chips">
-          <div class="single-chip"><img src="/assets/img/album/snowsong.jpg" alt="Snow Song"><span class="single-chip-title">Snow Song</span></div>
-          <div class="single-chip"><img src="/assets/img/album/kow.jpg" alt="King of Wands*"><span class="single-chip-title">King of Wands*</span></div>
-        </div>
-      </section>
       </div>
     <footer>
       <div class="footer-inner">
@@ -1090,7 +1162,7 @@
       <div class="bottom-nav-bar">
         <div class="bottom-nav-tabs">
           <a href="/" class="bottom-tab">
-            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg></span>
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5L12 3.5l8.5 6V20a2.5 2.5 0 0 1-2.5 2.5H6a2.5 2.5 0 0 1-2.5-2.5V9.5z"/><polyline points="9.5 21 9.5 14 14.5 14 14.5 21"/></svg></span>
             <span class="tab-label">HOME</span>
           </a>
           <a href="/discography/" class="bottom-tab active">
@@ -1102,7 +1174,7 @@
             <span class="tab-label">FILM</span>
           </a>
           <a href="/contact/" class="bottom-tab">
-            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h15a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-15a2.5 2.5 0 0 1-2.5-2.5V7a2.5 2.5 0 0 1 2.5-2.5z"/><polyline points="22 7.5 12 14 2 7.5"/></svg></span>
             <span class="tab-label">CONTACT</span>
           </a>
         </div>
@@ -1115,7 +1187,16 @@
 
     <script>
       (function() {
-        var bgClasses = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' };
+        var starBgClasses = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' };
+        function clearDropdownBg(dropdown, content) {
+          var once = function() {
+            if (content) content.removeEventListener('transitionend', once);
+            dropdown.classList.remove('album-bg');
+            var starBg = starBgClasses[dropdown.id];
+            if (starBg) dropdown.classList.remove(starBg);
+          };
+          if (content) content.addEventListener('transitionend', once);
+        }
         function closeDropdown(dropdown) {
           if (!dropdown.classList.contains('open')) return;
           var header = dropdown.querySelector('.album-dropdown-header');
@@ -1123,14 +1204,7 @@
           dropdown.classList.remove('open');
           if (header) header.setAttribute('aria-expanded', 'false');
           if (content) content.setAttribute('aria-hidden', 'true');
-          var bgClass = bgClasses[dropdown.id];
-          if (bgClass) {
-            var once = function() {
-              if (content) content.removeEventListener('transitionend', once);
-              dropdown.classList.remove(bgClass);
-            };
-            if (content) content.addEventListener('transitionend', once);
-          }
+          clearDropdownBg(dropdown, content);
         }
         document.querySelectorAll('.album-dropdown-header').forEach(function(btn) {
           btn.addEventListener('click', function(e) {
@@ -1144,18 +1218,13 @@
             this.setAttribute('aria-expanded', isOpen);
             var content = document.getElementById(this.getAttribute('aria-controls'));
             if (content) content.setAttribute('aria-hidden', !isOpen);
-            /* Keep dots/stars visible until close animation finishes */
-            var bgClass = bgClasses[dropdown.id];
-            if (bgClass) {
-              if (isOpen) {
-                dropdown.classList.add(bgClass);
-              } else {
-                var once = function() {
-                  content.removeEventListener('transitionend', once);
-                  dropdown.classList.remove(bgClass);
-                };
-                content.addEventListener('transitionend', once);
-              }
+            /* Keep dark overlay (and stars) visible until close animation finishes */
+            if (isOpen) {
+              dropdown.classList.add('album-bg');
+              var starBg = starBgClasses[dropdown.id];
+              if (starBg) dropdown.classList.add(starBg);
+            } else {
+              clearDropdownBg(dropdown, content);
             }
             /* Keep newly opened dropdown (other panels’ collapse can shift scroll) */
           });
@@ -1175,9 +1244,9 @@
               document.querySelectorAll('.album-dropdown.open').forEach(function(other) {
                 if (other !== target) closeDropdown(other);
               });
-              target.classList.add('open');
-              var openBg = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' }[target.id];
-              if (openBg) target.classList.add(openBg);
+              target.classList.add('open', 'album-bg');
+              var openStarBg = starBgClasses[target.id];
+              if (openStarBg) target.classList.add(openStarBg);
               btn.setAttribute('aria-expanded', 'true');
               var content = document.getElementById(btn.getAttribute('aria-controls'));
               if (content) content.setAttribute('aria-hidden', 'false');
@@ -1192,7 +1261,7 @@
         var header = document.querySelector('.header') || document.querySelector('.musicheader');
         var chip = document.getElementById('headerChip');
         if (!header || !chip) return;
-        var titleEl = header.querySelector('.headermusicinfo span');
+        var titleEl = header.querySelector('.headermusicinfo h1') || header.querySelector('.header-gradient-text');
         chip.textContent = (header.getAttribute('data-header-title') || (titleEl ? titleEl.textContent : header.textContent)).replace(/\s+/g, ' ').trim();
         chip.setAttribute('aria-hidden', 'true');
         var observer = new IntersectionObserver(function(entries) {
@@ -1249,8 +1318,8 @@
             el.addEventListener('touchcancel', function() { el.classList.remove('touch-active'); });
           });
         }
-        initCursorGlow('.single-chip');
         initCursorGlow('.album-dropdown');
+        initCursorGlow('.album-film-btn');
         initCursorGlow('.navlinks a');
       })();
     </script>

@@ -7,14 +7,9 @@
   --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
   max-width: var(--narrow-max-width);
   margin: 0 auto;
-  padding: 1.25rem var(--site-gutter) 3rem;
+  padding-left: var(--site-gutter);
+  padding-right: var(--site-gutter);
   font-family: 'Space Grotesk', sans-serif;
-}
-
-@media screen and (min-width: 769px) {
-  .contact-page {
-    padding-top: clamp(2rem, 4vw, 3rem);
-  }
 }
 
 .contact-intro {
@@ -29,8 +24,6 @@
 /* Shared glass card base */
 .contact-card,
 .contact-form-card {
-  position: relative;
-  overflow: hidden;
   padding: 24px 26px;
   border-radius: var(--radius-xl);
   box-sizing: border-box;
@@ -39,41 +32,6 @@
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-}
-
-.contact-card::before,
-.contact-form-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at var(--mouse-x) var(--mouse-y),
-    var(--theme-hover-glow) 0%,
-    var(--theme-hover-glow-soft) 35%,
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.contact-card:hover,
-.contact-form-card:hover {
-  border-color: var(--theme-hover-border);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.3),
-    0 0 22px rgba(62, 122, 118, 0.16),
-    inset 0 1px 0 rgba(190, 238, 233, 0.4),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.12);
-}
-
-.contact-card:hover::before,
-.contact-form-card:hover::before {
-  opacity: 1;
 }
 
 .contact-cards {
@@ -285,10 +243,6 @@
 }
 
 @media (max-width: 768px) {
-  .contact-page {
-    padding-bottom: 2rem;
-  }
-
   .contact-intro {
     margin-bottom: 1rem;
   }

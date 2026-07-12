@@ -7,35 +7,37 @@
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Bobby Nair | Official Site – Music, Film & More</title>
-    <meta name="description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more. Stream, watch videos, and get in touch.">
+    <meta name="description" content="Official site for Bobby Nair. Half A Mind out now — music, films, and discography including Café, Love You, King of Wands, and more. Stream, watch videos, and get in touch.">
     <meta name="keywords" content="bobby nair, discography, saturn, cafe, bobby nair music, love you song, iseewhatidont!, king of wands, let your light down">
     <link rel="canonical" href="https://bobbynair.com/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bobbynair.com/">
     <meta property="og:title" content="Bobby Nair | Official Site – Music, Film & More">
-    <meta property="og:description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more.">
-    <meta property="og:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide1.PNG">
+    <meta property="og:description" content="Official site for Bobby Nair. Half A Mind out now — music, films, and discography including Café, Love You, King of Wands, and more.">
+    <meta property="og:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide2.jpg">
     <meta property="og:site_name" content="Bobby Nair">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Bobby Nair | Official Site – Music, Film & More">
-    <meta name="twitter:description" content="Official site for Bobby Nair. Music, films, and discography – Café, Love You, King of Wands, and more...">
-    <meta name="twitter:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide1.PNG">
+    <meta name="twitter:description" content="Official site for Bobby Nair. Half A Mind out now — music, films, and discography including Café, Love You, King of Wands, and more.">
+    <meta name="twitter:image" content="https://bobbynair.com/assets/img/slideshow/NewSlide2.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Rubik+Iso&family=Space+Grotesk&display=swap" rel="stylesheet">
-    <link rel="icon" href="/assets/img/favicon/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Roboto+Mono&family=Roboto+Slab&family=Space+Grotesk&display=swap" rel="stylesheet">
+    <link rel="icon" href="/assets/img/favicon/favicon.ico" sizes="any">
+    <link rel="icon" href="/assets/img/favicon/favicon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
     <link href="/css/main.css" rel="stylesheet">
     <link rel="preload" as="image" href="/assets/img/slideshow/NewSlide1.jpg" fetchpriority="high">
-    <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <script type="application/ld+json">
-    {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bobbynair.com/#website","url":"https://bobbynair.com/","name":"Bobby Nair","description":"Official site for Bobby Nair. Music, films, and discography.","publisher":{"@id":"https://bobbynair.com/#artist"},"inLanguage":"en"},{"@type":"MusicGroup","@id":"https://bobbynair.com/#artist","name":"Bobby Nair","url":"https://bobbynair.com/","description":"Bobby Nair – musician and filmmaker."}]}
+    {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://bobbynair.com/#website","url":"https://bobbynair.com/","name":"Bobby Nair","description":"Official site for Bobby Nair. Music, films, and discography.","publisher":{"@id":"https://bobbynair.com/#artist"},"inLanguage":"en"},{"@type":"MusicGroup","@id":"https://bobbynair.com/#artist","name":"Bobby Nair","url":"https://bobbynair.com/","description":"Bobby Nair – musician and filmmaker.","sameAs":["https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi","https://music.apple.com/us/artist/bobby-nair/1591990564","https://www.youtube.com/@bobbynairmusic","https://www.instagram.com/bobbyfreakingnair/","https://genius.com/artists/Bobby-nair","https://bobbynairmusic.bandcamp.com/"]}]}
     </script>
     <link href="/css/slideshow.css" rel="stylesheet">
 </head>
 <body>
-  <div class="header" style="background-image:url('/assets/img/head.jpg');" data-header-title="Bobby Nair">
-    <span class="header-gradient-text">Bobby Nair</span>
+  <div class="header" style="background-image:url('/assets/img/head.png');" data-header-title="Bobby Nair">
+    <h1 class="header-gradient-text">Bobby Nair</h1>
   </div>
 
 
@@ -256,7 +258,7 @@
         var header = document.querySelector('.header') || document.querySelector('.musicheader');
         var chip = document.getElementById('headerChip');
         if (!header || !chip) return;
-        var titleEl = header.querySelector('.headermusicinfo span');
+        var titleEl = header.querySelector('.headermusicinfo h1') || header.querySelector('.header-gradient-text');
         chip.textContent = (header.getAttribute('data-header-title') || (titleEl ? titleEl.textContent : header.textContent)).replace(/\s+/g, ' ').trim();
         chip.setAttribute('aria-hidden', 'true');
         var observer = new IntersectionObserver(function(entries) {
@@ -298,7 +300,7 @@
       <div class="bottom-nav-bar">
         <div class="bottom-nav-tabs">
           <a href="/" class="bottom-tab active">
-            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><polyline points="9 21 9 14 15 14 15 21"/></svg></span>
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5L12 3.5l8.5 6V20a2.5 2.5 0 0 1-2.5 2.5H6a2.5 2.5 0 0 1-2.5-2.5V9.5z"/><polyline points="9.5 21 9.5 14 14.5 14 14.5 21"/></svg></span>
             <span class="tab-label">HOME</span>
           </a>
           <a href="/discography/" class="bottom-tab">
@@ -310,7 +312,7 @@
             <span class="tab-label">FILM</span>
           </a>
           <a href="/contact/" class="bottom-tab">
-            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h15a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-15a2.5 2.5 0 0 1-2.5-2.5V7a2.5 2.5 0 0 1 2.5-2.5z"/><polyline points="22 7.5 12 14 2 7.5"/></svg></span>
             <span class="tab-label">CONTACT</span>
           </a>
         </div>
