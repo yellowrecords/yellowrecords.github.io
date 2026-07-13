@@ -3,13 +3,13 @@ body{
     background: linear-gradient(-45deg, #000f4d, #001f04, #00175c, #00162e);
 	background-size: 400% 400%;
 	animation: gradient 7s ease infinite;
-    color:white;
+    color: rgb(237, 237, 237);
     font-family: 'Playfair Display', serif !important;
     margin:0;
 }
 a{
     text-decoration: none;
-    color:white;
+    color: rgb(237, 237, 237);
 }
 
 .container{
@@ -131,7 +131,7 @@ footer {
   transition: color 0.3s;
 }
 .footer-links a:hover {
-  color: #fff;
+  color: rgb(237, 237, 237);
 }
 .lnkimg{
     height:33px;

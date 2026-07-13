@@ -30,7 +30,7 @@
   <link rel="icon" href="/assets/img/favicon/favicon.svg" type="image/svg+xml">
   <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon/favicon-96x96.png">
   <link rel="apple-touch-icon" href="/assets/img/favicon/apple-touch-icon.png">
-  <link href="/css/main.css?v=1.1" rel="stylesheet">
+  <link href="/css/main.css" rel="stylesheet">
   <link href="/css/film.css" rel="stylesheet">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"ItemList","name":"Films & Music Videos – Bobby Nair","itemListElement":[
@@ -58,11 +58,24 @@
 <nav class="navbar">
   <div class="navitems">
     <div class="navlinks">
-      <a href="/">HOME</a>
-      <a href="/discography/">MUSIC</a>
-      <a class="active" href="/video/">FILM</a>
-      <a href="/contact/">CONTACT</a>
+      <a href="/">
+        <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5L12 3.5l8.5 6V20a2.5 2.5 0 0 1-2.5 2.5H6a2.5 2.5 0 0 1-2.5-2.5V9.5z"/><polyline points="9.5 21 9.5 14 14.5 14 14.5 21"/></svg></span>
+        <span class="tab-label">HOME</span>
+      </a>
+      <a href="/discography/">
+        <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <span class="tab-label">MUSIC</span>
+      </a>
+      <a class="active" href="/video/">
+        <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg></span>
+        <span class="tab-label">FILM</span>
+      </a>
+      <a href="/contact/">
+        <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h15a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-15a2.5 2.5 0 0 1-2.5-2.5V7a2.5 2.5 0 0 1 2.5-2.5z"/><polyline points="22 7.5 12 14 2 7.5"/></svg></span>
+        <span class="tab-label">CONTACT</span>
+      </a>
     </div>
+    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
     <div class="navicons">
       <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
       <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
@@ -72,7 +85,6 @@
     </div>
   </div>
 </nav>
-<div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
 <main class="film-page">
 
@@ -123,7 +135,6 @@
         </button>
       </div>
     </div>
-    <p class="film-count" id="filmCount" aria-live="polite"></p>
   </div>
 
   <ol class="film-grid" id="filmGrid">
@@ -150,8 +161,8 @@
         </div>
         <div class="film-card-body">
           <span class="film-card-tag">Music Video</span>
-          <h3 class="film-card-title">Broadcast From Nowhere - March 2026</h3>
           <time class="film-card-date" datetime="2026-03-11">March 11, 2026</time>
+          <h3 class="film-card-title">Broadcast From Nowhere</h3>
         </div>
       </a>
     </li>
@@ -434,7 +445,6 @@
   (function() {
     var cards = document.querySelectorAll('.film-card');
     var searchInput = document.getElementById('filmSearch');
-    var countEl = document.getElementById('filmCount');
     var emptyEl = document.getElementById('filmEmpty');
     var filterBtns = document.querySelectorAll('.film-filter-btn');
     var toolbarBar = document.getElementById('filmToolbarBar');
@@ -525,10 +535,6 @@
       }
     }
 
-    function updateCount(visible) {
-      countEl.textContent = visible + ' film' + (visible === 1 ? '' : 's');
-    }
-
     function applyFilters() {
       var visible = 0;
       var q = searchQuery.toLowerCase().trim();
@@ -545,7 +551,6 @@
       });
 
       emptyEl.classList.toggle('is-hidden', visible > 0);
-      updateCount(visible);
     }
 
     filterBtns.forEach(function(btn) {

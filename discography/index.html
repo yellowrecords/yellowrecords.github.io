@@ -390,7 +390,7 @@
           align-items: center;
           justify-content: center;
           text-decoration: none;
-          color: #fff;
+          color: var(--main-text);
           background: var(--album-btn-bg);
           backdrop-filter: var(--glass-blur);
           -webkit-backdrop-filter: var(--glass-blur);
@@ -698,12 +698,12 @@
           border: var(--glass-border);
           box-shadow: var(--glass-shadow);
         }
-        .albums-section.latest-hero-section + .albums-section {
+        .albums-section + .albums-section {
           margin-top: 0;
           padding-top: 1.65rem;
           position: relative;
         }
-        .albums-section.latest-hero-section + .albums-section::before {
+        .albums-section + .albums-section::before {
           content: '';
           position: absolute;
           top: 0;
@@ -719,6 +719,12 @@
           );
           box-shadow: 0 0 16px rgba(62, 122, 118, 0.18);
           pointer-events: none;
+        }
+        .singles-section + .albums-section::before {
+          content: none;
+        }
+        .singles-section + .albums-section {
+          padding-top: 0;
         }
         .latest-hero-art {
           margin: 0;
@@ -782,7 +788,7 @@
           min-height: 44px;
           padding: 6px 8px;
           text-decoration: none;
-          color: #fff;
+          color: var(--main-text);
           background: var(--album-btn-bg);
           backdrop-filter: var(--glass-blur);
           -webkit-backdrop-filter: var(--glass-blur);
@@ -849,8 +855,11 @@
             gap: 12px;
             padding: var(--album-pad-y) 14px;
           }
-          .albums-section.latest-hero-section + .albums-section {
+          .albums-section + .albums-section {
             padding-top: 1.25rem;
+          }
+          .singles-section + .albums-section {
+            padding-top: 0;
           }
           .latest-hero-art {
             width: 88px;
@@ -956,18 +965,56 @@
       <h2 class="albums-section-title">Latest release</h2>
       <div class="latest-hero">
         <figure class="latest-hero-art album-art-glass">
-          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind cover" width="132" height="132">
+          <img src="/assets/img/album/feelslikefluid.jpg" alt="Feels Like Fluid cover" width="132" height="132">
         </figure>
         <div class="latest-hero-body">
           <div class="latest-hero-info">
-            <p class="latest-hero-title">Half A Mind</p>
-            <p class="latest-hero-meta">April 17, 2026</p>
+            <p class="latest-hero-title">Feels Like Fluid</p>
+            <p class="latest-hero-meta">July 10, 2026</p>
           </div>
           <div class="latest-hero-streaming" aria-label="Listen on">
-            <a href="https://open.spotify.com/track/2b35pqbXDCDq2xps2HGLTU?" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
-            <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
+            <a href="https://open.spotify.com/album/7HP0rkgn2hVQ1QSDSWP5Fm" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
+            <a href="https://music.apple.com/us/album/feels-like-fluid-single/1894407632" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
           </div>
         </div>
+      </div>
+    </section>
+    <section class="albumsdisplay albums-section singles-section">
+      <h2 class="albums-section-title">Singles</h2>
+      <div class="single-chips">
+        <article class="single-chip">
+          <img src="/assets/img/album/hardthing.jpg" alt="Hard Thing cover" width="64" height="64">
+          <div class="single-chip-info">
+            <p class="single-chip-title">Hard Thing</p>
+            <p class="single-chip-meta">June 26, 2026</p>
+          </div>
+          <div class="single-chip-streaming" aria-label="Listen on">
+            <a href="https://open.spotify.com/album/1yXH5Nir1IFnyDzMzGHzCw" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
+            <a href="https://music.apple.com/us/album/hard-thing-single/1894118060" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
+          </div>
+        </article>
+        <article class="single-chip">
+          <img src="/assets/img/album/rawhide.jpg" alt="Rawhide cover" width="64" height="64">
+          <div class="single-chip-info">
+            <p class="single-chip-title">Rawhide</p>
+            <p class="single-chip-meta">May 22, 2026</p>
+          </div>
+          <div class="single-chip-streaming" aria-label="Listen on">
+            <a href="https://open.spotify.com/album/3ulxiGtQzx9g38fOQ7j0I9" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
+            <a href="https://music.apple.com/us/album/rawhide-single/1894110638" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
+          </div>
+        </article>
+        <article class="single-chip">
+          <img src="/assets/img/album/halfamind.webp" alt="Half A Mind cover" width="64" height="64">
+          <div class="single-chip-info">
+            <p class="single-chip-title">Half A Mind</p>
+            <p class="single-chip-meta">April 17, 2026</p>
+          </div>
+          <div class="single-chip-streaming" aria-label="Listen on">
+            <a href="https://open.spotify.com/album/64w78R6BH9pyjkBJBX4AxT" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><img src="/assets/img/icons/spotify.png" alt=""></a>
+            <a href="https://music.apple.com/us/album/half-a-mind-single/1891114556" target="_blank" rel="noopener noreferrer" aria-label="Apple Music"><img src="/assets/img/icons/am.png" alt=""></a>
+          </div>
+        </article>
       </div>
     </section>
       <section class="albumsdisplay albums-section">
@@ -1482,6 +1529,8 @@
         initCursorGlow('.album-dropdown');
         initCursorGlow('.album-film-btn');
         initCursorGlow('.album-dropdown-content .streamingicons a:not(.album-film-btn)');
+        initCursorGlow('.single-chip');
+        initCursorGlow('.latest-hero-streaming a');
         initCursorGlow('.navlinks a');
       })();
     </script>

@@ -48,18 +48,6 @@ async function optimizePng(file, maxDim = null) {
   return { file, before, after };
 }
 
-async function toWebp(source, quality = 85) {
-  const abs = path.join(root, source);
-  const out = abs.replace(/\.(png|jpe?g)$/i, '.webp');
-  const before = fs.statSync(abs).size;
-  await sharp(abs)
-    .rotate()
-    .webp({ quality, alphaQuality: 90 })
-    .toFile(out);
-  const after = fs.statSync(out).size;
-  return { file: path.relative(root, out), before, after };
-}
-
 function fmt(bytes) {
   return `${(bytes / 1024).toFixed(1)} KB`;
 }
@@ -71,10 +59,6 @@ for (let i = 1; i <= 6; i++) {
   results.push(await optimizeJpeg(`assets/img/slideshow/NewSlide${i}.jpg`, 1200, 80));
 }
 
-// Hero link cards on homepage
-results.push(await toWebp('assets/img/videos.png', 82));
-results.push(await toWebp('assets/img/discography.png', 82));
-
 // Oversized icon
 results.push(await optimizePng('assets/img/icons/insta.png', 128));
 
@@ -83,24 +67,18 @@ const discographyJpegs = [
   'assets/img/album/bites.jpg',
   'assets/img/album/loveyou.jpg',
   'assets/img/album/caferedux.jpg',
-  'assets/img/album/snowsong.jpg',
   'assets/img/album/slowpoke.jpg',
   'assets/img/album/kow.jpg',
   'assets/img/album/redux.jpg',
   'assets/img/album/saturn.jpg',
-  'assets/img/album/ontheline.jpg',
   'assets/img/album/imtw.jpg',
-  'assets/img/album/killallthebutterflies.jpg',
+  'assets/img/album/feelslikefluid.jpg',
+  'assets/img/album/rawhide.jpg',
+  'assets/img/album/hardthing.jpg',
   'assets/img/album/iseewhatidont! Cover.jpg',
-  'assets/img/album/into my eyes Cover.jpg',
-  'assets/img/album/find me when you land Cover.JPG',
   'assets/img/album/Everything I Loved!TN.jpg',
   'assets/img/album/Jack The Rockstar_TN.jpeg',
   'assets/img/IMG_9906.jpg',
-  'assets/img/PromiseC.jpg',
-  'assets/img/OC.jpg',
-  'assets/img/ALLC.jpg',
-  'assets/img/ExtraC.jpg',
   'assets/img/puncherz/puncherzthumb1.jpg',
 ];
 for (const f of discographyJpegs) {
@@ -116,7 +94,6 @@ const thumbPngs = [
   'assets/img/CowboyTB.jpg',
   'assets/img/ExtraTB.jpg',
   'assets/img/LifeTB.png',
-  'assets/img/masks.png',
   'assets/img/album/cafe-blur.png',
   'assets/img/album/loveyou-blur.jpg',
   'assets/img/album/kow-blur.jpg',

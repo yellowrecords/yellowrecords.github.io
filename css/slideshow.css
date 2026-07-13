@@ -14,12 +14,24 @@
   --slideshow-inset-x: 14px;
   --slideshow-nav-btn-size: 44px;
   --slideshow-controls-gap: 10px;
-  --slideshow-controls-padding-bottom: 16px;
-  --slideshow-progress-inset-y: 4px;
+  --slideshow-controls-padding-bottom: 14px;
+  --slideshow-progress-height: 7px;
+  --slideshow-progress-pad-bottom: 8px;
+  --slideshow-progress-inset-x: calc(var(--slideshow-inset-x) + 12px);
+  --slideshow-duration: 7.5s;
   --theme-hover-border: rgba(218, 255, 252, 0.46);
   --theme-hover-fill: rgba(62, 122, 118, 0.13);
   --theme-hover-glow: rgba(138, 205, 199, 0.26);
   --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
+}
+
+.slideshow-container:focus {
+  outline: none;
+}
+
+.slideshow-container:focus-visible {
+  outline: 2px solid rgba(138, 205, 199, 0.45);
+  outline-offset: 3px;
 }
 
 .mySlides {
@@ -51,19 +63,14 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: calc(var(--slideshow-progress-height) + var(--slideshow-progress-pad-bottom));
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
+  padding: 20px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
   gap: 10px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.62) 0%,
-    rgba(0, 0, 0, 0.28) 55%,
-    transparent 100%
-  );
+  background: transparent;
   pointer-events: none;
 }
 
@@ -84,11 +91,10 @@
   width: var(--slideshow-nav-btn-size);
   height: var(--slideshow-nav-btn-size);
   color: rgba(255, 255, 255, 0.62);
-  font-size: 20px;
-  line-height: 1;
   text-decoration: none;
   user-select: none;
   border-radius: 50%;
+  -webkit-tap-highlight-color: transparent;
   --mouse-x: 50%;
   --mouse-y: 50%;
   backdrop-filter: var(--glass-blur);
@@ -98,13 +104,8 @@
     radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%),
     var(--glass-bg);
   border: 1px solid rgba(218, 255, 252, 0.24);
-  box-shadow:
-    0 8px 26px rgba(0, 0, 0, 0.18),
-    0 0 18px rgba(62, 122, 118, 0.07),
-    inset 0 1px 0 rgba(190, 238, 233, 0.46),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.16),
-    inset 1px 0 0 rgba(138, 205, 199, 0.16);
-  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: none;
+  transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
 
 .slideshow-controls .prev::before,
@@ -129,19 +130,7 @@
 .slideshow-controls .prev::after,
 .slideshow-controls .next::after,
 .slideshow-container > .slideshow-resume.contact-card-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background:
-    linear-gradient(105deg, transparent 28%, rgba(218, 255, 252, 0.2) 48%, transparent 68%),
-    linear-gradient(118deg, rgba(190, 238, 233, 0.18) 0%, transparent 18%, transparent 66%, rgba(62, 122, 118, 0.14) 100%),
-    linear-gradient(72deg, transparent 0%, rgba(218, 255, 252, 0.08) 48%, transparent 54%),
-    radial-gradient(ellipse 78% 90% at 20% 0%, rgba(138, 205, 199, 0.12) 0%, transparent 52%),
-    radial-gradient(ellipse 90% 70% at 82% 100%, rgba(62, 122, 118, 0.16) 0%, transparent 62%);
-  opacity: 0.82;
+  content: none;
 }
 
 .slideshow-controls .prev:hover,
@@ -152,17 +141,28 @@
     radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.18) 0%, transparent 62%),
     var(--glass-bg);
   border-color: var(--theme-hover-border);
-  box-shadow:
-    0 8px 28px rgba(0, 0, 0, 0.22),
-    0 0 22px rgba(62, 122, 118, 0.14),
-    inset 0 1px 0 rgba(190, 238, 233, 0.52),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.2),
-    inset 1px 0 0 rgba(138, 205, 199, 0.2);
+  box-shadow: none;
 }
 
 .slideshow-controls .prev:hover,
 .slideshow-controls .next:hover {
   color: rgba(255, 255, 255, 0.95);
+}
+
+.slideshow-controls .prev svg,
+.slideshow-controls .next svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.slideshow-controls .prev:focus-visible,
+.slideshow-controls .next:focus-visible,
+.slideshow-dots .dot:focus-visible,
+.slideshow-container > .slideshow-resume.contact-card-btn:focus-visible {
+  outline: 2px solid rgba(138, 205, 199, 0.72);
+  outline-offset: 2px;
 }
 
 .slideshow-controls .prev:hover::before,
@@ -172,22 +172,31 @@
 }
 
 .slideshow-container > .slideshow-resume.contact-card-btn:hover {
-  color: #fff;
+  color: var(--main-text);
 }
 
-.slideshow-center {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: flex;
-  align-items: center;
+.slideshow-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  padding: 0 var(--slideshow-progress-inset-x) var(--slideshow-progress-pad-bottom);
+  box-sizing: border-box;
+  pointer-events: none;
+  background: transparent;
+}
+
+.slideshow-progress > * {
+  pointer-events: auto;
 }
 
 .slideshow-dots {
   display: flex;
   align-items: stretch;
-  gap: 4px;
+  gap: 5px;
   width: 100%;
-  height: var(--slideshow-nav-btn-size);
+  height: var(--slideshow-progress-height);
   padding: 0;
   box-sizing: border-box;
 }
@@ -203,48 +212,116 @@
   display: block;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  appearance: none;
+  -webkit-appearance: none;
   font: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(0, 0, 0, 0.14);
-  backdrop-filter: blur(6px) saturate(1.15);
-  -webkit-backdrop-filter: blur(6px) saturate(1.15);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  border: 1px solid rgba(218, 255, 252, 0.22);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.1) 0%, rgba(62, 122, 118, 0.1) 58%, rgba(0, 0, 0, 0.06) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.12) 0%, transparent 62%),
+    var(--glass-bg);
+  box-shadow: none;
+  transition: border-color 0.3s ease, background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
 }
 
-.dot-fill {
+.dot::before {
+  content: '';
   position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 0%;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at var(--mouse-x) var(--mouse-y), var(--theme-hover-glow) 0%, var(--theme-hover-glow-soft) 35%, transparent 55%),
+    linear-gradient(180deg, rgba(190, 238, 233, 0.14) 0%, transparent 65%);
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.dot:hover::before {
+  opacity: 0.95;
+}
+
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
   background: linear-gradient(
     to right,
-    rgba(98, 168, 162, 0.48),
-    rgba(138, 205, 199, 0.58)
+    rgba(62, 122, 118, 0.88),
+    rgba(98, 168, 162, 0.94)
   );
-  border-radius: inherit;
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  will-change: transform;
   pointer-events: none;
 }
 
+.slideshow-container:not(.is-playing) .dot::after {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.slideshow-container:not(.is-playing) .dot.active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.slideshow-container.is-playing .dot.active.is-ticking::after {
+  animation: slideshow-tick var(--slideshow-duration) linear forwards;
+}
+
+@keyframes slideshow-tick {
+  from {
+    transform: scaleX(0);
+    opacity: 1;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
 .dot:hover {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(0, 0, 0, 0.2);
+  border-color: var(--theme-hover-border);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.14) 0%, rgba(62, 122, 118, 0.14) 58%, rgba(0, 0, 0, 0.08) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.16) 0%, transparent 62%),
+    var(--glass-bg);
 }
 
 .dot.active {
-  border-color: rgba(138, 205, 199, 0.38);
-  background: rgba(0, 0, 0, 0.18);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 0 6px rgba(98, 168, 162, 0.15);
+  border-color: rgba(138, 205, 199, 0.34);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.13) 0%, rgba(62, 122, 118, 0.14) 58%, rgba(0, 0, 0, 0.07) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.15) 0%, transparent 62%),
+    var(--glass-bg);
+}
+
+.slideshow-container.is-playing .dot.active.is-ticking {
+  border-color: rgba(62, 122, 118, 0.36);
+  background:
+    linear-gradient(180deg, rgba(20, 50, 48, 0.38) 0%, rgba(12, 35, 33, 0.44) 58%, rgba(0, 0, 0, 0.32) 100%),
+    rgba(12, 40, 38, 0.36);
+}
+
+.slideshow-container.is-playing .dot.active.is-ticking::before {
+  opacity: 0.28;
 }
 
 .slideshow-container > .slideshow-resume.contact-card-btn {
   position: absolute;
   left: calc(var(--slideshow-inset-x) + var(--slideshow-nav-btn-size) + var(--slideshow-controls-gap));
   right: calc(var(--slideshow-inset-x) + var(--slideshow-nav-btn-size) + var(--slideshow-controls-gap));
-  bottom: calc(var(--slideshow-controls-padding-bottom) + (var(--slideshow-nav-btn-size) / 2));
+  bottom: calc(var(--slideshow-progress-height) + var(--slideshow-progress-pad-bottom) + var(--slideshow-controls-padding-bottom) + (var(--slideshow-nav-btn-size) / 2));
   z-index: 4;
   display: block;
   overflow: hidden;
@@ -253,8 +330,13 @@
   margin: 0;
   padding: 12px 24px;
   box-sizing: border-box;
-  border-radius: var(--radius-pill);
   cursor: pointer;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-align: center;
+  border-radius: var(--radius-pill);
   color: rgba(255, 255, 255, 0.95);
   white-space: nowrap;
   opacity: 0;
@@ -270,19 +352,13 @@
     radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%),
     var(--glass-bg);
   border: 1px solid rgba(218, 255, 252, 0);
-  box-shadow:
-    0 8px 26px rgba(0, 0, 0, 0.18),
-    0 0 18px rgba(62, 122, 118, 0.07),
-    inset 0 1px 0 rgba(190, 238, 233, 0.46),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.16),
-    inset 1px 0 0 rgba(138, 205, 199, 0.16);
+  box-shadow: none;
   transition:
     opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
     visibility 0s linear 0.5s,
     color 0.2s ease,
     border-color 0.35s ease,
-    box-shadow 0.35s ease,
     background 0.35s ease;
 }
 
@@ -298,14 +374,8 @@
     visibility 0s linear 0s,
     color 0.2s ease,
     border-color 0.35s ease,
-    box-shadow 0.35s ease,
     background 0.35s ease;
 }
-
-.slideshow-controls.paused .dot-fill {
-  visibility: hidden;
-}
-
 
 /* Tablet: shorter carousel to match stacked layout */
 @media only screen and (min-width: 621px) and (max-width: 1030px) {
@@ -322,19 +392,22 @@
     --slideshow-inset-x: 10px;
     --slideshow-nav-btn-size: 38px;
     --slideshow-controls-gap: 8px;
-    --slideshow-controls-padding-bottom: 12px;
-    --slideshow-progress-inset-y: 3px;
+    --slideshow-controls-padding-bottom: 10px;
+    --slideshow-progress-height: 6px;
+    --slideshow-progress-pad-bottom: 6px;
+    --slideshow-progress-inset-x: calc(var(--slideshow-inset-x) + 8px);
   }
   .slideshow-controls {
-    padding: 22px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
+    padding: 16px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
     gap: 8px;
   }
   .slideshow-dots {
-    gap: 3px;
+    gap: 4px;
   }
-  .slideshow-controls .prev,
-  .slideshow-controls .next {
-    font-size: 16px;
+  .slideshow-controls .prev svg,
+  .slideshow-controls .next svg {
+    width: 17px;
+    height: 17px;
   }
   .slideshow-controls.paused ~ .slideshow-resume.contact-card-btn {
     padding: 10px 18px;

@@ -70,25 +70,26 @@
     </nav>
     <main class="contact-page">
         <p class="contact-intro">Reach out for booking, press, or general inquiries.</p>
-        <div class="contact-cards">
-          <div class="contact-card">
-            <div class="contact-card-header">
-              <h3 class="contact-card-title">Email</h3>
-              <img src="/assets/img/icons/mail.svg" alt="" class="contact-card-icon" width="32" height="32">
+        <div class="contact-layout">
+          <div class="contact-cards">
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <h3 class="contact-card-title">Email</h3>
+                <img src="/assets/img/icons/mail.svg" alt="" class="contact-card-icon" width="32" height="32">
+              </div>
+              <p class="contact-card-value">nairbobby5@gmail.com</p>
+              <a href="mailto:nairbobby5@gmail.com" class="contact-card-btn">Send Email</a>
             </div>
-            <p class="contact-card-value">nairbobby5@gmail.com</p>
-            <a href="mailto:nairbobby5@gmail.com" class="contact-card-btn">Send Email</a>
-          </div>
-          <div class="contact-card">
-            <div class="contact-card-header">
-              <h3 class="contact-card-title">Instagram</h3>
-              <img src="/assets/img/icons/insta.svg" alt="" class="contact-card-icon" width="32" height="32">
+            <div class="contact-card">
+              <div class="contact-card-header">
+                <h3 class="contact-card-title">Instagram</h3>
+                <img src="/assets/img/icons/insta.svg" alt="" class="contact-card-icon" width="32" height="32">
+              </div>
+              <p class="contact-card-value">@bobbyfreakingnair</p>
+              <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank" rel="noopener noreferrer" class="contact-card-btn">DM</a>
             </div>
-            <p class="contact-card-value">@bobbyfreakingnair</p>
-            <a href="https://www.instagram.com/bobbyfreakingnair/" target="_blank" rel="noopener noreferrer" class="contact-card-btn">DM</a>
           </div>
-        </div>
-        <div class="contact-form-card">
+          <div class="contact-form-card">
           <h2 class="contact-form-title">Send a Message</h2>
             <form action="https://api.web3forms.com/submit" method="POST" id="form">
               <input type="hidden" name="access_key" value="df86a2e6-e223-4860-9a42-730e47b253e0" />
@@ -107,10 +108,13 @@
                 <label for="message">Message</label>
                 <textarea rows="5" name="message" id="message" placeholder="Your Message" required></textarea>
               </div>
-              <button type="submit" class="contact-card-btn">Send Message</button>
+              <div class="contact-field">
+                <button type="submit" class="contact-card-btn">Send Message</button>
+              </div>
               <p class="contact-form-result" id="result"></p>
             </form>
           </div>
+        </div>
     </main>
 
     <footer>

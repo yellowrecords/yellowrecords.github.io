@@ -587,7 +587,7 @@
 }
 
 .film-filter-btn.active {
-  color: #fff;
+  color: var(--main-text);
 }
 
 .film-filter-toggle {

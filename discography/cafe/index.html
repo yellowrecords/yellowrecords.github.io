@@ -55,11 +55,24 @@
     <nav class="navbar">
       <div class="navitems">
         <div class="navlinks">
-          <a href="/">HOME</a>
-          <a class="active" href="/discography/">MUSIC</a>
-          <a href="/video/">FILM</a>
-          <a href="/contact/">CONTACT</a>
+          <a href="/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5L12 3.5l8.5 6V20a2.5 2.5 0 0 1-2.5 2.5H6a2.5 2.5 0 0 1-2.5-2.5V9.5z"/><polyline points="9.5 21 9.5 14 14.5 14 14.5 21"/></svg></span>
+            <span class="tab-label">HOME</span>
+          </a>
+          <a class="active" href="/discography/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+            <span class="tab-label">MUSIC</span>
+          </a>
+          <a href="/video/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg></span>
+            <span class="tab-label">FILM</span>
+          </a>
+          <a href="/contact/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h15a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-15a2.5 2.5 0 0 1-2.5-2.5V7a2.5 2.5 0 0 1 2.5-2.5z"/><polyline points="22 7.5 12 14 2 7.5"/></svg></span>
+            <span class="tab-label">CONTACT</span>
+          </a>
         </div>
+        <div class="header-chip" id="headerChip" aria-hidden="true"></div>
         <div class="navicons">
           <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
           <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
@@ -69,7 +82,6 @@
         </div>
       </div>
     </nav>
-    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
        
 <div class="musicpage">
     <iframe
@@ -166,7 +178,6 @@
           Let me know how it goes<br>
           Because I won't be around
         </p>
-</p>
 </div>
 
     <footer>
@@ -237,6 +248,23 @@
         var panel = document.querySelector('.bottom-nav-panel');
         linksTab.addEventListener('click', function(e) { e.stopPropagation(); panel.classList.toggle('open'); });
         document.addEventListener('click', function(e) { if (!panel.contains(e.target) && e.target !== linksTab) { panel.classList.remove('open'); } });
+      })();
+    </script>
+    <script>
+      (function() {
+        function setGlowPosition(el, e) {
+          var rect = el.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          el.style.setProperty('--mouse-x', x + '%');
+          el.style.setProperty('--mouse-y', y + '%');
+        }
+        function initCursorGlow(selector) {
+          document.querySelectorAll(selector).forEach(function(el) {
+            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
+          });
+        }
+        initCursorGlow('.navlinks a');
       })();
     </script>
 </body>
