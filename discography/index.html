@@ -120,7 +120,8 @@
           width: 56px;
           height: 56px;
         }
-        .album-dropdown-header:hover .album-art-glass {
+        .album-dropdown-header:hover .album-art-glass,
+        .single-chip:hover .album-art-glass {
           border-color: rgba(218, 255, 252, 0.38);
           box-shadow:
             0 5px 20px rgba(0, 0, 0, 0.36),
@@ -129,6 +130,10 @@
             inset 0 -1px 0 rgba(62, 122, 118, 0.24),
             inset 1px 0 0 rgba(138, 205, 199, 0.18),
             inset -1px 0 0 rgba(0, 0, 0, 0.14);
+        }
+        .single-chip .album-art-glass {
+          width: 64px;
+          height: 64px;
         }
         /* Album dropdowns – liquid glass (matches navbar) */
         .album-dropdowns {
@@ -896,6 +901,10 @@
             width: 48px;
             height: 48px;
           }
+          .single-chip .album-art-glass {
+            width: 56px;
+            height: 56px;
+          }
           .album-dropdown-title-wrap h4 {
             font-size: 1rem;
           }
@@ -1388,7 +1397,7 @@
 
     <script>
       (function() {
-        document.querySelectorAll('.album-dropdown-header > img').forEach(function(img) {
+        document.querySelectorAll('.album-dropdown-header > img, .single-chip > img').forEach(function(img) {
           if (img.parentElement.classList.contains('album-art-glass')) return;
           var frame = document.createElement('span');
           frame.className = 'album-art-glass';
