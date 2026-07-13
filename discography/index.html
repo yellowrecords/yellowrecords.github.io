@@ -38,6 +38,97 @@
           --theme-hover-fill: rgba(62, 122, 118, 0.13);
           --theme-hover-glow: rgba(138, 205, 199, 0.26);
           --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
+          /* Album card radius & spacing scale */
+          --album-surface-radius: 20px;
+          --album-art-radius: var(--radius-sm);
+          --album-inset-radius: var(--radius-md);
+          --album-control-radius: var(--radius-inner);
+          --album-pad-x: 16px;
+          --album-pad-y: 12px;
+          --album-header-gap: 14px;
+          --album-inset-pad: 6px;
+          --album-inset-gap: 4px;
+          --album-block-gap: 14px;
+          /* Streaming buttons – clear glass with subtle card-green tint */
+          --album-btn-bg: linear-gradient(
+            180deg,
+            rgba(138, 205, 199, 0.07) 0%,
+            rgba(98, 168, 162, 0.03) 45%,
+            rgba(0, 0, 0, 0.05) 100%
+          );
+          --album-btn-border: 1px solid rgba(138, 205, 199, 0.14);
+          --album-btn-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.16),
+            inset 0 1px 0 rgba(190, 238, 233, 0.16),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.05);
+          --album-btn-hover-bg: rgba(62, 122, 118, 0.07);
+          --album-btn-hover-border: rgba(138, 205, 199, 0.22);
+          --album-btn-hover-shadow:
+            0 5px 20px rgba(0, 0, 0, 0.20),
+            0 0 10px rgba(62, 122, 118, 0.06),
+            inset 0 1px 0 rgba(190, 238, 233, 0.22),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.07);
+          --album-inset-tray-bg: rgba(138, 205, 199, 0.03);
+          --album-inset-tray-border: rgba(138, 205, 199, 0.08);
+          --album-inset-tray-shadow:
+            inset 0 1px 2px rgba(190, 238, 233, 0.06),
+            inset 0 0 0 1px rgba(138, 205, 199, 0.04);
+          /* Album art – jewel-case glass frame */
+          --album-art-glass-border: 1px solid rgba(138, 205, 199, 0.32);
+          --album-art-glass-shadow:
+            0 4px 18px rgba(0, 0, 0, 0.34),
+            0 0 14px rgba(62, 122, 118, 0.16),
+            inset 0 1px 0 rgba(190, 238, 233, 0.44),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.2),
+            inset 1px 0 0 rgba(138, 205, 199, 0.14),
+            inset -1px 0 0 rgba(0, 0, 0, 0.12);
+          --album-art-glass-shine:
+            linear-gradient(125deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 26%, transparent 50%, transparent 70%, rgba(138, 205, 199, 0.14) 100%),
+            linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, transparent 36%),
+            radial-gradient(ellipse 85% 55% at 50% 0%, rgba(190, 238, 233, 0.22) 0%, transparent 68%);
+        }
+        /* Album art – glossy glass frame over cover */
+        .album-art-glass {
+          position: relative;
+          display: block;
+          flex-shrink: 0;
+          overflow: hidden;
+          isolation: isolate;
+          border-radius: var(--album-art-radius);
+          border: var(--album-art-glass-border);
+          box-shadow: var(--album-art-glass-shadow);
+        }
+        .album-art-glass::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          pointer-events: none;
+          z-index: 1;
+          background: var(--album-art-glass-shine);
+          opacity: 0.78;
+        }
+        .album-art-glass img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: inherit;
+          border: none;
+        }
+        .album-dropdown-header .album-art-glass {
+          width: 56px;
+          height: 56px;
+        }
+        .album-dropdown-header:hover .album-art-glass {
+          border-color: rgba(218, 255, 252, 0.38);
+          box-shadow:
+            0 5px 20px rgba(0, 0, 0, 0.36),
+            0 0 16px rgba(62, 122, 118, 0.22),
+            inset 0 1px 0 rgba(218, 255, 252, 0.5),
+            inset 0 -1px 0 rgba(62, 122, 118, 0.24),
+            inset 1px 0 0 rgba(138, 205, 199, 0.18),
+            inset -1px 0 0 rgba(0, 0, 0, 0.14);
         }
         /* Album dropdowns – liquid glass (matches navbar) */
         .album-dropdowns {
@@ -51,7 +142,7 @@
           font-family: 'Playfair Display', serif;
           position: relative;
           margin-bottom: 10px;
-          border-radius: var(--radius-md);
+          border-radius: var(--album-surface-radius);
           overflow: hidden;
           isolation: isolate;
           background: var(--glass-bg);
@@ -86,7 +177,8 @@
         .album-dropdown.open {
           border-color: rgba(218, 255, 252, 0.28);
         }
-        .album-dropdown:not(.open):hover {
+        .album-dropdown:not(.open):hover,
+        .album-dropdown.open:has(.album-dropdown-header:hover) {
           border-color: rgba(138, 205, 199, 0.4);
           box-shadow:
             0 4px 20px rgba(0, 0, 0, 0.22),
@@ -94,14 +186,15 @@
             inset 0 -1px 0 rgba(62, 122, 118, 0.12);
         }
         .album-dropdown:not(.open):hover::before,
-        .album-dropdown:not(.open).touch-active::before {
+        .album-dropdown:not(.open).touch-active::before,
+        .album-dropdown.open:has(.album-dropdown-header:hover)::before {
           opacity: 1;
         }
         .album-dropdown-header {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 12px 16px;
+          gap: var(--album-header-gap);
+          padding: var(--album-pad-y) var(--album-pad-x);
           cursor: pointer;
           list-style: none;
           text-align: left;
@@ -112,16 +205,8 @@
           font: inherit;
           transition: background 0.15s ease;
         }
-        .album-dropdown:not(.open) .album-dropdown-header:hover {
+        .album-dropdown-header:hover {
           background: rgba(255, 255, 255, 0.025);
-        }
-        .album-dropdown-header img {
-          width: 56px;
-          height: 56px;
-          object-fit: cover;
-          border-radius: var(--radius-inner);
-          flex-shrink: 0;
-          border: 1px solid rgba(255, 255, 255, 0.18);
         }
         .album-dropdown-title-wrap {
           flex: 1;
@@ -179,78 +264,99 @@
             rgba(0, 0, 0, 0.26) 100%
           );
         }
-        /* Album dots/stars background when dropdown is open or closing (until animation ends) */
-        #saturn.open .album-dropdown-content,
-        #saturn.saturn-bg .album-dropdown-content,
-        #winter.open .album-dropdown-content,
-        #winter.winter-bg .album-dropdown-content,
-        #slowpoke.open .album-dropdown-content,
-        #slowpoke.slowpoke-bg .album-dropdown-content,
-        #redux.open .album-dropdown-content,
-        #redux.redux-bg .album-dropdown-content,
-        #iseewhatidont.open .album-dropdown-content,
-        #iseewhatidont.iseewhatidont-bg .album-dropdown-content {
+        /* Album dots/stars background – tracklist only */
+        #saturn.open .album-dropdown-content .tracklist,
+        #saturn.saturn-bg .album-dropdown-content .tracklist,
+        #winter.open .album-dropdown-content .tracklist,
+        #winter.winter-bg .album-dropdown-content .tracklist,
+        #slowpoke.open .album-dropdown-content .tracklist,
+        #slowpoke.slowpoke-bg .album-dropdown-content .tracklist,
+        #redux.open .album-dropdown-content .tracklist,
+        #redux.redux-bg .album-dropdown-content .tracklist,
+        #iseewhatidont.open .album-dropdown-content .tracklist,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content .tracklist {
           position: relative;
+          overflow: hidden;
+          isolation: isolate;
+          background: var(--album-inset-tray-bg);
         }
-        #saturn.open .album-dropdown-content::before,
-        #saturn.saturn-bg .album-dropdown-content::before {
+        #saturn.open .album-dropdown-content .tracklist::before,
+        #saturn.saturn-bg .album-dropdown-content .tracklist::before {
           content: '';
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/orange stars.png') center / 136% no-repeat;
+          border-radius: inherit;
+          background: url('/assets/img/dots/orange stars.png') center / cover no-repeat;
           opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
-        #winter.open .album-dropdown-content::before,
-        #winter.winter-bg .album-dropdown-content::before {
+        #winter.open .album-dropdown-content .tracklist::before,
+        #winter.winter-bg .album-dropdown-content .tracklist::before {
           content: '';
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/white stars.png') center / 136% no-repeat;
+          border-radius: inherit;
+          background: url('/assets/img/dots/white stars.png') center / cover no-repeat;
           opacity: 0.12;
           mix-blend-mode: screen;
           pointer-events: none;
         }
-        #slowpoke.open .album-dropdown-content::before,
-        #slowpoke.slowpoke-bg .album-dropdown-content::before {
+        #slowpoke.open .album-dropdown-content .tracklist::before,
+        #slowpoke.slowpoke-bg .album-dropdown-content .tracklist::before {
           content: '';
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/yellow stars.png') center / 136% no-repeat;
+          border-radius: inherit;
+          background: url('/assets/img/dots/yellow stars.png') center / cover no-repeat;
           opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
-        #redux.open .album-dropdown-content::before,
-        #redux.redux-bg .album-dropdown-content::before {
+        #redux.open .album-dropdown-content .tracklist::before,
+        #redux.redux-bg .album-dropdown-content .tracklist::before {
           content: '';
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/red stars.png') center / 136% no-repeat;
+          border-radius: inherit;
+          background: url('/assets/img/dots/red stars.png') center / cover no-repeat;
           opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
         }
-        #iseewhatidont.open .album-dropdown-content::before,
-        #iseewhatidont.iseewhatidont-bg .album-dropdown-content::before {
+        #iseewhatidont.open .album-dropdown-content .tracklist::before,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content .tracklist::before {
           content: '';
           position: absolute;
           inset: 0;
           z-index: 0;
-          background: url('/assets/img/dots/blue stars.png') center / 136% no-repeat;
+          border-radius: inherit;
+          background: url('/assets/img/dots/blue stars.png') center / cover no-repeat;
           opacity: 0.13;
           mix-blend-mode: screen;
           pointer-events: none;
+        }
+        #saturn.open .album-dropdown-content .tracklist > *,
+        #saturn.saturn-bg .album-dropdown-content .tracklist > *,
+        #winter.open .album-dropdown-content .tracklist > *,
+        #winter.winter-bg .album-dropdown-content .tracklist > *,
+        #slowpoke.open .album-dropdown-content .tracklist > *,
+        #slowpoke.slowpoke-bg .album-dropdown-content .tracklist > *,
+        #redux.open .album-dropdown-content .tracklist > *,
+        #redux.redux-bg .album-dropdown-content .tracklist > *,
+        #iseewhatidont.open .album-dropdown-content .tracklist > *,
+        #iseewhatidont.iseewhatidont-bg .album-dropdown-content .tracklist > * {
+          position: relative;
+          z-index: 1;
         }
         .album-dropdown-content-inner {
           position: relative;
           z-index: 1;
-          padding: 0 16px 16px;
+          padding: 0 var(--album-pad-x) var(--album-pad-x);
           border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
         .album-dropdown-content-inner > .musecard-detail {
@@ -263,72 +369,40 @@
           margin: 0 0 12px;
           opacity: 0.7;
         }
-        /* Streaming icons */
+        /* Streaming icons – inset tray with glass buttons */
         .album-dropdown-content .streamingicons {
+          position: relative;
           display: flex;
           flex-wrap: wrap;
-          align-items: center;
-          gap: 2px;
-          margin: 0 0 14px;
-          padding: 0;
+          align-items: stretch;
+          gap: var(--album-inset-gap);
+          margin: 0 0 var(--album-block-gap);
+          padding: var(--album-inset-pad);
+          background: var(--album-inset-tray-bg);
+          border: 1px solid var(--album-inset-tray-border);
+          border-radius: var(--album-inset-radius);
+          box-shadow: var(--album-inset-tray-shadow);
         }
         .album-dropdown-content .streamingicons a {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: var(--radius-thumb);
-          transition: background 0.15s ease, opacity 0.15s ease;
-          opacity: 0.85;
-        }
-        .album-dropdown-content .streamingicons a:not(.album-film-btn) {
-          flex: 1 1 0;
-          min-width: 0;
-          padding: 5px 2px;
-        }
-        .album-dropdown-content .streamingicons a:hover {
-          background: rgba(255, 255, 255, 0.06);
-          opacity: 1;
-        }
-        .album-dropdown-content .streamingicons img {
-          height: 34px;
-          width: 34px;
-          display: block;
-        }
-        .album-dropdown-content .streamingicons .album-film-btn {
           position: relative;
           overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
-          flex: 1 1 100%;
-          width: 100%;
-          gap: 8px;
-          padding: 10px 20px;
-          margin-right: 0;
-          margin-bottom: 8px;
-          font-family: 'Roboto Mono', monospace;
-          font-size: 0.75rem;
-          font-weight: 700;
-          letter-spacing: 0.06em;
-          text-transform: uppercase;
-          color: #fff;
           text-decoration: none;
-          background: var(--glass-bg);
+          color: #fff;
+          background: var(--album-btn-bg);
           backdrop-filter: var(--glass-blur);
           -webkit-backdrop-filter: var(--glass-blur);
-          border: var(--glass-border);
-          border-radius: var(--radius-pill);
-          box-shadow:
-            0 4px 18px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(190, 238, 233, 0.34),
-            inset 0 -1px 0 rgba(62, 122, 118, 0.12);
+          border: var(--album-btn-border);
+          border-radius: var(--album-control-radius);
+          box-shadow: var(--album-btn-shadow);
           transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
           box-sizing: border-box;
-          opacity: 1;
           --mouse-x: 50%;
           --mouse-y: 50%;
         }
-        .album-dropdown-content .streamingicons .album-film-btn::before {
+        .album-dropdown-content .streamingicons a::before {
           content: '';
           position: absolute;
           inset: 0;
@@ -336,37 +410,66 @@
           pointer-events: none;
           background: radial-gradient(
             circle at var(--mouse-x) var(--mouse-y),
-            var(--theme-hover-glow) 0%,
-            var(--theme-hover-glow-soft) 35%,
+            rgba(138, 205, 199, 0.14) 0%,
+            rgba(62, 122, 118, 0.05) 35%,
             transparent 55%
           );
           opacity: 0;
           transition: opacity 0.2s ease;
         }
-        .album-dropdown-content .streamingicons .album-film-btn:hover {
-          background-color: var(--theme-hover-fill);
-          border-color: var(--theme-hover-border);
-          box-shadow:
-            0 5px 20px rgba(0, 0, 0, 0.24),
-            0 0 18px rgba(62, 122, 118, 0.16),
-            inset 0 1px 0 rgba(190, 238, 233, 0.42),
-            inset 0 -1px 0 rgba(62, 122, 118, 0.16);
+        .album-dropdown-content .streamingicons a:hover {
+          background-color: var(--album-btn-hover-bg);
+          border-color: var(--album-btn-hover-border);
+          box-shadow: var(--album-btn-hover-shadow);
         }
-        .album-dropdown-content .streamingicons .album-film-btn:hover::before {
+        .album-dropdown-content .streamingicons a:hover::before {
           opacity: 1;
         }
-        .album-dropdown-content .streamingicons .album-film-btn > * {
+        .album-dropdown-content .streamingicons a > * {
           position: relative;
           z-index: 1;
+        }
+        .album-dropdown-content .streamingicons a:not(.album-film-btn) {
+          flex: 1 1 0;
+          min-width: 0;
+          min-height: 44px;
+          padding: 6px 4px;
+        }
+        .album-dropdown-content .streamingicons img {
+          height: 34px;
+          width: 34px;
+          display: block;
+          transform: none;
+        }
+        .album-dropdown-content .streamingicons a:not(.album-film-btn):hover img {
+          transform: none;
+          filter: none;
+        }
+        .album-dropdown-content .streamingicons .album-film-btn {
+          flex: 1 1 100%;
+          width: 100%;
+          gap: 8px;
+          padding: 10px 20px;
+          margin-right: 0;
+          margin-bottom: 2px;
+          font-family: 'Roboto Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          text-transform: uppercase;
         }
         .album-dropdown-content .streamingicons .album-film-btn img {
           height: 20px;
           width: 20px;
         }
-        /* Tracklist */
+        /* Tracklist – inset tray (matches contact inputs / streaming icons) */
         .album-dropdown-content .tracklist {
-          margin-top: 4px;
-          padding: 0;
+          margin-top: var(--album-inset-gap);
+          padding: calc(var(--album-inset-pad) + 4px) calc(var(--album-inset-pad) + 6px);
+          background: var(--album-inset-tray-bg);
+          border: 1px solid var(--album-inset-tray-border);
+          border-radius: var(--album-inset-radius);
+          box-shadow: var(--album-inset-tray-shadow);
         }
         .album-dropdown-content .tracklist h4 {
           font-family: 'Roboto Mono', monospace;
@@ -375,7 +478,7 @@
           letter-spacing: 0.1em;
           text-transform: uppercase;
           color: rgba(255, 255, 255, 0.4);
-          margin: 0 0 8px;
+          margin: 0 0 6px;
           padding: 0;
           border: none;
         }
@@ -454,7 +557,7 @@
           justify-content: center;
           gap: 4px;
           padding: 0 0 0 8px;
-          border-radius: var(--radius-thumb);
+          border-radius: var(--album-control-radius);
           border: none;
           color: rgba(255, 255, 255, 0.5);
           font-family: 'Roboto Mono', monospace;
@@ -482,16 +585,16 @@
         }
         /* Mobile album card layout */
         @media (max-width: 640px) {
-          #saturn.open .album-dropdown-content::before,
-          #saturn.saturn-bg .album-dropdown-content::before,
-          #winter.open .album-dropdown-content::before,
-          #winter.winter-bg .album-dropdown-content::before,
-          #slowpoke.open .album-dropdown-content::before,
-          #slowpoke.slowpoke-bg .album-dropdown-content::before,
-          #redux.open .album-dropdown-content::before,
-          #redux.redux-bg .album-dropdown-content::before,
-          #iseewhatidont.open .album-dropdown-content::before,
-          #iseewhatidont.iseewhatidont-bg .album-dropdown-content::before {
+          #saturn.open .album-dropdown-content .tracklist::before,
+          #saturn.saturn-bg .album-dropdown-content .tracklist::before,
+          #winter.open .album-dropdown-content .tracklist::before,
+          #winter.winter-bg .album-dropdown-content .tracklist::before,
+          #slowpoke.open .album-dropdown-content .tracklist::before,
+          #slowpoke.slowpoke-bg .album-dropdown-content .tracklist::before,
+          #redux.open .album-dropdown-content .tracklist::before,
+          #redux.redux-bg .album-dropdown-content .tracklist::before,
+          #iseewhatidont.open .album-dropdown-content .tracklist::before,
+          #iseewhatidont.iseewhatidont-bg .album-dropdown-content .tracklist::before {
             opacity: 0.07;
           }
           .album-dropdown.open .album-dropdown-content-inner,
@@ -504,29 +607,33 @@
             );
           }
           .album-dropdown-content-inner {
-            padding: 0 16px 16px;
+            padding: 0 var(--album-pad-x) var(--album-pad-x);
           }
           .album-dropdown-content .streamingicons {
-            gap: 4px;
-            margin-bottom: 14px;
+            gap: var(--album-inset-gap);
+            padding: var(--album-inset-pad);
+            margin-bottom: var(--album-block-gap);
           }
           .album-dropdown-content .streamingicons .album-film-btn {
             padding: 10px 18px;
             font-size: 0.72rem;
             min-height: 44px;
-            margin-bottom: 6px;
+            margin-bottom: 2px;
           }
           .album-dropdown-content .streamingicons .album-film-btn img {
             height: 18px;
             width: 18px;
           }
           .album-dropdown-content .streamingicons a:not(.album-film-btn) {
-            padding: 4px 1px;
-            min-height: 0;
+            padding: 4px 2px;
+            min-height: 40px;
           }
           .album-dropdown-content .streamingicons img {
             height: 32px;
             width: 32px;
+          }
+          .album-dropdown-content .tracklist {
+            padding: calc(var(--album-inset-pad) + 2px) calc(var(--album-inset-pad) + 4px);
           }
           .album-dropdown-content .tracklist .track {
             padding: 8px 0;
@@ -543,7 +650,7 @@
           gap: 6px;
           margin-top: 10px;
           padding: 6px 12px;
-          border-radius: var(--radius-thumb);
+          border-radius: var(--album-control-radius);
           border: 1px solid rgba(255, 255, 255, 0.28);
           color: rgba(255, 255, 255, 0.85);
           font-family: 'Roboto Mono', monospace;
@@ -574,14 +681,14 @@
         .latest-hero {
           display: grid;
           grid-template-columns: minmax(0, 132px) minmax(0, 1fr);
-          gap: 16px;
+          gap: var(--album-pad-x);
           align-items: center;
           width: 100%;
           max-width: var(--narrow-max-width);
           margin: 0 auto;
-          padding: 14px 16px;
+          padding: calc(var(--album-pad-y) + 2px) var(--album-pad-x);
           color: var(--main-text);
-          border-radius: var(--radius-md);
+          border-radius: var(--album-surface-radius);
           position: relative;
           overflow: hidden;
           isolation: isolate;
@@ -618,16 +725,6 @@
           align-self: start;
           width: 100%;
           aspect-ratio: 1;
-          overflow: hidden;
-          border-radius: var(--radius-inner);
-        }
-        .latest-hero-art img {
-          display: block;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          border-radius: inherit;
-          border: 1px solid rgba(255, 255, 255, 0.18);
         }
         .latest-hero-body {
           display: flex;
@@ -661,31 +758,74 @@
           margin: 0;
         }
         .latest-hero-streaming {
+          position: relative;
           display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 6px;
+          flex-direction: row;
+          align-items: stretch;
+          gap: var(--album-inset-gap);
           margin: 0;
           flex-shrink: 0;
+          padding: var(--album-inset-pad);
+          background: var(--album-inset-tray-bg);
+          border: 1px solid var(--album-inset-tray-border);
+          border-radius: var(--album-inset-radius);
+          box-shadow: var(--album-inset-tray-shadow);
         }
         .latest-hero-streaming a {
+          position: relative;
+          overflow: hidden;
+          flex: 1 1 0;
+          min-width: 0;
           display: flex;
           align-items: center;
           justify-content: center;
+          min-height: 44px;
           padding: 6px 8px;
-          border-radius: var(--radius-thumb);
-          opacity: 0.85;
-          transition: opacity 0.15s ease, background 0.15s ease;
+          text-decoration: none;
+          color: #fff;
+          background: var(--album-btn-bg);
+          backdrop-filter: var(--glass-blur);
+          -webkit-backdrop-filter: var(--glass-blur);
+          border: var(--album-btn-border);
+          border-radius: var(--album-control-radius);
+          box-shadow: var(--album-btn-shadow);
+          transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+          box-sizing: border-box;
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+        }
+        .latest-hero-streaming a::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          border-radius: inherit;
+          pointer-events: none;
+          background: radial-gradient(
+            circle at var(--mouse-x) var(--mouse-y),
+            rgba(138, 205, 199, 0.14) 0%,
+            rgba(62, 122, 118, 0.05) 35%,
+            transparent 55%
+          );
+          opacity: 0;
+          transition: opacity 0.2s ease;
         }
         .latest-hero-streaming a:hover {
+          background-color: var(--album-btn-hover-bg);
+          border-color: var(--album-btn-hover-border);
+          box-shadow: var(--album-btn-hover-shadow);
+        }
+        .latest-hero-streaming a:hover::before {
           opacity: 1;
-          background: rgba(255, 255, 255, 0.06);
         }
         .latest-hero-streaming img {
+          position: relative;
+          z-index: 1;
           width: 34px;
           height: 34px;
           display: block;
+        }
+        .latest-hero-streaming a:hover img {
+          filter: none;
         }
         /* Scroll margin so "Discography" pill stays visible when hero links to #bites */
         #bites {
@@ -707,7 +847,7 @@
           .latest-hero {
             grid-template-columns: 88px minmax(0, 1fr);
             gap: 12px;
-            padding: 12px 14px;
+            padding: var(--album-pad-y) 14px;
           }
           .albums-section.latest-hero-section + .albums-section {
             padding-top: 1.25rem;
@@ -728,10 +868,12 @@
             font-size: 0.85rem;
           }
           .latest-hero-streaming {
-            gap: 4px;
+            gap: var(--album-inset-gap);
+            padding: var(--album-inset-pad);
           }
           .latest-hero-streaming a {
             padding: 4px 5px;
+            min-height: 40px;
           }
           .latest-hero-streaming img {
             width: 28px;
@@ -741,7 +883,7 @@
             padding: 10px 12px;
             gap: 10px;
           }
-          .album-dropdown-header img {
+          .album-dropdown-header .album-art-glass {
             width: 48px;
             height: 48px;
           }
@@ -756,7 +898,7 @@
             height: 20px;
           }
           .album-dropdown-content-inner {
-            padding: 0 16px 16px;
+            padding: 0 var(--album-pad-x) var(--album-pad-x);
           }
           .album-dropdown-content .musecard-detail p {
             font-size: 0.82rem;
@@ -781,11 +923,24 @@
     <nav class="navbar">
       <div class="navitems">
         <div class="navlinks">
-          <a href="/">HOME</a>
-          <a class="active" href="/discography/">MUSIC</a>
-          <a href="/video/">FILM</a>
-          <a href="/contact/">CONTACT</a>
+          <a href="/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5L12 3.5l8.5 6V20a2.5 2.5 0 0 1-2.5 2.5H6a2.5 2.5 0 0 1-2.5-2.5V9.5z"/><polyline points="9.5 21 9.5 14 14.5 14 14.5 21"/></svg></span>
+            <span class="tab-label">HOME</span>
+          </a>
+          <a class="active" href="/discography/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+            <span class="tab-label">MUSIC</span>
+          </a>
+          <a href="/video/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18"/><line x1="7" y1="2" x2="7" y2="22"/><line x1="17" y1="2" x2="17" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="2" y1="7" x2="7" y2="7"/><line x1="2" y1="17" x2="7" y2="17"/><line x1="17" y1="7" x2="22" y2="7"/><line x1="17" y1="17" x2="22" y2="17"/></svg></span>
+            <span class="tab-label">FILM</span>
+          </a>
+          <a href="/contact/">
+            <span class="tab-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h15a2.5 2.5 0 0 1 2.5 2.5v10a2.5 2.5 0 0 1-2.5 2.5h-15a2.5 2.5 0 0 1-2.5-2.5V7a2.5 2.5 0 0 1 2.5-2.5z"/><polyline points="22 7.5 12 14 2 7.5"/></svg></span>
+            <span class="tab-label">CONTACT</span>
+          </a>
         </div>
+        <div class="header-chip" id="headerChip" aria-hidden="true"></div>
         <div class="navicons">
           <a href="https://open.spotify.com/artist/5IGPzDdGKP8sgXxAmc1Lgi" target="_blank"><img src="/assets/img/icons/spotify.png" alt="Spotify"></a>
           <a href="https://music.apple.com/us/artist/bobby-nair/1591990564" target="_blank"><img src="/assets/img/icons/am.png" alt="Apple Music"></a>
@@ -795,13 +950,12 @@
         </div>
       </div>
     </nav>
-    <div class="header-chip" id="headerChip" aria-hidden="true"></div>
 
 <div class="mobilepage">
     <section class="albumsdisplay albums-section latest-hero-section">
       <h2 class="albums-section-title">Latest release</h2>
       <div class="latest-hero">
-        <figure class="latest-hero-art">
+        <figure class="latest-hero-art album-art-glass">
           <img src="/assets/img/album/halfamind.webp" alt="Half A Mind cover" width="132" height="132">
         </figure>
         <div class="latest-hero-body">
@@ -1187,6 +1341,13 @@
 
     <script>
       (function() {
+        document.querySelectorAll('.album-dropdown-header > img').forEach(function(img) {
+          if (img.parentElement.classList.contains('album-art-glass')) return;
+          var frame = document.createElement('span');
+          frame.className = 'album-art-glass';
+          img.parentNode.insertBefore(frame, img);
+          frame.appendChild(img);
+        });
         var starBgClasses = { saturn: 'saturn-bg', winter: 'winter-bg', slowpoke: 'slowpoke-bg', redux: 'redux-bg', iseewhatidont: 'iseewhatidont-bg' };
         function clearDropdownBg(dropdown, content) {
           var once = function() {
@@ -1320,6 +1481,7 @@
         }
         initCursorGlow('.album-dropdown');
         initCursorGlow('.album-film-btn');
+        initCursorGlow('.album-dropdown-content .streamingicons a:not(.album-film-btn)');
         initCursorGlow('.navlinks a');
       })();
     </script>

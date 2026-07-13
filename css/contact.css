@@ -79,8 +79,8 @@
   opacity: 0.9;
 }
 
-/* mail.svg is stroke-based; show light on dark card */
-.contact-card:first-child .contact-card-icon {
+/* stroke-based icons; show light on dark card */
+.contact-card-icon {
   filter: brightness(0) invert(1);
 }
 
@@ -97,18 +97,21 @@
   position: relative;
   overflow: hidden;
   display: block;
+  box-sizing: border-box;
   text-align: center;
   padding: 12px 24px;
   font-family: 'Roboto Mono', monospace;
   font-size: 0.95rem;
   font-weight: 700;
+  line-height: 1.6;
   letter-spacing: 0.02em;
   color: #fff;
+  min-height: calc(0.95rem * 1.6 + 24px + 2px);
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-xl);
   box-shadow:
     0 4px 18px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(190, 238, 233, 0.34),
@@ -116,8 +119,16 @@
   text-decoration: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
   margin-top: auto;
+  appearance: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
   --mouse-x: 50%;
   --mouse-y: 50%;
+}
+
+button.contact-card-btn {
+  cursor: pointer;
+  margin: 0;
 }
 
 .contact-card-btn::before {
@@ -181,10 +192,8 @@
 .contact-form-card input,
 .contact-form-card textarea {
   font-family: 'Roboto Mono', monospace;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: var(--glass-border);
+  background: rgba(28, 52, 50, 0.32);
+  border: 1px solid rgba(62, 122, 118, 0.22);
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 100%;
@@ -193,9 +202,8 @@
   color: var(--main-text, #fff);
   box-sizing: border-box;
   box-shadow:
-    0 4px 18px rgba(0, 0, 0, 0.18),
-    inset 0 1px 0 rgba(190, 238, 233, 0.26),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.1);
+    inset 0 1px 4px rgba(0, 0, 0, 0.28),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   text-align: left;
 }
@@ -208,16 +216,12 @@
 .contact-form-card input:focus,
 .contact-form-card textarea:focus {
   outline: none;
-  background:
-    linear-gradient(180deg, rgba(190, 238, 233, 0.13) 0%, rgba(62, 122, 118, 0.08) 100%),
-    var(--glass-bg);
-  border-color: var(--theme-hover-border);
+  background: rgba(34, 62, 59, 0.4);
+  border-color: rgba(138, 205, 199, 0.36);
   box-shadow:
-    0 5px 22px rgba(0, 0, 0, 0.22),
-    0 0 0 3px rgba(138, 205, 199, 0.12),
-    0 0 20px rgba(62, 122, 118, 0.16),
-    inset 0 1px 0 rgba(190, 238, 233, 0.42),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.16);
+    inset 0 1px 5px rgba(0, 0, 0, 0.32),
+    inset 0 0 0 1px rgba(138, 205, 199, 0.12),
+    0 0 0 3px rgba(138, 205, 199, 0.1);
 }
 
 .contact-form-card textarea {
@@ -226,11 +230,9 @@
   resize: vertical;
 }
 
-.contact-form-card .contact-card-btn {
+.contact-form-card form > .contact-card-btn {
   width: 100%;
-  box-sizing: border-box;
-  margin-top: 0.5rem;
-  cursor: pointer;
+  margin-top: 1.25rem;
 }
 
 .contact-form-result {
@@ -240,6 +242,11 @@
   font-family: 'Roboto Mono', monospace;
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.55);
+}
+
+.contact-form-result:empty {
+  display: none;
+  margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -286,6 +293,7 @@
   .contact-card-btn {
     padding: 10px 18px;
     font-size: 0.9rem;
+    min-height: calc(0.9rem * 1.6 + 20px + 2px);
   }
 
   .contact-field {
@@ -304,7 +312,7 @@
     min-height: 80px;
   }
 
-  .contact-form-card .contact-card-btn {
-    margin-top: 0.25rem;
+  .contact-form-card form > .contact-card-btn {
+    margin-top: 0.85rem;
   }
 }

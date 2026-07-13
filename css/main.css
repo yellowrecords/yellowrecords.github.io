@@ -25,7 +25,10 @@
   --page-bottom-offset: 1.25rem;
   --page-footer-gap: 1.25rem;
   --nav-float-offset: 56px;
-  --bottom-nav-offset: 80px;
+  --desktop-nav-pill-height: 50px;
+  --header-chip-duration: 0.5s;
+  --header-chip-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --bottom-nav-offset: 84px;
   --site-max-width: 1100px;
   --content-max-width: 900px;
   --layout-tablet-max: 1030px;
@@ -57,6 +60,9 @@
     inset 1px 0 0 rgba(138, 205, 199, 0.16),
     inset -1px 0 0 rgba(0, 0, 0, 0.12);
   --glass-blur: blur(26px) saturate(2.05) contrast(1.08);
+  --hover-glow-shadow:
+    drop-shadow(0 0 4px rgba(138, 205, 199, 0.42))
+    drop-shadow(0 2px 8px rgba(35, 70, 67, 0.36));
 }
 
 
@@ -675,8 +681,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 50px;
+  min-height: var(--desktop-nav-pill-height);
   width: 100%;
+  position: relative;
 }
 .navlinks {
   position: relative;
@@ -721,11 +728,15 @@
 .navlinks a {
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-weight: 700;
   font-family: 'Roboto Mono', monospace;
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
-  padding: 8px 16px;
+  padding: 8px 14px;
   text-decoration: none;
   font-size: 15px;
   border: none;
@@ -733,6 +744,30 @@
   transition: color 300ms, background-color 300ms;
   --mouse-x: 50%;
   --mouse-y: 50%;
+}
+.navlinks a > * {
+  position: relative;
+  z-index: 2;
+}
+.navlinks a .tab-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18px;
+  flex-shrink: 0;
+}
+.navlinks a .tab-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.35;
+}
+.navlinks a .tab-icon svg rect {
+  rx: 5;
+  ry: 5;
+}
+.navlinks a .tab-label {
+  line-height: 1;
 }
 .navlinks a::before {
   content: '';
@@ -751,15 +786,51 @@
 }
 .navlinks a.active {
   color: #fff;
-  background-color: rgba(62, 122, 118, 0.13);
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%);
+  box-shadow:
+    inset 0 1px 0 rgba(190, 238, 233, 0.36),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+    0 0 14px rgba(62, 122, 118, 0.12);
   /* same padding as .navlinks a so pill size doesn't change when active */
-  padding: 8px 16px;
+  padding: 8px 14px;
+}
+.navlinks a.active::before {
+  z-index: 0;
+  background:
+    linear-gradient(112deg, rgba(190, 238, 233, 0.18) 0%, transparent 32%, transparent 58%, rgba(62, 122, 118, 0.12) 100%),
+    radial-gradient(ellipse 85% 120% at 26% 0%, rgba(138, 205, 199, 0.16) 0%, transparent 54%);
+  opacity: 1;
+}
+.navlinks a.active::after {
+  content: '';
+  position: absolute;
+  top: -35%;
+  bottom: -35%;
+  left: -45%;
+  z-index: 1;
+  width: 38%;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 0%, rgba(218, 255, 252, 0.22) 48%, transparent 100%);
+  transform: rotate(12deg);
+  opacity: 0.55;
 }
 .navlinks a:hover {
   color: var(--main-text);
   background-color: rgba(62, 122, 118, 0.08);
 }
 .navlinks a:hover::before {
+  opacity: 1;
+}
+.navlinks a.active:hover {
+  color: #fff;
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%);
+}
+.navlinks a.active:hover::before {
   opacity: 1;
 }
 .navicons {
@@ -789,24 +860,21 @@
 .navicons img {
   height: 30px;
   width: 30px;
-  filter: grayscale(100%);
-  transition: filter 300ms;
+  transition: transform 300ms, filter 300ms;
 }
 .navicons a:hover img {
-  filter: grayscale(0%);
+  filter: var(--hover-glow-shadow);
 }
 
 /* Sticky header chip – appears when header scrolls out of view */
 .header-chip {
-  position: fixed;
-  top: 16px;
-  left: 50%;
-  transform: translateX(-50%) translateY(-12px);
   z-index: 6;
+  box-sizing: border-box;
   padding: 10px 24px;
   font-weight: bold;
   font-family: 'Roboto Mono', monospace;
   font-size: 22px;
+  line-height: 1;
   color: #fff;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   background: var(--glass-bg);
@@ -821,12 +889,83 @@
   visibility: hidden;
   overflow: hidden;
   isolation: isolate;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  transform: translateY(calc(-100% - 12px));
+  transition:
+    opacity var(--header-chip-duration) var(--header-chip-ease),
+    transform var(--header-chip-duration) var(--header-chip-ease),
+    visibility 0s linear var(--header-chip-duration);
 }
+
 .header-chip.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
+  transition:
+    opacity var(--header-chip-duration) var(--header-chip-ease),
+    transform var(--header-chip-duration) var(--header-chip-ease),
+    visibility 0s linear 0s;
+}
+
+@media (min-width: 1031px) {
+  .navitems {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 12px;
+    container-type: inline-size;
+    container-name: site-nav;
+  }
+
+  .navlinks {
+    grid-column: 1;
+    grid-row: 1;
+    height: var(--desktop-nav-pill-height);
+    min-height: var(--desktop-nav-pill-height);
+    padding-block: 0;
+    padding-inline: 8px;
+    box-sizing: border-box;
+  }
+
+  .navicons {
+    grid-column: 3;
+    grid-row: 1;
+    height: var(--desktop-nav-pill-height);
+    min-height: var(--desktop-nav-pill-height);
+    padding-block: 0;
+    padding-inline: 20px;
+    box-sizing: border-box;
+  }
+
+  .header-chip {
+    grid-column: 2;
+    grid-row: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: max-content;
+    max-width: min(100%, 42vw);
+    height: var(--desktop-nav-pill-height);
+    min-height: var(--desktop-nav-pill-height);
+    padding-block: 0;
+    padding-inline: 24px;
+    z-index: 7;
+    transform: translate(-50%, calc(-50% - 100% - 12px));
+  }
+
+  .header-chip.visible {
+    transform: translate(-50%, -50%);
+  }
+
+  /* Wide desktop: center chip on the bar (viewport center) */
+  @container site-nav (min-width: 1180px) {
+    .header-chip {
+      grid-column: 1 / -1;
+      max-width: none;
+    }
+  }
 }
 
 .discandvid-group {
@@ -847,16 +986,20 @@
   text-align: center;
   text-decoration: none;
   padding: 20px;
-  transition: transform 0.5s;
 }
 .disc img {
+  display: block;
   width: 100%;
   max-width: 460px;
   height: auto;
-  transition: transform 0.5s;
+  transition: transform 0.5s, filter 300ms;
 }
 .disc:hover {
+  transform: none;
+}
+.disc:hover img {
   transform: scale(1.05);
+  filter: var(--hover-glow-shadow);
 }
 .disc p {
   text-align: center !important;
@@ -998,11 +1141,6 @@
     width: 100%;
     aspect-ratio: auto;
   }
-  body:has(.hero) .slideshow-controls {
-    margin-top: 6px;
-    padding: 4px 0;
-    flex-shrink: 0;
-  }
   body:has(.hero) .hero-text {
     width: 100%;
     min-width: 0;
@@ -1088,7 +1226,6 @@
     max-width: none;
     padding: clamp(2px, 1.2cqi, 8px);
     box-sizing: border-box;
-    overflow: hidden;
     text-decoration: none;
   }
   body:has(.hero) .disc img {
@@ -1096,8 +1233,7 @@
     width: 100%;
     max-width: 100%;
     height: auto;
-    border-radius: 6px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, filter 300ms;
   }
   body:has(.hero) .disc p {
     display: block;
@@ -1190,7 +1326,6 @@
     max-width: 100%;
     padding: 8px 16px 8px 8px;
     text-align: left;
-    overflow: hidden;
   }
   .hero-text .disc img {
     width: auto;
@@ -1198,9 +1333,9 @@
     max-width: 135px;
     min-width: 0;
     flex-shrink: 0;
-    object-fit: cover;
-    border-radius: 6px;
+    object-fit: contain;
     transform: none;
+    transition: transform 0.3s ease, filter 300ms;
   }
   .hero-text .disc p {
     margin: 0 !important;
@@ -1254,8 +1389,8 @@
     max-width: 155px;
     min-width: 108px;
     flex-shrink: 0;
-    object-fit: cover;
-    border-radius: 8px;
+    object-fit: contain;
+    transition: transform 0.3s ease, filter 300ms;
   }
   body:has(.hero) .disc p {
     margin: 0 !important;
@@ -1669,19 +1804,60 @@ footer {
 /* Mobile-style nav (bottom bar) for both mobile and tablet – all pages */
 @media only screen and (max-width: 1030px) {
   .navbar {
+    display: block;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    margin-bottom: 0;
+    overflow: visible;
+    position: static;
+    background: transparent;
+  }
+  .navitems {
+    display: block;
+    height: 0;
+    min-height: 0;
+    overflow: visible;
+  }
+  .navlinks,
+  .navicons {
     display: none;
+  }
+  .header-chip {
+    position: fixed;
+    top: max(12px, env(safe-area-inset-top, 12px));
+    left: 50%;
+    transform: translateX(-50%) translateY(calc(-100% - max(12px, env(safe-area-inset-top, 12px))));
+    max-width: calc(100vw - (2 * var(--site-gutter)));
+    min-width: 0;
+    width: max-content;
+    height: auto;
+    min-height: 0;
+    padding: 10px 24px;
+    font-size: 20px;
+    border-color: rgba(138, 205, 199, 0.30);
+    display: block;
+    transition:
+      opacity var(--header-chip-duration) var(--header-chip-ease),
+      transform var(--header-chip-duration) var(--header-chip-ease),
+      visibility 0s linear var(--header-chip-duration);
+  }
+  .header-chip.visible {
+    transform: translateX(-50%) translateY(0);
+    transition:
+      opacity var(--header-chip-duration) var(--header-chip-ease),
+      transform var(--header-chip-duration) var(--header-chip-ease),
+      visibility 0s linear 0s;
   }
   body {
     padding-bottom: var(--bottom-nav-offset);
   }
   .bottom-nav {
-    --bottom-nav-height: 76px;
+    --bottom-nav-height: 64px;
+    --bottom-nav-bottom-gap: 12px;
     --bottom-nav-outer-radius: 40px;
-    --bottom-nav-tabs-padding-block: 6px;
-    --bottom-nav-tabs-padding-inline: 8px;
-    --bottom-nav-inner-radius:
-      calc(var(--bottom-nav-outer-radius) - var(--bottom-nav-tabs-padding-block))
-      calc(var(--bottom-nav-outer-radius) - var(--bottom-nav-tabs-padding-inline));
+    --bottom-nav-item-gap: 4px;
+    --bottom-tab-pill-radius: var(--radius-pill);
     --bottom-nav-glass-bg: linear-gradient(
       180deg,
       rgba(190, 238, 233, 0.07) 0%,
@@ -1707,27 +1883,27 @@ footer {
     pointer-events: none;
   }
   .bottom-nav-bar {
-    display: grid;
-    grid-template-columns: 1fr auto auto 1fr;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    column-gap: 12px;
+    gap: 12px;
     width: 100%;
     box-sizing: border-box;
     padding-inline: max(var(--site-gutter), env(safe-area-inset-left, 0px)) max(var(--site-gutter), env(safe-area-inset-right, 0px));
-    padding-bottom: max(8px, env(safe-area-inset-bottom, 0px));
+    padding-bottom: max(var(--bottom-nav-bottom-gap), env(safe-area-inset-bottom, 0px));
     pointer-events: none;
   }
   .bottom-nav-tabs {
     position: relative;
     overflow: hidden;
     isolation: isolate;
+    container-type: inline-size;
     display: flex;
-    justify-content: space-around;
-    align-items: stretch;
-    grid-column: 2;
+    justify-content: center;
+    align-items: center;
     width: min(
-      380px,
-      calc(100vw - (2 * var(--site-gutter)) - var(--bottom-nav-height) - 36px)
+      348px,
+      calc(100vw - (2 * var(--site-gutter)) - var(--bottom-nav-height) - 12px)
     );
     min-width: 0;
     height: var(--bottom-nav-height);
@@ -1737,8 +1913,8 @@ footer {
     border: var(--bottom-nav-glass-border);
     box-shadow: var(--bottom-nav-glass-shadow);
     border-radius: var(--bottom-nav-outer-radius);
-    padding: var(--bottom-nav-tabs-padding-block) var(--bottom-nav-tabs-padding-inline);
-    gap: 4px;
+    padding: var(--bottom-nav-item-gap);
+    gap: var(--bottom-nav-item-gap);
     pointer-events: auto;
     box-sizing: border-box;
   }
@@ -1772,7 +1948,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 2px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.7);
     font-family: 'Roboto Mono', monospace;
@@ -1780,10 +1956,11 @@ footer {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 12px 8px;
+    padding: 0;
     min-width: 0;
-    min-height: 48px;
-    border-radius: var(--bottom-nav-inner-radius);
+    min-height: 0;
+    align-self: stretch;
+    border-radius: var(--bottom-tab-pill-radius);
     transition: color 300ms, background-color 300ms;
     flex: 1 1 0;
     box-sizing: border-box;
@@ -1800,8 +1977,14 @@ footer {
     border-radius: inherit;
     pointer-events: none;
     background:
+      linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
+      radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%),
       linear-gradient(112deg, rgba(190, 238, 233, 0.18) 0%, transparent 32%, transparent 58%, rgba(62, 122, 118, 0.12) 100%),
       radial-gradient(ellipse 85% 120% at 26% 0%, rgba(138, 205, 199, 0.16) 0%, transparent 54%);
+    box-shadow:
+      inset 0 1px 0 rgba(190, 238, 233, 0.36),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.16),
+      0 0 14px rgba(62, 122, 118, 0.12);
   }
   .bottom-tab.active::after {
     content: '';
@@ -1820,7 +2003,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 22px;
+    height: 20px;
     flex-shrink: 0;
   }
   .bottom-tab .tab-icon svg {
@@ -1836,19 +2019,40 @@ footer {
   .bottom-tab .tab-label {
     font-size: 9px;
     letter-spacing: 0.5px;
-    line-height: 1.2;
+    line-height: 1;
   }
   .bottom-tab.active {
+    z-index: 3;
     color: #fff;
-    border-radius: var(--bottom-nav-inner-radius);
-    background:
-      linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
-      radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%);
-    box-shadow:
-      inset 0 1px 0 rgba(190, 238, 233, 0.36),
-      inset 0 -1px 0 rgba(0, 0, 0, 0.16),
-      0 0 14px rgba(62, 122, 118, 0.12);
-    padding: 12px 8px;
+    border-radius: var(--radius-pill);
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  /* Very narrow tab bar: icon-only keeps each pill at least as wide as tall */
+  @container (max-width: 232px) {
+    .bottom-tab {
+      gap: 0;
+      padding: 0;
+      border-radius: var(--radius-pill);
+    }
+    .bottom-tab.active {
+      padding: 0;
+    }
+    .bottom-tab.active::before {
+      inset: 0;
+    }
+    .bottom-tab .tab-label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
   }
   .bottom-tab:hover {
     color: var(--main-text);
@@ -1862,8 +2066,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    grid-column: 3;
+    gap: 2px;
     width: var(--bottom-nav-height);
     height: var(--bottom-nav-height);
     padding: 0;
@@ -1890,7 +2093,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 22px;
+    height: 20px;
   }
   .bottom-links-btn .tab-icon svg {
     display: block;
@@ -1900,7 +2103,7 @@ footer {
   .bottom-links-btn .tab-label {
     font-size: 9px;
     letter-spacing: 0.5px;
-    line-height: 1.2;
+    line-height: 1;
   }
   .bottom-links-btn:hover {
     color: var(--main-text);
@@ -1953,7 +2156,7 @@ footer {
     max-width: 320px;
     position: absolute;
     right: max(var(--site-gutter), env(safe-area-inset-right, 0px));
-    bottom: calc(var(--bottom-nav-height) + 14px + 8px);
+    bottom: calc(var(--bottom-nav-height) + 14px + var(--bottom-nav-bottom-gap));
     left: auto;
     transform-origin: 100% 100%;
     background: var(--bottom-nav-glass-bg);
@@ -2250,8 +2453,8 @@ footer {
     box-shadow: var(--glass-shadow);
   }
   .header-chip {
-    font-size: 18px;
-    padding: 8px 20px;
+    font-size: 20px;
+    padding: 10px 24px;
     top: max(12px, env(safe-area-inset-top, 12px));
   }
   .pagecontent {

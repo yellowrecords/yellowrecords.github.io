@@ -11,6 +11,15 @@
   overflow: hidden;
   aspect-ratio: 4 / 3;
   border: var(--glass-border);
+  --slideshow-inset-x: 14px;
+  --slideshow-nav-btn-size: 44px;
+  --slideshow-controls-gap: 10px;
+  --slideshow-controls-padding-bottom: 16px;
+  --slideshow-progress-inset-y: 4px;
+  --theme-hover-border: rgba(218, 255, 252, 0.46);
+  --theme-hover-fill: rgba(62, 122, 118, 0.13);
+  --theme-hover-glow: rgba(138, 205, 199, 0.26);
+  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
 }
 
 .mySlides {
@@ -39,177 +48,262 @@
 }
 
 .slideshow-controls {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 12px;
-  padding: 8px 0;
-  gap: 12px;
+  padding: 28px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
+  gap: 10px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.28) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
-.prev,
-.next {
+.slideshow-controls > * {
+  pointer-events: auto;
+}
+
+.slideshow-controls .prev,
+.slideshow-controls .next {
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  color: rgba(255, 255, 255, 0.9);
+  width: var(--slideshow-nav-btn-size);
+  height: var(--slideshow-nav-btn-size);
+  color: rgba(255, 255, 255, 0.62);
   font-size: 20px;
   line-height: 1;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(24, 28, 34, 0.28) 100%
-  );
-  backdrop-filter: blur(24px) saturate(1.35);
-  -webkit-backdrop-filter: blur(24px) saturate(1.35);
-  border: var(--glass-border);
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.16);
-  border-radius: 50%;
   text-decoration: none;
   user-select: none;
-  transition: color 0.3s ease, background 0.3s ease, transform 0.2s ease;
+  border-radius: 50%;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%),
+    var(--glass-bg);
+  border: 1px solid rgba(218, 255, 252, 0.24);
+  box-shadow:
+    0 8px 26px rgba(0, 0, 0, 0.18),
+    0 0 18px rgba(62, 122, 118, 0.07),
+    inset 0 1px 0 rgba(190, 238, 233, 0.46),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.16),
+    inset 1px 0 0 rgba(138, 205, 199, 0.16);
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.prev:hover,
-.next:hover {
-  color: #fff;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(30, 34, 40, 0.34) 100%
+.slideshow-controls .prev::before,
+.slideshow-controls .next::before,
+.slideshow-container > .slideshow-resume.contact-card-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
+    transparent 55%
   );
-  transform: scale(1.06);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
-.prev:active,
-.next:active {
-  transform: scale(0.96);
+.slideshow-controls .prev::after,
+.slideshow-controls .next::after,
+.slideshow-container > .slideshow-resume.contact-card-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(105deg, transparent 28%, rgba(218, 255, 252, 0.2) 48%, transparent 68%),
+    linear-gradient(118deg, rgba(190, 238, 233, 0.18) 0%, transparent 18%, transparent 66%, rgba(62, 122, 118, 0.14) 100%),
+    linear-gradient(72deg, transparent 0%, rgba(218, 255, 252, 0.08) 48%, transparent 54%),
+    radial-gradient(ellipse 78% 90% at 20% 0%, rgba(138, 205, 199, 0.12) 0%, transparent 52%),
+    radial-gradient(ellipse 90% 70% at 82% 100%, rgba(62, 122, 118, 0.16) 0%, transparent 62%);
+  opacity: 0.82;
+}
+
+.slideshow-controls .prev:hover,
+.slideshow-controls .next:hover,
+.slideshow-container > .slideshow-resume.contact-card-btn:hover {
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.16) 0%, rgba(62, 122, 118, 0.16) 58%, rgba(0, 0, 0, 0.1) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.18) 0%, transparent 62%),
+    var(--glass-bg);
+  border-color: var(--theme-hover-border);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.22),
+    0 0 22px rgba(62, 122, 118, 0.14),
+    inset 0 1px 0 rgba(190, 238, 233, 0.52),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.2),
+    inset 1px 0 0 rgba(138, 205, 199, 0.2);
+}
+
+.slideshow-controls .prev:hover,
+.slideshow-controls .next:hover {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.slideshow-controls .prev:hover::before,
+.slideshow-controls .next:hover::before,
+.slideshow-container > .slideshow-resume.contact-card-btn:hover::before {
+  opacity: 1;
+}
+
+.slideshow-container > .slideshow-resume.contact-card-btn:hover {
+  color: #fff;
+}
+
+.slideshow-center {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.slideshow-dots {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  width: 100%;
+  height: var(--slideshow-nav-btn-size);
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .dot {
   cursor: pointer;
-  height: 14px;
-  width: 14px;
-  margin: 0 4px;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.14) 0%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  box-shadow:
-    0 2px 12px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.dot:hover {
-  background: linear-gradient(
-    to bottom,
-    rgba(138, 205, 199, 0.22) 0%,
-    rgba(98, 168, 162, 0.16) 100%
-  );
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow:
-    0 2px 14px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-.dot.active {
-  background: linear-gradient(
-    to bottom,
-    rgba(138, 205, 199, 0.34) 0%,
-    rgba(98, 168, 162, 0.26) 100%
-  );
-  border-color: rgba(255, 255, 255, 0.4);
-  box-shadow:
-    0 2px 16px rgba(98, 168, 162, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.slideshow-center {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 8px;
-  flex: 0 0 auto;
-}
-
-.slideshow-dots {
-  text-align: center;
-}
-
-.slideshow-progress {
-  width: 100%;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.35);
+  flex: 1 1 0;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  margin: 0;
   border-radius: var(--radius-pill);
-  overflow: visible;
-  border: var(--glass-border);
+  display: block;
   position: relative;
+  overflow: hidden;
+  font: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(6px) saturate(1.15);
+  -webkit-backdrop-filter: blur(6px) saturate(1.15);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.slideshow-progress-bar {
+.dot-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
   height: 100%;
   width: 0%;
   background: linear-gradient(
     to right,
-    rgba(98, 168, 162, 0.9),
-    rgba(138, 205, 199, 0.95)
+    rgba(98, 168, 162, 0.48),
+    rgba(138, 205, 199, 0.58)
   );
-  border-radius: var(--radius-pill);
+  border-radius: inherit;
+  pointer-events: none;
 }
 
-.slideshow-resume {
-  display: none;
+.dot:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dot.active {
+  border-color: rgba(138, 205, 199, 0.38);
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 6px rgba(98, 168, 162, 0.15);
+}
+
+.slideshow-container > .slideshow-resume.contact-card-btn {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  height: 28px;
+  left: calc(var(--slideshow-inset-x) + var(--slideshow-nav-btn-size) + var(--slideshow-controls-gap));
+  right: calc(var(--slideshow-inset-x) + var(--slideshow-nav-btn-size) + var(--slideshow-controls-gap));
+  bottom: calc(var(--slideshow-controls-padding-bottom) + (var(--slideshow-nav-btn-size) / 2));
+  z-index: 4;
+  display: block;
+  overflow: hidden;
+  isolation: isolate;
+  width: auto;
   margin: 0;
-  padding: 0 12px;
-  align-items: center;
-  justify-content: center;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.7);
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(24, 28, 34, 0.28) 100%
-  );
-  backdrop-filter: blur(24px) saturate(1.35);
-  -webkit-backdrop-filter: blur(24px) saturate(1.35);
-  border: none;
+  padding: 12px 24px;
+  box-sizing: border-box;
   border-radius: var(--radius-pill);
   cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.slideshow-resume:hover {
-  color: rgba(255, 255, 255, 1);
-}
-
-.slideshow-progress.paused .slideshow-progress-bar {
+  color: rgba(255, 255, 255, 0.95);
+  white-space: nowrap;
+  opacity: 0;
   visibility: hidden;
+  transform: translateY(calc(50% + 100%));
+  pointer-events: none;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  background:
+    linear-gradient(180deg, rgba(190, 238, 233, 0.12) 0%, rgba(62, 122, 118, 0.12) 58%, rgba(0, 0, 0, 0.08) 100%),
+    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.14) 0%, transparent 62%),
+    var(--glass-bg);
+  border: 1px solid rgba(218, 255, 252, 0);
+  box-shadow:
+    0 8px 26px rgba(0, 0, 0, 0.18),
+    0 0 18px rgba(62, 122, 118, 0.07),
+    inset 0 1px 0 rgba(190, 238, 233, 0.46),
+    inset 0 -1px 0 rgba(62, 122, 118, 0.16),
+    inset 1px 0 0 rgba(138, 205, 199, 0.16);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0.5s,
+    color 0.2s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
 }
 
-.slideshow-progress.paused .slideshow-resume {
-  display: flex;
+.slideshow-controls.paused ~ .slideshow-resume.contact-card-btn {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(50%);
+  pointer-events: auto;
+  border-color: rgba(218, 255, 252, 0.24);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 0s linear 0s,
+    color 0.2s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+.slideshow-controls.paused .dot-fill {
+  visibility: hidden;
 }
 
 
@@ -225,12 +319,24 @@
     aspect-ratio: 5 / 3;
     border-radius: var(--radius-lg);
     touch-action: pan-y pinch-zoom; /* allow vertical scroll, we handle horizontal swipe */
+    --slideshow-inset-x: 10px;
+    --slideshow-nav-btn-size: 38px;
+    --slideshow-controls-gap: 8px;
+    --slideshow-controls-padding-bottom: 12px;
+    --slideshow-progress-inset-y: 3px;
   }
-  .prev,
-  .next {
-    width: 38px;
-    height: 38px;
+  .slideshow-controls {
+    padding: 22px var(--slideshow-inset-x) var(--slideshow-controls-padding-bottom);
+    gap: 8px;
+  }
+  .slideshow-dots {
+    gap: 3px;
+  }
+  .slideshow-controls .prev,
+  .slideshow-controls .next {
     font-size: 16px;
-    margin: 0 8px;
+  }
+  .slideshow-controls.paused ~ .slideshow-resume.contact-card-btn {
+    padding: 10px 18px;
   }
 }
