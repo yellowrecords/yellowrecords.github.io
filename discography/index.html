@@ -34,10 +34,6 @@
 
     <style>
         .mobilepage {
-          --theme-hover-border: rgba(218, 255, 252, 0.46);
-          --theme-hover-fill: rgba(62, 122, 118, 0.13);
-          --theme-hover-glow: rgba(138, 205, 199, 0.26);
-          --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
           /* Album card radius & spacing scale */
           --album-surface-radius: 20px;
           --album-art-radius: var(--radius-sm);
@@ -120,8 +116,7 @@
           width: 56px;
           height: 56px;
         }
-        .album-dropdown-header:hover .album-art-glass,
-        .single-chip:hover .album-art-glass {
+        .album-dropdown-header:hover .album-art-glass {
           border-color: rgba(218, 255, 252, 0.38);
           box-shadow:
             0 5px 20px rgba(0, 0, 0, 0.36),
@@ -168,12 +163,12 @@
           pointer-events: none;
           background: radial-gradient(
             circle at var(--mouse-x) var(--mouse-y),
-            rgba(138, 205, 199, 0.3) 0%,
-            rgba(62, 122, 118, 0.11) 35%,
+            var(--theme-hover-glow) 0%,
+            var(--theme-hover-glow-soft) 35%,
             transparent 56%
           );
           opacity: 0;
-          transition: opacity 0.2s ease;
+          transition: opacity 0.15s ease;
         }
         .album-dropdown > * {
           position: relative;
@@ -184,11 +179,10 @@
         }
         .album-dropdown:not(.open):hover,
         .album-dropdown.open:has(.album-dropdown-header:hover) {
-          border-color: rgba(138, 205, 199, 0.4);
+          background-color: var(--theme-hover-fill);
           box-shadow:
             0 4px 20px rgba(0, 0, 0, 0.22),
-            inset 0 1px 0 rgba(255, 255, 255, 0.4),
-            inset 0 -1px 0 rgba(62, 122, 118, 0.12);
+            var(--fluent-hover-shadow);
         }
         .album-dropdown:not(.open):hover::before,
         .album-dropdown:not(.open).touch-active::before,
@@ -415,17 +409,16 @@
           pointer-events: none;
           background: radial-gradient(
             circle at var(--mouse-x) var(--mouse-y),
-            rgba(138, 205, 199, 0.14) 0%,
-            rgba(62, 122, 118, 0.05) 35%,
+            var(--theme-hover-glow) 0%,
+            var(--theme-hover-glow-soft) 35%,
             transparent 55%
           );
           opacity: 0;
-          transition: opacity 0.2s ease;
+          transition: opacity 0.15s ease;
         }
         .album-dropdown-content .streamingicons a:hover {
-          background-color: var(--album-btn-hover-bg);
-          border-color: var(--album-btn-hover-border);
-          box-shadow: var(--album-btn-hover-shadow);
+          background-color: var(--theme-hover-fill);
+          box-shadow: var(--album-btn-hover-shadow), var(--fluent-hover-shadow);
         }
         .album-dropdown-content .streamingicons a:hover::before {
           opacity: 1;
@@ -702,6 +695,7 @@
           -webkit-backdrop-filter: var(--glass-blur);
           border: var(--glass-border);
           box-shadow: var(--glass-shadow);
+          cursor: default;
         }
         .albums-section + .albums-section {
           margin-top: 0;
@@ -813,17 +807,16 @@
           pointer-events: none;
           background: radial-gradient(
             circle at var(--mouse-x) var(--mouse-y),
-            rgba(138, 205, 199, 0.14) 0%,
-            rgba(62, 122, 118, 0.05) 35%,
+            var(--theme-hover-glow) 0%,
+            var(--theme-hover-glow-soft) 35%,
             transparent 55%
           );
           opacity: 0;
-          transition: opacity 0.2s ease;
+          transition: opacity 0.15s ease;
         }
         .latest-hero-streaming a:hover {
-          background-color: var(--album-btn-hover-bg);
-          border-color: var(--album-btn-hover-border);
-          box-shadow: var(--album-btn-hover-shadow);
+          background-color: var(--theme-hover-fill);
+          box-shadow: var(--album-btn-hover-shadow), var(--fluent-hover-shadow);
         }
         .latest-hero-streaming a:hover::before {
           opacity: 1;
@@ -1510,38 +1503,9 @@
         });
       })();
     </script>
+    <script src="/js/cursor-glow.js"></script>
     <script>
-      (function() {
-        function setGlowPosition(el, clientX, clientY) {
-          var rect = el.getBoundingClientRect();
-          var x = ((clientX - rect.left) / rect.width) * 100;
-          var y = ((clientY - rect.top) / rect.height) * 100;
-          el.style.setProperty('--mouse-x', x + '%');
-          el.style.setProperty('--mouse-y', y + '%');
-        }
-        function initCursorGlow(selector) {
-          document.querySelectorAll(selector).forEach(function(el) {
-            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e.clientX, e.clientY); });
-            el.addEventListener('touchstart', function(e) {
-              if (e.touches.length) {
-                setGlowPosition(el, e.touches[0].clientX, e.touches[0].clientY);
-                el.classList.add('touch-active');
-              }
-            }, { passive: true });
-            el.addEventListener('touchmove', function(e) {
-              if (e.touches.length) setGlowPosition(el, e.touches[0].clientX, e.touches[0].clientY);
-            }, { passive: true });
-            el.addEventListener('touchend', function() { el.classList.remove('touch-active'); });
-            el.addEventListener('touchcancel', function() { el.classList.remove('touch-active'); });
-          });
-        }
-        initCursorGlow('.album-dropdown');
-        initCursorGlow('.album-film-btn');
-        initCursorGlow('.album-dropdown-content .streamingicons a:not(.album-film-btn)');
-        initCursorGlow('.single-chip');
-        initCursorGlow('.latest-hero-streaming a');
-        initCursorGlow('.navlinks a');
-      })();
+      initFluentReveal({ extraSelectors: '.navlinks a' });
     </script>
 </body>
 </html>

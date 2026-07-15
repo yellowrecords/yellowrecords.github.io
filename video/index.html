@@ -420,26 +420,9 @@
     });
   })();
 </script>
+<script src="/js/cursor-glow.js"></script>
 <script>
-  (function() {
-    function setGlowPosition(el, e) {
-      var rect = el.getBoundingClientRect();
-      var x = ((e.clientX - rect.left) / rect.width) * 100;
-      var y = ((e.clientY - rect.top) / rect.height) * 100;
-      el.style.setProperty('--mouse-x', x + '%');
-      el.style.setProperty('--mouse-y', y + '%');
-    }
-    function initCursorGlow(selector) {
-      document.querySelectorAll(selector).forEach(function(el) {
-        el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
-      });
-    }
-    initCursorGlow('.navlinks a');
-    initCursorGlow('.film-filter-btn');
-    initCursorGlow('.film-filter-toggle');
-    initCursorGlow('.film-card');
-    initCursorGlow('.film-featured-link');
-  })();
+  initFluentReveal({ extraSelectors: '.navlinks a, .film-filter-btn, .film-filter-toggle, .film-search-wrap' });
 </script>
 <script>
   (function() {

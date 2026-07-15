@@ -19,10 +19,6 @@
   --slideshow-progress-pad-bottom: 8px;
   --slideshow-progress-inset-x: calc(var(--slideshow-inset-x) + 12px);
   --slideshow-duration: 7.5s;
-  --theme-hover-border: rgba(218, 255, 252, 0.46);
-  --theme-hover-fill: rgba(62, 122, 118, 0.13);
-  --theme-hover-glow: rgba(138, 205, 199, 0.26);
-  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
 }
 
 .slideshow-container:focus {
@@ -124,24 +120,16 @@
     transparent 55%
   );
   opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.slideshow-controls .prev::after,
-.slideshow-controls .next::after,
-.slideshow-container > .slideshow-resume.contact-card-btn::after {
-  content: none;
+  transition: opacity 0.15s ease;
 }
 
 .slideshow-controls .prev:hover,
 .slideshow-controls .next:hover,
 .slideshow-container > .slideshow-resume.contact-card-btn:hover {
   background:
-    linear-gradient(180deg, rgba(190, 238, 233, 0.16) 0%, rgba(62, 122, 118, 0.16) 58%, rgba(0, 0, 0, 0.1) 100%),
-    radial-gradient(ellipse 80% 100% at 50% 0%, rgba(138, 205, 199, 0.18) 0%, transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 58%, rgba(0, 0, 0, 0.06) 100%),
     var(--glass-bg);
-  border-color: var(--theme-hover-border);
-  box-shadow: none;
+  box-shadow: var(--fluent-hover-shadow);
 }
 
 .slideshow-controls .prev:hover,

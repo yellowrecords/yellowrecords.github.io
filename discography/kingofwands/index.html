@@ -253,22 +253,9 @@
         document.addEventListener('click', function(e) { if (!panel.contains(e.target) && e.target !== linksTab) { panel.classList.remove('open'); } });
       })();
     </script>
+    <script src="/js/cursor-glow.js"></script>
     <script>
-      (function() {
-        function setGlowPosition(el, e) {
-          var rect = el.getBoundingClientRect();
-          var x = ((e.clientX - rect.left) / rect.width) * 100;
-          var y = ((e.clientY - rect.top) / rect.height) * 100;
-          el.style.setProperty('--mouse-x', x + '%');
-          el.style.setProperty('--mouse-y', y + '%');
-        }
-        function initCursorGlow(selector) {
-          document.querySelectorAll(selector).forEach(function(el) {
-            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
-          });
-        }
-        initCursorGlow('.navlinks a');
-      })();
+      initFluentReveal({ extraSelectors: '.navlinks a' });
     </script>
 </body>
 

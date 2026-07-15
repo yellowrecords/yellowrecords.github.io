@@ -1,10 +1,6 @@
 /* Contact page – matches site glass aesthetic */
 
 .contact-page {
-  --theme-hover-border: rgba(218, 255, 252, 0.46);
-  --theme-hover-fill: rgba(62, 122, 118, 0.13);
-  --theme-hover-glow: rgba(138, 205, 199, 0.26);
-  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
   max-width: var(--narrow-max-width);
   margin: 0 auto;
   padding-left: var(--site-gutter);
@@ -115,7 +111,7 @@
     inset 0 1px 0 rgba(190, 238, 233, 0.34),
     inset 0 -1px 0 rgba(62, 122, 118, 0.12);
   text-decoration: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  transition: var(--fluent-hover-transition);
   margin-top: auto;
   appearance: none;
   -webkit-appearance: none;
@@ -142,17 +138,16 @@ button.contact-card-btn {
     transparent 55%
   );
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.15s ease;
+  z-index: 1;
 }
 
 .contact-card-btn:hover {
   background-color: var(--theme-hover-fill);
-  border-color: var(--theme-hover-border);
   box-shadow:
     0 5px 20px rgba(0, 0, 0, 0.24),
     0 0 18px rgba(62, 122, 118, 0.16),
-    inset 0 1px 0 rgba(190, 238, 233, 0.42),
-    inset 0 -1px 0 rgba(62, 122, 118, 0.16);
+    var(--fluent-hover-shadow);
 }
 
 .contact-card-btn:hover::before {

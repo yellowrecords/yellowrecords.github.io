@@ -392,24 +392,9 @@
         });
       })();
     </script>
+    <script src="/js/cursor-glow.js"></script>
     <script>
-      (function() {
-        function setGlowPosition(el, e) {
-          var rect = el.getBoundingClientRect();
-          var x = ((e.clientX - rect.left) / rect.width) * 100;
-          var y = ((e.clientY - rect.top) / rect.height) * 100;
-          el.style.setProperty('--mouse-x', x + '%');
-          el.style.setProperty('--mouse-y', y + '%');
-        }
-        function initCursorGlow(selector) {
-          document.querySelectorAll(selector).forEach(function(el) {
-            el.addEventListener('mousemove', function(e) { setGlowPosition(el, e); });
-          });
-        }
-        initCursorGlow('.navlinks a');
-        initCursorGlow('.slideshow-controls .prev, .slideshow-controls .next, .slideshow-resume, .slideshow-dots .dot');
-        initCursorGlow('.latest-hero-streaming a');
-      })();
+      initFluentReveal({ extraSelectors: '.navlinks a, .slideshow-dots .dot' });
     </script>
 </body>
 </html>

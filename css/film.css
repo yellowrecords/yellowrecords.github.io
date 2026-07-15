@@ -1,10 +1,6 @@
 /* Film page layout – matches site glass aesthetic */
 
 .film-page {
-  --theme-hover-border: rgba(218, 255, 252, 0.46);
-  --theme-hover-fill: rgba(62, 122, 118, 0.13);
-  --theme-hover-glow: rgba(138, 205, 199, 0.26);
-  --theme-hover-glow-soft: rgba(62, 122, 118, 0.1);
   --film-thumb-glass-shine:
     linear-gradient(125deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 26%, transparent 50%, transparent 70%, rgba(138, 205, 199, 0.14) 100%),
     linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, transparent 36%),
@@ -45,7 +41,7 @@
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  transition: var(--fluent-hover-transition), transform 0.2s ease;
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -72,12 +68,11 @@
 }
 
 .film-featured-link:hover {
-  border-color: var(--theme-hover-border);
+  background-color: var(--theme-hover-fill);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.3),
     0 0 22px rgba(62, 122, 118, 0.16),
-    inset 0 1px 0 rgba(190, 238, 233, 0.45);
-  transform: translateY(-2px);
+    var(--fluent-hover-shadow);
 }
 
 .film-featured-link:hover::before {
@@ -142,12 +137,11 @@
 }
 
 .film-featured--promo .film-featured-link:hover {
-  transform: none;
-  border-color: var(--theme-hover-border);
+  background-color: var(--theme-hover-fill);
   box-shadow:
     0 6px 24px rgba(0, 0, 0, 0.22),
     0 0 20px rgba(62, 122, 118, 0.16),
-    inset 0 1px 0 rgba(190, 238, 233, 0.38);
+    var(--fluent-hover-shadow);
 }
 
 .film-featured--promo .film-featured-link:hover .film-featured-media img {
@@ -441,20 +435,52 @@
   box-sizing: border-box;
   border-radius: var(--radius-xl);
   overflow: hidden;
+  isolation: isolate;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--fluent-hover-transition);
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+.film-search-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--mouse-x) var(--mouse-y),
+    var(--theme-hover-glow) 0%,
+    var(--theme-hover-glow-soft) 35%,
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 1;
+}
+
+.film-search-wrap:is(:hover, .is-proximity-hover, :focus-within) {
+  background-color: var(--theme-hover-fill);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.25),
+    var(--fluent-hover-shadow);
+}
+
+.film-search-wrap:is(:hover, .is-proximity-hover, :focus-within)::before {
+  opacity: 1;
+}
+
+.film-search-wrap > * {
+  position: relative;
+  z-index: 3;
 }
 
 .film-search-wrap:focus-within {
-  border-color: var(--theme-hover-border);
-  box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.25),
-    inset 0 1px 0 rgba(190, 238, 233, 0.45),
-    0 0 0 3px rgba(138, 205, 199, 0.1);
+  outline: none;
 }
 
 .film-search-wrap svg.film-search-icon {
@@ -553,7 +579,7 @@
   border: none;
   border-radius: var(--radius-lg);
   cursor: pointer;
-  transition: color 0.28s ease, background-color 0.2s ease;
+  transition: color 0.28s ease, background-color 0.2s ease, box-shadow 0.15s ease;
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -580,10 +606,12 @@
 
 .film-filter-btn:not(.active):hover {
   background-color: var(--theme-hover-fill);
+  box-shadow: var(--fluent-hover-shadow);
 }
 
-.film-filter-btn:hover::before {
-  opacity: 1;
+.film-filter-btn:not(.active):hover::before,
+.film-filter-btn:not(.active).is-proximity-hover::before {
+  opacity: var(--proximity-opacity, 1);
 }
 
 .film-filter-btn.active {
@@ -606,7 +634,7 @@
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.15s ease;
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -643,10 +671,12 @@
 .film-filter-toggle:hover {
   background-color: rgba(62, 122, 118, 0.2);
   color: rgba(218, 255, 252, 0.96);
+  box-shadow: var(--fluent-hover-shadow);
 }
 
-.film-filter-toggle:hover::before {
-  opacity: 1;
+.film-filter-toggle:hover::before,
+.film-filter-toggle.is-proximity-hover::before {
+  opacity: var(--proximity-opacity, 1);
 }
 
 /* ── Grid ── */
@@ -668,7 +698,7 @@
   -webkit-backdrop-filter: var(--glass-blur);
   border: var(--glass-border);
   box-shadow: var(--glass-shadow);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: var(--fluent-hover-transition);
   --mouse-x: 50%;
   --mouse-y: 50%;
 }
@@ -682,20 +712,20 @@
   background: radial-gradient(
     circle at var(--mouse-x) var(--mouse-y),
     var(--theme-hover-glow) 0%,
-    rgba(62, 122, 118, 0.07) 35%,
+    var(--theme-hover-glow-soft) 35%,
     transparent 55%
   );
   opacity: 0;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.15s ease;
   z-index: 1;
 }
 
 .film-card:hover {
-  border-color: var(--theme-hover-border);
+  background-color: var(--theme-hover-fill);
   box-shadow:
     0 5px 20px rgba(0, 0, 0, 0.22),
     0 0 18px rgba(62, 122, 118, 0.14),
-    inset 0 1px 0 rgba(190, 238, 233, 0.38);
+    var(--fluent-hover-shadow);
 }
 
 .film-card:hover::before {
