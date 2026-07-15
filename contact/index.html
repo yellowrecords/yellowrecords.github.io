@@ -98,15 +98,21 @@
               <input type="checkbox" name="botcheck" id="" style="display: none;" />
               <div class="contact-field">
                 <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="John Doe" required />
+                <div class="contact-input-wrap">
+                  <input type="text" name="name" id="name" placeholder="John Doe" required />
+                </div>
               </div>
               <div class="contact-field">
                 <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" placeholder="you@company.com" required />
+                <div class="contact-input-wrap">
+                  <input type="email" name="email" id="email" placeholder="you@company.com" required />
+                </div>
               </div>
               <div class="contact-field">
                 <label for="message">Message</label>
-                <textarea rows="5" name="message" id="message" placeholder="Your Message" required></textarea>
+                <div class="contact-input-wrap">
+                  <textarea rows="5" name="message" id="message" placeholder="Your Message" required></textarea>
+                </div>
               </div>
               <div class="contact-field">
                 <button type="submit" class="contact-card-btn">Send Message</button>
@@ -213,7 +219,7 @@
     </script>
     <script src="/js/cursor-glow.js"></script>
     <script>
-      initFluentReveal({ extraSelectors: '.navlinks a' });
+      initFluentReveal({ extraSelectors: '.navlinks a, .contact-input-wrap' });
     </script>
 </body>
 </html>

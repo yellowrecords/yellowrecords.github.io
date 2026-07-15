@@ -463,14 +463,14 @@
   z-index: 1;
 }
 
-.film-search-wrap:is(:hover, .is-proximity-hover, :focus-within) {
+.film-search-wrap:is(:hover, .is-proximity-hover):not(:focus-within) {
   background-color: var(--theme-hover-fill);
   box-shadow:
     0 4px 24px rgba(0, 0, 0, 0.25),
     var(--fluent-hover-shadow);
 }
 
-.film-search-wrap:is(:hover, .is-proximity-hover, :focus-within)::before {
+.film-search-wrap:is(:hover, .is-proximity-hover):not(:focus-within)::before {
   opacity: 1;
 }
 
@@ -481,6 +481,13 @@
 
 .film-search-wrap:focus-within {
   outline: none;
+  background: var(--glass-bg);
+  box-shadow: var(--glass-shadow);
+}
+
+.film-search-wrap:focus-within::before,
+.film-search-wrap:focus-within::after {
+  opacity: 0;
 }
 
 .film-search-wrap svg.film-search-icon {
@@ -1042,10 +1049,16 @@
       transform var(--toolbar-duration) var(--toolbar-ease);
   }
 
-  .film-toolbar-bar .film-search-wrap:focus-within {
+  .film-toolbar-bar .film-search-wrap:is(:hover, .is-proximity-hover, :focus-within) {
+    background: none;
     border: none;
     box-shadow: none;
     outline: none;
+  }
+
+  .film-toolbar-bar .film-search-wrap:is(:hover, .is-proximity-hover, :focus-within)::before,
+  .film-toolbar-bar .film-search-wrap:is(:hover, .is-proximity-hover, :focus-within)::after {
+    opacity: 0;
   }
 
   .film-toolbar-bar.is-search-open .film-search-wrap {

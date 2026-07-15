@@ -211,4 +211,11 @@
   global.initCursorGlow = function (selector) {
     return initFluentReveal({ extraSelectors: selector });
   };
+
+  // Pause expensive background motion while the tab is hidden.
+  function syncXmbPause() {
+    global.document.documentElement.classList.toggle('xmb-paused', global.document.hidden);
+  }
+  global.document.addEventListener('visibilitychange', syncXmbPause);
+  syncXmbPause();
 })(window);

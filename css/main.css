@@ -59,7 +59,8 @@
     inset 0 -1px 0 rgba(62, 122, 118, 0.2),
     inset 1px 0 0 rgba(138, 205, 199, 0.16),
     inset -1px 0 0 rgba(0, 0, 0, 0.12);
-  --glass-blur: blur(26px) saturate(2.05) contrast(1.08);
+  /* Slightly lighter blur: glass still frosts, but cheaper when waves move behind it */
+  --glass-blur: blur(16px) saturate(1.95) contrast(1.06);
   --hover-glow-shadow:
     drop-shadow(0 0 4px rgba(138, 205, 199, 0.42))
     drop-shadow(0 2px 8px rgba(35, 70, 67, 0.36));
@@ -114,6 +115,7 @@
 .single-chip-streaming a::after,
 .album-dropdown-content .streamingicons a::after,
 .film-search-wrap::after,
+.contact-input-wrap::after,
 .navlinks a:not(.active)::after,
 .film-filter-btn::after,
 .film-filter-toggle::after {
@@ -154,7 +156,8 @@
 .slideshow-container > .slideshow-resume.contact-card-btn:is(:hover, .is-proximity-hover)::after,
 .single-chip-streaming a:is(:hover, .is-proximity-hover)::after,
 .album-dropdown-content .streamingicons a:is(:hover, .is-proximity-hover)::after,
-.film-search-wrap:is(:hover, .is-proximity-hover, :focus-within)::after,
+.film-search-wrap:is(:hover, .is-proximity-hover):not(:focus-within)::after,
+.contact-input-wrap:is(:hover, .is-proximity-hover):not(:focus-within)::after,
 .navlinks a:not(.active):is(:hover, .is-proximity-hover)::after,
 .film-filter-btn:is(:hover, .is-proximity-hover)::after,
 .film-filter-toggle:is(:hover, .is-proximity-hover)::after {
@@ -208,7 +211,9 @@
 * {
     box-sizing: border-box;
   }
-  /* PS3 XMB-inspired layered wave background (html fills iOS safe area) */
+  /* PS3 XMB wave background.
+     Perf: no filter/blur or mix-blend-mode on moving layers (those force glass
+     backdrop-filter to re-sample every frame). Soft gradients + transform-only. */
   html {
     min-height: 100%;
     background-color: #000;
@@ -234,34 +239,31 @@
       var(--background);
     background-size: 120% 120%, 100% 100%, 100% 100%, 100% 100%;
     background-position: 50% 48%, 0 0, 0 0, 0 0;
-    -webkit-animation: XmbAmbient 18s ease-in-out infinite;
-    animation: XmbAmbient 18s ease-in-out infinite;
   }
   /* Primary soft horizontal wave layer. */
   html::after {
     z-index: -2;
-    inset: -24% -64%;
+    inset: -12% -36%;
     --ribbon-a: var(--ribbon-blue);
     --ribbon-b: var(--ribbon-warm);
     --ribbon-c: var(--ribbon-blue-mid);
     --ribbon-d: var(--ribbon-glow);
     background:
-      radial-gradient(ellipse 44% 5.6% at 14% 49%, rgba(255, 255, 255, 0.38) 0%, var(--ribbon-d) 18%, var(--ribbon-a) 45%, transparent 74%),
-      radial-gradient(ellipse 54% 7.2% at 41% 45%, rgba(255, 255, 255, 0.24) 0%, var(--ribbon-a) 22%, var(--ribbon-c) 54%, transparent 78%),
-      radial-gradient(ellipse 48% 6% at 70% 51%, rgba(255, 255, 255, 0.3) 0%, var(--ribbon-d) 16%, var(--ribbon-a) 42%, transparent 74%),
-      radial-gradient(ellipse 70% 9.5% at 88% 58%, var(--ribbon-a) 0%, rgba(42, 126, 121, 0.22) 38%, transparent 76%),
-      radial-gradient(ellipse 60% 6.2% at 28% 62%, var(--ribbon-b) 0%, var(--ribbon-warm-mid) 36%, transparent 76%);
+      radial-gradient(ellipse 48% 9% at 14% 49%, rgba(255, 255, 255, 0.42) 0%, var(--ribbon-d) 22%, var(--ribbon-a) 48%, transparent 78%),
+      radial-gradient(ellipse 58% 11% at 41% 45%, rgba(255, 255, 255, 0.28) 0%, var(--ribbon-a) 26%, var(--ribbon-c) 56%, transparent 82%),
+      radial-gradient(ellipse 52% 10% at 70% 51%, rgba(255, 255, 255, 0.34) 0%, var(--ribbon-d) 20%, var(--ribbon-a) 46%, transparent 78%),
+      radial-gradient(ellipse 74% 14% at 88% 58%, var(--ribbon-a) 0%, rgba(42, 126, 121, 0.28) 40%, transparent 80%),
+      radial-gradient(ellipse 64% 10% at 28% 62%, var(--ribbon-b) 0%, var(--ribbon-warm-mid) 40%, transparent 80%);
     background-size: 88% 100%, 95% 100%, 90% 100%, 100% 100%, 92% 100%;
+    background-position: 8% 56%, 44% 52%, 86% 54%, 136% 62%, 58% 72%;
     background-repeat: no-repeat;
-    mix-blend-mode: screen;
-    -webkit-filter: blur(12px) saturate(1.85);
-    filter: blur(12px) saturate(1.85);
-    opacity: 0.62;
-    will-change: transform, background-position, opacity;
+    opacity: 0.7;
+    will-change: transform;
+    contain: layout style paint;
     -webkit-transform: translate3d(-3%, 0, 0) skewY(-4deg) scale(1.08);
     transform: translate3d(-3%, 0, 0) skewY(-4deg) scale(1.08);
-    -webkit-animation: XmbWaveDrift 12s ease-in-out infinite alternate, XmbWavePositions 20s ease-in-out infinite alternate;
-    animation: XmbWaveDrift 12s ease-in-out infinite alternate, XmbWavePositions 20s ease-in-out infinite alternate;
+    -webkit-animation: XmbWaveDrift 22s ease-in-out infinite alternate;
+    animation: XmbWaveDrift 22s ease-in-out infinite alternate;
   }
   body {
     margin: 0;
@@ -285,130 +287,89 @@
   }
   /* Secondary counter wave layer for the glassy PS3 depth. */
   body::after {
-    inset: -28% -58%;
+    inset: -14% -30%;
     z-index: -1;
     --ribbon-a: var(--ribbon-blue);
     --ribbon-b: var(--ribbon-warm);
     --ribbon-c: var(--ribbon-blue-mid);
     --ribbon-d: var(--ribbon-glow);
     background:
-      radial-gradient(ellipse 76% 7.6% at 18% 43%, rgba(255, 255, 255, 0.18) 0%, rgba(72, 152, 145, 0.3) 24%, transparent 74%),
-      radial-gradient(ellipse 84% 9.2% at 55% 56%, rgba(255, 255, 255, 0.18) 0%, var(--ribbon-a) 20%, var(--ribbon-c) 48%, transparent 80%),
-      radial-gradient(ellipse 64% 6.6% at 86% 48%, var(--ribbon-d) 0%, rgba(56, 132, 126, 0.24) 30%, transparent 78%),
-      radial-gradient(ellipse 86% 9.6% at 45% 64%, var(--ribbon-b) 0%, rgba(28, 82, 78, 0.14) 43%, transparent 82%);
+      radial-gradient(ellipse 80% 12% at 18% 43%, rgba(255, 255, 255, 0.22) 0%, rgba(72, 152, 145, 0.34) 28%, transparent 78%),
+      radial-gradient(ellipse 88% 14% at 55% 56%, rgba(255, 255, 255, 0.2) 0%, var(--ribbon-a) 24%, var(--ribbon-c) 52%, transparent 84%),
+      radial-gradient(ellipse 68% 11% at 86% 48%, var(--ribbon-d) 0%, rgba(56, 132, 126, 0.28) 34%, transparent 82%),
+      radial-gradient(ellipse 90% 14% at 45% 64%, var(--ribbon-b) 0%, rgba(28, 82, 78, 0.18) 46%, transparent 86%);
     background-size: 105% 100%, 112% 100%, 96% 100%, 108% 100%;
+    background-position: 72% 52%, 34% 58%, 8% 56%, 50% 68%;
     background-repeat: no-repeat;
-    mix-blend-mode: screen;
-    -webkit-filter: blur(22px) saturate(1.55);
-    filter: blur(22px) saturate(1.55);
-    opacity: 0.46;
-    will-change: transform, background-position, opacity;
+    opacity: 0.5;
+    will-change: transform;
+    contain: layout style paint;
     -webkit-transform: translate3d(4%, 0, 0) skewY(5deg) scale(1.12);
     transform: translate3d(4%, 0, 0) skewY(5deg) scale(1.12);
-    -webkit-animation: XmbWaveDriftBack 18s ease-in-out infinite alternate, XmbWavePositionsBack 30s ease-in-out infinite alternate;
-    animation: XmbWaveDriftBack 18s ease-in-out infinite alternate, XmbWavePositionsBack 30s ease-in-out infinite alternate;
+    -webkit-animation: XmbWaveDriftBack 28s ease-in-out infinite alternate;
+    animation: XmbWaveDriftBack 28s ease-in-out infinite alternate;
   }
-  @-webkit-keyframes XmbAmbient {
-    0%, 100% { background-position: 45% 49%, 0 0, 0 0, 0 0; }
-    50% { background-position: 56% 45%, 0 0, 0 0, 0 0; }
-  }
-  @keyframes XmbAmbient {
-    0%, 100% { background-position: 45% 49%, 0 0, 0 0, 0 0; }
-    50% { background-position: 56% 45%, 0 0, 0 0, 0 0; }
-  }
+  /* Transform-only; skew stays constant so compositor can cache the layer. */
   @-webkit-keyframes XmbWaveDrift {
     0% {
-      opacity: 0.46;
-      -webkit-transform: translate3d(-8%, 3%, 0) skewY(-8deg) scale(1.11);
-      transform: translate3d(-8%, 3%, 0) skewY(-8deg) scale(1.11);
+      -webkit-transform: translate3d(-9%, 2%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(-9%, 2%, 0) skewY(-4deg) scale(1.08);
     }
     50% {
-      opacity: 0.68;
-      -webkit-transform: translate3d(1%, 16%, 0) skewY(5deg) scale(1.16);
-      transform: translate3d(1%, 16%, 0) skewY(5deg) scale(1.16);
+      -webkit-transform: translate3d(2%, 10%, 0) skewY(-4deg) scale(1.12);
+      transform: translate3d(2%, 10%, 0) skewY(-4deg) scale(1.12);
     }
     100% {
-      opacity: 0.74;
-      -webkit-transform: translate3d(8%, 6%, 0) skewY(-6deg) scale(1.13);
-      transform: translate3d(8%, 6%, 0) skewY(-6deg) scale(1.13);
+      -webkit-transform: translate3d(9%, 3%, 0) skewY(-4deg) scale(1.1);
+      transform: translate3d(9%, 3%, 0) skewY(-4deg) scale(1.1);
     }
   }
   @keyframes XmbWaveDrift {
     0% {
-      opacity: 0.46;
-      -webkit-transform: translate3d(-8%, 3%, 0) skewY(-8deg) scale(1.11);
-      transform: translate3d(-8%, 3%, 0) skewY(-8deg) scale(1.11);
+      -webkit-transform: translate3d(-9%, 2%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(-9%, 2%, 0) skewY(-4deg) scale(1.08);
     }
     50% {
-      opacity: 0.68;
-      -webkit-transform: translate3d(1%, 16%, 0) skewY(5deg) scale(1.16);
-      transform: translate3d(1%, 16%, 0) skewY(5deg) scale(1.16);
+      -webkit-transform: translate3d(2%, 10%, 0) skewY(-4deg) scale(1.12);
+      transform: translate3d(2%, 10%, 0) skewY(-4deg) scale(1.12);
     }
     100% {
-      opacity: 0.74;
-      -webkit-transform: translate3d(8%, 6%, 0) skewY(-6deg) scale(1.13);
-      transform: translate3d(8%, 6%, 0) skewY(-6deg) scale(1.13);
+      -webkit-transform: translate3d(9%, 3%, 0) skewY(-4deg) scale(1.1);
+      transform: translate3d(9%, 3%, 0) skewY(-4deg) scale(1.1);
     }
   }
   @-webkit-keyframes XmbWaveDriftBack {
     0% {
-      opacity: 0.32;
-      -webkit-transform: translate3d(8%, 7%, 0) skewY(8deg) scale(1.13);
-      transform: translate3d(8%, 7%, 0) skewY(8deg) scale(1.13);
+      -webkit-transform: translate3d(8%, 4%, 0) skewY(5deg) scale(1.12);
+      transform: translate3d(8%, 4%, 0) skewY(5deg) scale(1.12);
     }
     50% {
-      opacity: 0.5;
-      -webkit-transform: translate3d(0%, 19%, 0) skewY(-5deg) scale(1.16);
-      transform: translate3d(0%, 19%, 0) skewY(-5deg) scale(1.16);
+      -webkit-transform: translate3d(-1%, 12%, 0) skewY(5deg) scale(1.14);
+      transform: translate3d(-1%, 12%, 0) skewY(5deg) scale(1.14);
     }
     100% {
-      opacity: 0.56;
-      -webkit-transform: translate3d(-8%, 10%, 0) skewY(6deg) scale(1.17);
-      transform: translate3d(-8%, 10%, 0) skewY(6deg) scale(1.17);
+      -webkit-transform: translate3d(-8%, 6%, 0) skewY(5deg) scale(1.13);
+      transform: translate3d(-8%, 6%, 0) skewY(5deg) scale(1.13);
     }
   }
   @keyframes XmbWaveDriftBack {
     0% {
-      opacity: 0.32;
-      -webkit-transform: translate3d(8%, 7%, 0) skewY(8deg) scale(1.13);
-      transform: translate3d(8%, 7%, 0) skewY(8deg) scale(1.13);
+      -webkit-transform: translate3d(8%, 4%, 0) skewY(5deg) scale(1.12);
+      transform: translate3d(8%, 4%, 0) skewY(5deg) scale(1.12);
     }
     50% {
-      opacity: 0.5;
-      -webkit-transform: translate3d(0%, 19%, 0) skewY(-5deg) scale(1.16);
-      transform: translate3d(0%, 19%, 0) skewY(-5deg) scale(1.16);
+      -webkit-transform: translate3d(-1%, 12%, 0) skewY(5deg) scale(1.14);
+      transform: translate3d(-1%, 12%, 0) skewY(5deg) scale(1.14);
     }
     100% {
-      opacity: 0.56;
-      -webkit-transform: translate3d(-8%, 10%, 0) skewY(6deg) scale(1.17);
-      transform: translate3d(-8%, 10%, 0) skewY(6deg) scale(1.17);
+      -webkit-transform: translate3d(-8%, 6%, 0) skewY(5deg) scale(1.13);
+      transform: translate3d(-8%, 6%, 0) skewY(5deg) scale(1.13);
     }
   }
-  @-webkit-keyframes XmbWavePositions {
-    0% { background-position: -24% 54%, 12% 64%, 58% 50%, 104% 72%, 22% 78%; }
-    25% { background-position: 8% 72%, 44% 52%, 86% 66%, 136% 60%, 58% 68%; }
-    50% { background-position: 48% 56%, 82% 76%, 122% 54%, 170% 70%, 98% 82%; }
-    75% { background-position: 86% 74%, 108% 58%, 156% 72%, 198% 58%, 132% 66%; }
-    100% { background-position: 118% 58%, 134% 76%, 188% 52%, 224% 74%, 164% 80%; }
-  }
-  @keyframes XmbWavePositions {
-    0% { background-position: -24% 54%, 12% 64%, 58% 50%, 104% 72%, 22% 78%; }
-    25% { background-position: 8% 72%, 44% 52%, 86% 66%, 136% 60%, 58% 68%; }
-    50% { background-position: 48% 56%, 82% 76%, 122% 54%, 170% 70%, 98% 82%; }
-    75% { background-position: 86% 74%, 108% 58%, 156% 72%, 198% 58%, 132% 66%; }
-    100% { background-position: 118% 58%, 134% 76%, 188% 52%, 224% 74%, 164% 80%; }
-  }
-  @-webkit-keyframes XmbWavePositionsBack {
-    0% { background-position: 124% 52%, 86% 74%, 58% 56%, 100% 82%; }
-    33% { background-position: 72% 76%, 34% 58%, 8% 82%, 50% 62%; }
-    66% { background-position: 16% 64%, -26% 82%, -48% 58%, -4% 78%; }
-    100% { background-position: -48% 78%, -78% 62%, -100% 84%, -52% 66%; }
-  }
-  @keyframes XmbWavePositionsBack {
-    0% { background-position: 124% 52%, 86% 74%, 58% 56%, 100% 82%; }
-    33% { background-position: 72% 76%, 34% 58%, 8% 82%, 50% 62%; }
-    66% { background-position: 16% 64%, -26% 82%, -48% 58%, -4% 78%; }
-    100% { background-position: -48% 78%, -78% 62%, -100% 84%, -52% 66%; }
+  html.xmb-paused::after,
+  html.xmb-paused body::after {
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
   }
   /* Header title still uses AnimationName alias */
   @-webkit-keyframes AnimationName {
@@ -420,142 +381,113 @@
     50% { background-position: 100% 50%; }
   }
   @media (prefers-reduced-motion: reduce) {
-    html::before,
     html::after,
     body::after {
       -webkit-animation: none;
       animation: none;
+      will-change: auto;
     }
     html::after {
-      opacity: 0.42;
+      opacity: 0.55;
       -webkit-transform: translate3d(0, 0, 0) skewY(-3deg) scale(1.08);
       transform: translate3d(0, 0, 0) skewY(-3deg) scale(1.08);
     }
     body::after {
-      opacity: 0.28;
+      opacity: 0.36;
       -webkit-transform: translate3d(0, 0, 0) skewY(4deg) scale(1.12);
       transform: translate3d(0, 0, 0) skewY(4deg) scale(1.12);
     }
   }
   @media (max-width: 1030px) {
     html::after {
-      inset: -18% -70%;
+      inset: -12% -40%;
       background:
-        radial-gradient(ellipse 70% 9% at 8% 66%, rgba(158, 236, 228, 0.36) 0%, rgba(72, 152, 145, 0.34) 28%, transparent 78%),
-        radial-gradient(ellipse 80% 10.5% at 54% 72%, rgba(255, 255, 255, 0.16) 0%, rgba(72, 152, 145, 0.32) 24%, rgba(34, 104, 100, 0.22) 54%, transparent 82%),
-        radial-gradient(ellipse 62% 8% at 96% 62%, rgba(158, 236, 228, 0.3) 0%, rgba(56, 132, 126, 0.2) 38%, transparent 80%);
+        radial-gradient(ellipse 72% 12% at 8% 66%, rgba(158, 236, 228, 0.36) 0%, rgba(72, 152, 145, 0.34) 30%, transparent 80%),
+        radial-gradient(ellipse 82% 14% at 54% 72%, rgba(255, 255, 255, 0.16) 0%, rgba(72, 152, 145, 0.32) 26%, rgba(34, 104, 100, 0.22) 56%, transparent 84%),
+        radial-gradient(ellipse 64% 11% at 96% 62%, rgba(158, 236, 228, 0.3) 0%, rgba(56, 132, 126, 0.2) 40%, transparent 82%);
       background-size: 115% 138%, 125% 132%, 110% 142%;
       background-position: -12% 0, 48% 0, 112% 0;
       background-repeat: no-repeat;
-      mix-blend-mode: normal;
-      -webkit-filter: blur(6px) saturate(1.35);
-      filter: blur(6px) saturate(1.35);
-      opacity: 0.58;
+      opacity: 0.62;
       -webkit-transform: translate3d(-3%, 0, 0) skewY(-4deg) scale(1.08);
       transform: translate3d(-3%, 0, 0) skewY(-4deg) scale(1.08);
-      will-change: transform, background-position, opacity;
-      -webkit-animation: MobileXmbWave 18s ease-in-out infinite alternate;
-      animation: MobileXmbWave 18s ease-in-out infinite alternate;
+      will-change: transform;
+      -webkit-animation: MobileXmbWave 24s ease-in-out infinite alternate;
+      animation: MobileXmbWave 24s ease-in-out infinite alternate;
     }
     body::after {
       display: block;
-      inset: -34% -92%;
+      inset: -18% -48%;
       z-index: -1;
       background:
-        radial-gradient(ellipse 82% 8% at 18% 44%, rgba(255, 255, 255, 0.16) 0%, rgba(158, 236, 228, 0.28) 18%, rgba(72, 152, 145, 0.22) 42%, transparent 78%),
-        radial-gradient(ellipse 96% 10% at 60% 58%, rgba(255, 255, 255, 0.14) 0%, rgba(72, 152, 145, 0.28) 22%, rgba(34, 104, 100, 0.2) 52%, transparent 82%),
-        radial-gradient(ellipse 78% 7% at 90% 70%, rgba(158, 236, 228, 0.22) 0%, rgba(58, 116, 109, 0.18) 36%, transparent 80%);
+        radial-gradient(ellipse 84% 12% at 18% 44%, rgba(255, 255, 255, 0.16) 0%, rgba(158, 236, 228, 0.28) 20%, rgba(72, 152, 145, 0.22) 44%, transparent 80%),
+        radial-gradient(ellipse 98% 14% at 60% 58%, rgba(255, 255, 255, 0.14) 0%, rgba(72, 152, 145, 0.28) 24%, rgba(34, 104, 100, 0.2) 54%, transparent 84%),
+        radial-gradient(ellipse 80% 11% at 90% 70%, rgba(158, 236, 228, 0.22) 0%, rgba(58, 116, 109, 0.18) 38%, transparent 82%);
       background-size: 130% 130%, 142% 136%, 126% 132%;
+      background-position: 42% 50%, 28% 58%, 58% 54%;
       background-repeat: no-repeat;
-      mix-blend-mode: screen;
-      -webkit-filter: blur(16px) saturate(1.5);
-      filter: blur(16px) saturate(1.5);
-      opacity: 0.5;
+      opacity: 0.48;
       -webkit-transform: translate3d(7%, 3%, 0) skewY(6deg) scale(1.12);
       transform: translate3d(7%, 3%, 0) skewY(6deg) scale(1.12);
-      will-change: transform, background-position, opacity;
-      -webkit-animation: MobileXmbWaveBack 24s ease-in-out infinite alternate;
-      animation: MobileXmbWaveBack 24s ease-in-out infinite alternate;
+      will-change: transform;
+      -webkit-animation: MobileXmbWaveBack 30s ease-in-out infinite alternate;
+      animation: MobileXmbWaveBack 30s ease-in-out infinite alternate;
     }
   }
   @-webkit-keyframes MobileXmbWave {
     0% {
-      opacity: 0.42;
-      -webkit-transform: translate3d(-6%, -1%, 0) skewY(-5deg) scale(1.08);
-      transform: translate3d(-6%, -1%, 0) skewY(-5deg) scale(1.08);
-      background-position: -8% 0%, 28% 8%, 72% 0%;
+      -webkit-transform: translate3d(-8%, -1%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(-8%, -1%, 0) skewY(-4deg) scale(1.08);
     }
     50% {
-      opacity: 0.64;
-      -webkit-transform: translate3d(0%, 4%, 0) skewY(3deg) scale(1.1);
-      transform: translate3d(0%, 4%, 0) skewY(3deg) scale(1.1);
-      background-position: 24% 8%, 58% 0%, 92% 8%;
+      -webkit-transform: translate3d(0%, 4%, 0) skewY(-4deg) scale(1.1);
+      transform: translate3d(0%, 4%, 0) skewY(-4deg) scale(1.1);
     }
     100% {
-      opacity: 0.5;
-      -webkit-transform: translate3d(6%, 0%, 0) skewY(-3deg) scale(1.08);
-      transform: translate3d(6%, 0%, 0) skewY(-3deg) scale(1.08);
-      background-position: 56% 0%, 88% 8%, 118% 0%;
+      -webkit-transform: translate3d(8%, 0%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(8%, 0%, 0) skewY(-4deg) scale(1.08);
     }
   }
   @keyframes MobileXmbWave {
     0% {
-      opacity: 0.42;
-      -webkit-transform: translate3d(-6%, -1%, 0) skewY(-5deg) scale(1.08);
-      transform: translate3d(-6%, -1%, 0) skewY(-5deg) scale(1.08);
-      background-position: -8% 0%, 28% 8%, 72% 0%;
+      -webkit-transform: translate3d(-8%, -1%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(-8%, -1%, 0) skewY(-4deg) scale(1.08);
     }
     50% {
-      opacity: 0.64;
-      -webkit-transform: translate3d(0%, 4%, 0) skewY(3deg) scale(1.1);
-      transform: translate3d(0%, 4%, 0) skewY(3deg) scale(1.1);
-      background-position: 24% 8%, 58% 0%, 92% 8%;
+      -webkit-transform: translate3d(0%, 4%, 0) skewY(-4deg) scale(1.1);
+      transform: translate3d(0%, 4%, 0) skewY(-4deg) scale(1.1);
     }
     100% {
-      opacity: 0.5;
-      -webkit-transform: translate3d(6%, 0%, 0) skewY(-3deg) scale(1.08);
-      transform: translate3d(6%, 0%, 0) skewY(-3deg) scale(1.08);
-      background-position: 56% 0%, 88% 8%, 118% 0%;
+      -webkit-transform: translate3d(8%, 0%, 0) skewY(-4deg) scale(1.08);
+      transform: translate3d(8%, 0%, 0) skewY(-4deg) scale(1.08);
     }
   }
   @-webkit-keyframes MobileXmbWaveBack {
     0% {
-      opacity: 0.34;
-      -webkit-transform: translate3d(6%, 0%, 0) skewY(5deg) scale(1.1);
-      transform: translate3d(6%, 0%, 0) skewY(5deg) scale(1.1);
-      background-position: 72% 42%, 58% 58%, 92% 50%;
+      -webkit-transform: translate3d(8%, 0%, 0) skewY(6deg) scale(1.1);
+      transform: translate3d(8%, 0%, 0) skewY(6deg) scale(1.1);
     }
     50% {
-      opacity: 0.56;
-      -webkit-transform: translate3d(0%, 5%, 0) skewY(-3deg) scale(1.12);
-      transform: translate3d(0%, 5%, 0) skewY(-3deg) scale(1.12);
-      background-position: 42% 58%, 28% 42%, 58% 54%;
+      -webkit-transform: translate3d(0%, 5%, 0) skewY(6deg) scale(1.12);
+      transform: translate3d(0%, 5%, 0) skewY(6deg) scale(1.12);
     }
     100% {
-      opacity: 0.4;
-      -webkit-transform: translate3d(-6%, 2%, 0) skewY(4deg) scale(1.1);
-      transform: translate3d(-6%, 2%, 0) skewY(4deg) scale(1.1);
-      background-position: 12% 50%, -8% 62%, 24% 48%;
+      -webkit-transform: translate3d(-8%, 2%, 0) skewY(6deg) scale(1.1);
+      transform: translate3d(-8%, 2%, 0) skewY(6deg) scale(1.1);
     }
   }
   @keyframes MobileXmbWaveBack {
     0% {
-      opacity: 0.34;
-      -webkit-transform: translate3d(6%, 0%, 0) skewY(5deg) scale(1.1);
-      transform: translate3d(6%, 0%, 0) skewY(5deg) scale(1.1);
-      background-position: 72% 42%, 58% 58%, 92% 50%;
+      -webkit-transform: translate3d(8%, 0%, 0) skewY(6deg) scale(1.1);
+      transform: translate3d(8%, 0%, 0) skewY(6deg) scale(1.1);
     }
     50% {
-      opacity: 0.56;
-      -webkit-transform: translate3d(0%, 5%, 0) skewY(-3deg) scale(1.12);
-      transform: translate3d(0%, 5%, 0) skewY(-3deg) scale(1.12);
-      background-position: 42% 58%, 28% 42%, 58% 54%;
+      -webkit-transform: translate3d(0%, 5%, 0) skewY(6deg) scale(1.12);
+      transform: translate3d(0%, 5%, 0) skewY(6deg) scale(1.12);
     }
     100% {
-      opacity: 0.4;
-      -webkit-transform: translate3d(-6%, 2%, 0) skewY(4deg) scale(1.1);
-      transform: translate3d(-6%, 2%, 0) skewY(4deg) scale(1.1);
-      background-position: 12% 50%, -8% 62%, 24% 48%;
+      -webkit-transform: translate3d(-8%, 2%, 0) skewY(6deg) scale(1.1);
+      transform: translate3d(-8%, 2%, 0) skewY(6deg) scale(1.1);
     }
   }
   @media (max-width: 1030px) and (prefers-reduced-motion: reduce) {
@@ -563,6 +495,7 @@
     body::after {
       -webkit-animation: none;
       animation: none;
+      will-change: auto;
     }
   }
 
@@ -2946,36 +2879,30 @@ footer {
 /*Mobile Style*/
 @-webkit-keyframes MobileSimpleGlow {
   0% {
-    opacity: 0.38;
     -webkit-transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
     transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
   }
   50% {
-    opacity: 0.62;
-    -webkit-transform: translate3d(0, 3%, 0) skewY(-2deg) scale(1.06);
-    transform: translate3d(0, 3%, 0) skewY(-2deg) scale(1.06);
+    -webkit-transform: translate3d(0, 3%, 0) skewY(-5deg) scale(1.06);
+    transform: translate3d(0, 3%, 0) skewY(-5deg) scale(1.06);
   }
   100% {
-    opacity: 0.44;
-    -webkit-transform: translate3d(12%, 0%, 0) skewY(3deg) scale(1.04);
-    transform: translate3d(12%, 0%, 0) skewY(3deg) scale(1.04);
+    -webkit-transform: translate3d(12%, 0%, 0) skewY(-5deg) scale(1.04);
+    transform: translate3d(12%, 0%, 0) skewY(-5deg) scale(1.04);
   }
 }
 @keyframes MobileSimpleGlow {
   0% {
-    opacity: 0.38;
     -webkit-transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
     transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
   }
   50% {
-    opacity: 0.62;
-    -webkit-transform: translate3d(0, 3%, 0) skewY(-2deg) scale(1.06);
-    transform: translate3d(0, 3%, 0) skewY(-2deg) scale(1.06);
+    -webkit-transform: translate3d(0, 3%, 0) skewY(-5deg) scale(1.06);
+    transform: translate3d(0, 3%, 0) skewY(-5deg) scale(1.06);
   }
   100% {
-    opacity: 0.44;
-    -webkit-transform: translate3d(12%, 0%, 0) skewY(3deg) scale(1.04);
-    transform: translate3d(12%, 0%, 0) skewY(3deg) scale(1.04);
+    -webkit-transform: translate3d(12%, 0%, 0) skewY(-5deg) scale(1.04);
+    transform: translate3d(12%, 0%, 0) skewY(-5deg) scale(1.04);
   }
 }
 @media only screen and (max-width: 620px) {
@@ -3012,7 +2939,7 @@ footer {
     -webkit-filter: none;
     filter: none;
     opacity: 0.32;
-    will-change: transform, opacity;
+    will-change: transform;
     -webkit-transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
     transform: translate3d(-12%, -2%, 0) skewY(-5deg) scale(1.04);
     -webkit-animation: MobileSimpleGlow 14s ease-in-out infinite alternate;
